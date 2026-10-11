@@ -21,7 +21,9 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 - **Zigbee and Thread** smart-home radios (802.15.4)
 - **Drone Remote ID**: the serial number and position many drones broadcast
 - **Possible card skimmers**: Bluetooth modules still wearing a factory name (the kind sometimes hidden in gas pumps and ATM readers). This is a clue, not a verdict.
-
+- **License-plate readers (ALPR)**: Flock cameras, Raven sensors and battery packs, Penguin, Pigvision, Ubicquia and Genetec AutoVu, found over Wi-Fi and Bluetooth
+- **Axon equipment (AXON)**: body cameras, docks and TASER devices, found over Wi-Fi and Bluetooth, including by their Bluetooth service data and company ID
+  
 ## Features
 
 - Detection groups with live counts: ALPR, AXON, CAMS, GLASS, DRONE, BT, TAGS, WIFI, ZIGBEE/THREAD
