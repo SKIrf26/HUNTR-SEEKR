@@ -38,6 +38,10 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 
 You need an **NM-CYD-C5** board and a USB-C **data** cable. Not sure where to start? Read [READ_ME_FIRST.txt](READ_ME_FIRST.txt) and the [help folder](help/).
 
+### Flash online
+
+Flash the .bin at address 0x0 using any popular online flasher (ESP Terminator, SpaceHuhn, etc)
+
 ### Flash the firmware file
 
 1. Download `HUNTR-SEEKR_C5_CYD_Public_Beta_1.bin` and `SHA256SUMS.txt` from the [Releases page](../../releases).
