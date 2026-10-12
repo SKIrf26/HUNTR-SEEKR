@@ -1,6 +1,6 @@
 <div align="center">
 
-![HUNTR/SEEKR](docs/images/banner.bmp)
+![HUNTR/SEEKR](docs/images/banner.png)
 
 **A pocket counter-surveillance signal scanner for small ESP32 touch-screen boards.**
 It listens for the radio signals that cameras, trackers, drones and other gadgets give off, tells you what it heard, and helps you walk toward the source.
