@@ -137,6 +137,8 @@ All boards support an optional GPS module for position stamps in the log.
 
 You need a supported board, a USB-C **data** cable (some charge-only cables will not work), and a computer running Windows, macOS or Linux. No programming tools are needed: you flash one ready-made file.
 
+- **NEW! USE THE WEB FLASHER LOCATED HERE!!! JUST PICK YOUR DEVICE AND FLASH!!! ([WEB FLASHER](https://skirf-labs.tech/))
+
 **1. Download** your board's `.bin` and `SHA256SUMS.txt` from the [Releases page](../../releases/latest):
 
 | Board | Firmware file | Chip name for esptool |
