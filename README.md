@@ -75,7 +75,7 @@ These boards have a single 2.4 GHz radio shared by Wi-Fi, Bluetooth and 802.15.4
 
 Wi-Fi side: `ALPR` `AXON` `CAMS` `GLASS` `DRONE` `WIFI` · 802.15.4 side: `ZB/TH`
 
-> **Not seen:** anything on 5 GHz Wi-Fi (the app scans the 2.4 GHz band only), Bluetooth Classic devices, and devices that use a random address. Agency fleet Wi-Fi names are usually changed from the maker's default, so a router can go unseen.
+> **Not seen:** anything on 5 GHz Wi-Fi (the app scans the 2.4 GHz band only) CYD C5 has option to scan EITHER band both 5GhZ and 2.4, Bluetooth Classic devices, and devices that use a random address. Agency fleet Wi-Fi names are usually changed from the maker's default, so a router can go unseen.
 
 ## Supported devices
 
