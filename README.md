@@ -207,8 +207,7 @@ Each board has its own illustrated, printable guide covering set-up, every scree
 | S3 LCD 1.69 | [HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf) |
 | C6 LCD 1.47 | [HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf) |
 | C5 CYD | [HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf) |
-| CYD 2.8 | Coming soon |
-
+| CYD 2.8 | [HUNTR-SEEKR_2.8_CYD_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_28_CYD_Public_Beta_1_User_Guide.pdf) |
 ## Beta status: what to expect
 
 This is the **first public beta**. It does what the guides describe, but expect rough edges, and expect some behaviour to change in later releases.
