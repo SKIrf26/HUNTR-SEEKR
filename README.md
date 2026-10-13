@@ -130,7 +130,7 @@ All boards support an optional GPS module for position stamps in the log.
 - **Findings record**: save logs as plain CSV tables, with a session report that charts each group
 - **Phone page over the board's own hotspot** (WPA2, random password): live view, log download, custom rules, clock sync
 - **Discreet mode** (silent, dim, no banners), **power saver**, portrait and landscape, auto-rotate where there is a motion sensor
-- **Boot logo** of your own, and on the Watch a custom boot sound and an analog watch face
+- **Boot logo** of your own, and on the Watch a custom boot sound
 - **Self-test** screen that checks every part of the hardware
 
 ## Install
