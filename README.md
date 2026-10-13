@@ -71,7 +71,7 @@ Treat this as rough. Walls, your own body and the other device's antenna can shi
 
 ### The one radio rule
 
-These boards have a single 2.4 GHz radio shared by Wi-Fi, Bluetooth and 802.15.4. **Bluetooth groups (BT, TAGS) run alongside either side**, but Wi-Fi scanning and Zigbee/Thread scanning each need the radio to themselves, so you arm one side at a time. Tiles on the other side turn dim red and say *blocked*.
+These boards have a single 2.4 GHz radio (*EXCEPT C5 CYD*) shared by Wi-Fi, Bluetooth and 802.15.4. **Bluetooth groups (BT, TAGS) run alongside either side**, but Wi-Fi scanning and Zigbee/Thread scanning each need the radio to themselves, so you arm one side at a time. Tiles on the other side turn dim red and say *blocked*.
 
 Wi-Fi side: `ALPR` `AXON` `CAMS` `GLASS` `DRONE` `WIFI` · 802.15.4 side: `ZB/TH`
 
