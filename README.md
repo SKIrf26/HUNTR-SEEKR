@@ -93,7 +93,7 @@ One shared code base, tuned for each board. Pick yours:
 | **Sound** | Speaker | Buzzer | Optional buzzer (IO7) | Optional buzzer (IO26) | Optional speaker (IO26) |
 | **Clock** | Built in | Built in | Set from your phone | Set from your phone | Set from your phone |
 | **Update from phone** | Yes | Yes | USB only | USB only | USB only |
-| **Guide** | [PDF](docs/HUNTR-SEEKR_Watch_AMOLED206_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf) | Coming soon |
+| **Guide** | [PDF](docs/HUNTR-SEEKR_Watch_AMOLED206_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_28_CYD_Public_Beta_1_User_Guide.pdf) |
 
 All boards support an optional GPS module for position stamps in the log.
 
