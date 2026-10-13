@@ -6,7 +6,7 @@
 It listens for the radio signals that cameras, trackers, drones and other gadgets give off, tells you what it heard, and helps you walk toward the source.
 
 ![Status](https://img.shields.io/badge/status-Public%20Beta%201-orange)
-![Boards](https://img.shields.io/badge/boards-Watch%20%7C%20S3%20%7C%20C6%20%7C%20C5-blue)
+![Boards](https://img.shields.io/badge/boards-Watch%20%7C%20S3%20%7C%20C6%20%7C%20C5%20%7C%20CYD%202.8-blue)
 ![Radios](https://img.shields.io/badge/scans-Wi--Fi%20%7C%20Bluetooth%20%7C%20Zigbee%2FThread-informational)
 ![Passive](https://img.shields.io/badge/mode-receive%20only-success)
 ![Licence](https://img.shields.io/badge/licence-GPL%20v3-green)
@@ -41,7 +41,7 @@ Everything is organised into **detection groups**. Arm the ones you care about; 
 | **BT** | Bluetooth devices by name or maker, with type tags: `IBEACON` `EDDYSTONE` `ALTBEACON` `WEARABLE` `LIGHT` `FASTPAIR` `MESH`; also public-safety radios and vehicle light-bar controllers (Motorola, L3Harris, Tait, Feniex, SoundOff, Whelen) | Bluetooth |
 | **TAGS** | Tile, AirTag and other Find My trackers, SmartTag, Google Find Hub trackers, Chipolo, Pebblebee, TrackR, Jiobit | Bluetooth |
 | **WIFI** | Any nearby 2.4 GHz access point; smart bulbs in set-up mode (WiZ, LIFX, Yeelight, tag `LIGHT`); vehicle routers (Cradlepoint, Sierra Wireless, Peplink) and rugged laptops/handhelds (Panasonic, Zebra, Datalogic) when recognised | Wi-Fi |
-| **ZB/TH** | Zigbee, Thread and plain 802.15.4 devices (channels 11 to 26) | 802.15.4 |
+| **ZB/TH** *(not on the S3 or CYD 2.8)* | Zigbee, Thread and plain 802.15.4 devices (channels 11 to 26) | 802.15.4 |
 
 ### Extra checks
 
@@ -51,7 +51,7 @@ Everything is organised into **detection groups**. Arm the ones you care about; 
 | **Skimmer watch** | Flags Bluetooth LE modules still wearing a factory name (HC-03, HC-05, HC-06, HC-08, linvor...), the kind sometimes hidden in gas pumps and ATM readers. Bluetooth LE only, so it is a clue, not a verdict. |
 | **Rogue Wi-Fi signs** *(Watch, S3, C6)* | `DEAUTH` (de-authentication flood), `TWIN` (an open copy of a protected network name), `KARMA` (one transmitter answering to many names), and `PROBE` (devices asking for a named network). |
 | **Drone Remote ID** | Decodes the ID, position, height and speed many drones broadcast, over Bluetooth or Wi-Fi. |
-| **Your own rules** | Add detection rules (`ssid`, `oui`, `name`, `cid`, `uuid`...) from your phone. Up to 128 rules on the Watch, S3 and C6 (64 on the C5), plus a separate `sigs_update.txt` for lists you receive from others. |
+| **Your own rules** | Add detection rules (`ssid`, `oui`, `name`, `cid`, `uuid`...) from your phone. Up to 128 rules on the Watch, S3 and C6 (64 on the C5 and CYD 2.8), plus a separate `sigs_update.txt` for lists you receive from others. |
 
 > Some signatures come from a published list that marks them as only *possible*: the maker also sells ordinary products. Those are listed quietly at low confidence with no alert.
 
@@ -81,19 +81,19 @@ Wi-Fi side: `ALPR` `AXON` `CAMS` `GLASS` `DRONE` `WIFI` · 802.15.4 side: `ZB/TH
 
 One shared code base, tuned for each board. Pick yours:
 
-| | **Watch AMOLED 2.06** | **S3 LCD 1.69** | **C6 LCD 1.47** | **C5 CYD** |
-|---|---|---|---|---|
-| **Board** | Waveshare ESP32-C6-Touch-AMOLED-2.06 | Waveshare ESP32-S3-Touch-LCD-1.69 | Waveshare ESP32-C6-Touch-LCD-1.47 | NM-CYD-C5 ("cheap yellow display") |
-| **Chip** | ESP32-C6 | ESP32-S3 | ESP32-C6 | ESP32-C5 |
-| **Screen** | 2.06" AMOLED, 410 x 502 | 1.69" IPS, 240 x 280 | 1.47" IPS, 172 x 320 | 2.8" LCD, 320 x 240, resistive |
-| **Detection groups** | 9 | 8 (no ZB/TH) | 9 | 9 |
-| **Zigbee / Thread** | Yes | No | Yes | Yes |
-| **Direction finding (AIM, beta) and SWEEP** | Yes | Yes | Yes | No (no motion sensor) |
-| **Rogue Wi-Fi alerts** | Yes | Yes | Yes | - |
-| **Sound** | Speaker | Buzzer | Optional buzzer (IO7) | Optional buzzer (IO26) |
-| **Clock** | Built in | Built in | Set from your phone | Set from your phone |
-| **Update from phone** | Yes | Yes | USB only | USB only |
-| **Guide** | [PDF](docs/HUNTR-SEEKR_Watch_AMOLED206_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf) |
+| | **Watch AMOLED 2.06** | **S3 LCD 1.69** | **C6 LCD 1.47** | **C5 CYD** | **CYD 2.8** |
+|---|---|---|---|---|---|
+| **Board** | Waveshare ESP32-C6-Touch-AMOLED-2.06 | Waveshare ESP32-S3-Touch-LCD-1.69 | Waveshare ESP32-C6-Touch-LCD-1.47 | NM-CYD-C5 ("cheap yellow display") | ESP32-2432S028 ("cheap yellow display") |
+| **Chip** | ESP32-C6 | ESP32-S3 | ESP32-C6 | ESP32-C5 | ESP32 |
+| **Screen** | 2.06" AMOLED, 410 x 502 | 1.69" IPS, 240 x 280 | 1.47" IPS, 172 x 320 | 2.8" LCD, 320 x 240, resistive | 2.8" LCD, 240 x 320, resistive |
+| **Detection groups** | 9 | 8 (no ZB/TH) | 9 | 9 | 8 (no ZB/TH) |
+| **Zigbee / Thread** | Yes | No | Yes | Yes | No |
+| **Direction finding (AIM, beta) and SWEEP** | Yes | Yes | Yes | No (no motion sensor) | No (no motion sensor) |
+| **Rogue Wi-Fi alerts** | Yes | Yes | Yes | - | - |
+| **Sound** | Speaker | Buzzer | Optional buzzer (IO7) | Optional buzzer (IO26) | Optional speaker (IO26) |
+| **Clock** | Built in | Built in | Set from your phone | Set from your phone | Set from your phone |
+| **Update from phone** | Yes | Yes | USB only | USB only | USB only |
+| **Guide** | [PDF](docs/HUNTR-SEEKR_Watch_AMOLED206_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf) | [PDF](docs/HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf) | Coming soon |
 
 All boards support an optional GPS module for position stamps in the log.
 
@@ -147,6 +147,7 @@ You need a supported board, a USB-C **data** cable (some charge-only cables will
 | S3 LCD 1.69 | `HUNTR-SEEKR_S3_LCD169_Public_Beta_1.bin` | `esp32s3` |
 | C6 LCD 1.47 | `HUNTR-SEEKR_C6_LCD147_Public_Beta_1.bin` | `esp32c6` |
 | C5 CYD | `HUNTR-SEEKR_C5_CYD_Public_Beta_1.bin` | `esp32c5` |
+| CYD 2.8 (ESP32-2432S028) | `HUNTR-SEEKR_CYD_2432S028_Public_Beta_1.bin` | `esp32` |
 
 **2. Install the flashing tool** once. You need Python 3 ([python.org](https://www.python.org)), then:
 
@@ -164,7 +165,7 @@ pip install esptool
 esptool --chip esp32c6 --port YOUR_PORT --baud 460800 write-flash 0x0 HUNTR-SEEKR_Watch_AMOLED206_Public_Beta_1.bin
 ```
 
-Wait for `Hash of data verified` and `Hard resetting`. The board restarts by itself and shows **Public Beta 1** on the boot screen. The C5 asks you to calibrate its touch screen the first time (press and hold each of the four crosses).
+Wait for `Hash of data verified` and `Hard resetting`. The board restarts by itself and shows **Public Beta 1** on the boot screen. The C5 and the CYD 2.8 ask you to calibrate the touch screen the first time (press and hold each of the four crosses).
 
 <details>
 <summary><b>If the computer cannot connect to the board</b></summary>
@@ -174,6 +175,7 @@ Wait for `Hash of data verified` and `Hard resetting`. The board restarts by its
 - Use a USB-C **data** cable and try another USB port.
 - Put the chip in download mode: unplug the cable, hold the board's **BOOT** button, plug the cable in, release BOOT, and run the command again.
 - If the connection is unreliable, use `--baud 115200`.
+- On the CYD 2.8, if the upload stops with "Wrong boot mode detected" or never connects, hold **BOOT** while the command shows "Connecting...", or try another cable or USB port.
 
 </details>
 
@@ -189,9 +191,9 @@ Wait for `Hash of data verified` and `Hard resetting`. The board restarts by its
 
 </details>
 
-> Flashing replaces the software and **resets saved settings**. Logs already saved on the board (or the C5's microSD card) are kept.
+> Flashing replaces the software and **resets saved settings**. Logs already saved on the board (or on the microSD card of the C5 and CYD 2.8) are kept.
 
-**Updating later.** Flash the newer file the same way. On the **Watch** and **S3** you can also update from your phone with no computer: download the `_app-only.bin` from the Releases page, tap **SHARE** on the LOG page, join the board's hotspot and open `192.168.4.1/update`. The C6 and C5 update over USB.
+**Updating later.** Flash the newer file the same way. On the **Watch** and **S3** you can also update from your phone with no computer: download the `_app-only.bin` from the Releases page, tap **SHARE** on the LOG page, join the board's hotspot and open `192.168.4.1/update`. The C6, C5 and CYD 2.8 update over USB.
 
 **First use.** Tap tiles on the **ARM** page to arm groups, watch the **FINDS** page fill, tap a find and press **TRACK**. Open **SETUP > Self-test** at any time: every dot should be green (a grey row is a part your board does not have).
 
@@ -205,6 +207,7 @@ Each board has its own illustrated, printable guide covering set-up, every scree
 | S3 LCD 1.69 | [HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide.pdf) |
 | C6 LCD 1.47 | [HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf) |
 | C5 CYD | [HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide.pdf) |
+| CYD 2.8 | Coming soon |
 
 ## Beta status: what to expect
 
@@ -212,7 +215,8 @@ This is the **first public beta**. It does what the guides describe, but expect 
 
 - Signal strength is only a rough guide to distance. One antenna cannot measure direction directly: use the warmer / colder reading and walk around, or try AIM where your board has it.
 - The scanner hears **2.4 GHz only**. 5 GHz Wi-Fi and Bluetooth Classic are not seen.
-- Sound on the C6 and C5 needs a small **passive** buzzer you fit yourself (see the guide for the pads).
+- Sound on the C6 and C5 needs a small **passive** buzzer you fit yourself (see the guide for the pads). On the CYD 2.8, sound needs a small speaker plugged into the board's speaker socket.
+- The CYD 2.8 is new in this release and has had less testing than the other boards.
 - Detection lists are not exhaustive, and what is heard depends heavily on where you are.
 
 Found a problem? Open an issue and say which board you have, what you were doing, and what the screen showed.
