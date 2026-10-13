@@ -97,29 +97,6 @@ One shared code base, tuned for each board. Pick yours:
 
 All boards support an optional GPS module for position stamps in the log.
 
-<details>
-<summary><b>Screenshots for each board</b></summary>
-
-<br>
-
-**Watch AMOLED 2.06** (arm, finds, track, watch face)
-
-<img src="docs/images/watch.png" height="360" alt="Watch screens">
-
-**S3 LCD 1.69** (arm, finds, track, log)
-
-<img src="docs/images/s3.png" height="340" alt="S3 screens">
-
-**C6 LCD 1.47** (arm, finds, groups, log)
-
-<img src="docs/images/c6.png" height="360" alt="C6 screens">
-
-**C5 CYD** (arm, finds, track, report)
-
-<img src="docs/images/c5.png" height="260" alt="C5 screens">
-
-</details>
-
 ## Features
 
 - **Live detection groups** with counts and signal bars, plus one-tap **Scenes** (for example a SKIMMER scene for gas pumps)
