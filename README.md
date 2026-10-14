@@ -534,7 +534,7 @@ This project is meant for defensive, privacy-protecting use: finding out what is
 
 HUNTR/SEEKR is **freeware**. It is free to download, install and share (unchanged), for personal, educational, research and business use. It may not be sold, modified or reverse engineered, and it comes with **no warranty**. See [LICENSE](LICENSE) for the full terms.
 
-The firmware includes open-source components under their own licences, and nothing in the freeware licence limits your rights under them: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The firmware includes open-source components under their own licences, and nothing in the freeware licence limits your rights under them: see [THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md).
 
 | You may | You may not |
 |---|---|
