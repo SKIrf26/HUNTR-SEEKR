@@ -4,7 +4,7 @@
 
 **Version 1.0**
 
-Copyright (c) 2026 [YOUR NAME OR BRAND]. All rights reserved.
+Copyright (c) 2026 [skitwosix@gmail.com]. All rights reserved.
 
 </div>
 
