@@ -1,0 +1,23 @@
+# Third-party notices
+
+HUNTR/SEEKR itself is released under the **GNU General Public License v3.0** (see [LICENSE](LICENSE)).
+
+It is built with, and links against, the open-source components below. Their licences are all compatible with distributing a combined GPL v3 firmware. Copies of the licence texts are in the `licenses/` folder.
+
+| Component | Used for | Licence | Copy of licence |
+|---|---|---|---|
+| Arduino-ESP32 core (Espressif Systems), incl. ESP-IDF components | Runtime, Wi-Fi, Bluetooth, 802.15.4, file system | LGPL 2.1 or later, with Apache 2.0 and other permissive parts for the underlying ESP-IDF | [licenses/LGPL-2.1.txt](licenses/LGPL-2.1.txt); see the core's own repository for the full per-component list |
+| GFX Library for Arduino (moononournation) | Display driver and drawing | BSD (based on Adafruit GFX, Copyright (c) 2012 Adafruit Industries) | [licenses/BSD-GFX-Library-for-Arduino.txt](licenses/BSD-GFX-Library-for-Arduino.txt) |
+| TinyGPSPlus (Mikal Hart) | NMEA parsing (only used if a GPS module is wired) | LGPL 2.1 or later | [licenses/LGPL-2.1.txt](licenses/LGPL-2.1.txt) |
+| Inter typeface (The Inter Project Authors) | Glyph shapes drawn on screen | SIL Open Font License 1.1 | [licenses/OFL-1.1-Inter.txt](licenses/OFL-1.1-Inter.txt) |
+| Share Tech Mono (Carrois Type Design) | Glyph shapes drawn on screen | SIL Open Font License 1.1 | [licenses/OFL-1.1-Share-Tech-Mono.txt](licenses/OFL-1.1-Share-Tech-Mono.txt) |
+| Oxanium (The Oxanium Project Authors) | Glyph shapes drawn on screen | SIL Open Font License 1.1 | [licenses/OFL-1.1-Oxanium.txt](licenses/OFL-1.1-Oxanium.txt) |
+
+## About the font data
+The firmware contains pre-rendered, anti-aliased glyph bitmaps generated from the typefaces above (SIL OFL 1.1). The bitmaps are derivatives of the font software and remain under the OFL; they are not sold on their own. The copyright lines are in the licence files in `licenses/`.
+
+## Trademarks
+Names such as Waveshare, Espressif, Arduino, AirTag, Tile, SmartTag, Wyze, Axon, Flock, and the other brand and product names that appear in the detection lists or screenshots belong to their respective owners. They are used only to describe what the scanner recognises. This project is not affiliated with, endorsed by, or sponsored by any of them.
+
+## Binary releases
+A pre-built `.bin` attached to a GitHub Release contains compiled code from the components above. The library sources are available from the projects named in the table.
