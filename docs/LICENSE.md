@@ -75,4 +75,4 @@ If a part of this licence cannot be enforced, the rest stays in force. This lice
 
 ---
 
-**Contact:** [YOUR EMAIL OR REPO ISSUES URL]
+**Contact:** [skitwosix@gmail.com]
