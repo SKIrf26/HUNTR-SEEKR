@@ -1,6 +1,6 @@
 # Third-party notices
 
-HUNTR/SEEKR itself is released under the **GNU General Public License v3.0** (see [LICENSE](GPL-3.0.txt).
+HUNTR/SEEKR itself is released under the **GNU General Public License v3.0** (see [LICENSE](GPL-3.0.txt).)
 
 It is built with, and links against, the open-source components below. Their licences are all compatible with distributing a combined GPL v3 firmware. Copies of the licence texts are in the `licenses/` folder.
 
