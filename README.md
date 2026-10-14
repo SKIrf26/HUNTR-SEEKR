@@ -500,8 +500,7 @@ Wait for `Hash of data verified` and `Hard resetting`. The board restarts by its
 
 ## User guides
 
-Each board has its own illustrated, printable guide covering set-up, every screen, the settings, troubleshooting and care. Normal and booklet versions are included in each release.
-
+Each board has its own illustrated, printable guide covering set-up, every screen, the settings, troubleshooting and care.
 | Board | Guide |
 |---|---|
 | Watch AMOLED 2.06 | [HUNTR-SEEKR_Watch_AMOLED206_Public_Beta_1_User_Guide.pdf](docs/HUNTR-SEEKR_Watch_AMOLED206_Public_Beta_1_User_Guide.pdf) |
