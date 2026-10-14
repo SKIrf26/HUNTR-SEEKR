@@ -14,7 +14,7 @@ It listens for the radio signals that cameras, trackers, drones and other gadget
 ![Remote ID](https://img.shields.io/badge/drone-Remote%20ID-red)
 ![Bands](https://img.shields.io/badge/Wi--Fi-2.4%20GHz%20%7C%205%20GHz%20(C5)-lightgrey)
 ![Passive](https://img.shields.io/badge/mode-receive%20only-success)
-![Licence](https://img.shields.io/badge/licence-GPL%20v3-green)
+![Licence](https://img.shields.io/badge/licence-freeware-green)
 
 [**Download**](../../releases/latest) · [**Install**](#install) · [**Supported devices**](#supported-devices) · [**What's new**](#whats-new) · [**What it scans for**](#what-it-scans-for) · [**The lists**](#what-it-finds-the-lists) · [**Alerts**](#alerts) · [**User guides**](#user-guides)
 
@@ -532,6 +532,14 @@ This project is meant for defensive, privacy-protecting use: finding out what is
 
 ## Licence
 
-HUNTR/SEEKR is free software released under the **GNU General Public License v3.0**: see [LICENSE](LICENSE). It comes with **no warranty**. It includes third-party components under their own licences: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+HUNTR/SEEKR is **freeware**. It is free to download, install and share (unchanged), for personal, educational, research and business use. It may not be sold, modified or reverse engineered, and it comes with **no warranty**. See [LICENSE](LICENSE) for the full terms.
+
+The firmware includes open-source components under their own licences, and nothing in the freeware licence limits your rights under them: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+| You may | You may not |
+|---|---|
+| Install it on any board you own or may use | Sell it, rent it or bundle it with something you sell |
+| Share the unchanged `.bin` with the licence and `SHA256SUMS.txt`, free of charge | Modify or patch it, or share modified copies |
+| Change the settings, custom rules and files the app itself lets you change | Reverse engineer it, remove its notices, or pass it off as your own |
 
 Waveshare, RockBase, NMTech, Espressif and all brand and product names that appear in the detection lists or screenshots belong to their owners. This project is not affiliated with, or endorsed by, any of them.
