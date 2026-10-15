@@ -37,7 +37,7 @@ Each board has its own folder with the source code, the user guide, plain-text h
 
 ## Install
 
-1. Open the [Releases page](https://github.com/SKIrf26/HUNTR-SEEKR/releases) and download the `.bin` file for your board, together with `SHA256SUMS.txt`.
+1. Open the [Releases page](https://github.com/SKIrf26/HUNTR-SEEKR/releases), pick the release for your board (each board has its own), and download its `.bin` file together with `SHA256SUMS.txt`.
 2. Flash it with `esptool` or with the project's [web flasher](https://skirf-labs.tech/) (Chrome or Edge on a computer). The exact steps and the flash address for each board are in that board's `help/2_FLASHING.txt` and `firmware/README.md`.
 
 Not sure where to start? Open your board's folder and read `READ_ME_FIRST.txt`.
