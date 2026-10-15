@@ -67,8 +67,9 @@ GOOD TO KNOW (THIS IS A BETA)
   * There is no speaker on the board. Sound needs a small passive buzzer or piezo on pad IO7 and GND. Without
     one the board is silent.
   * The board is updated over USB (the phone update page is not supported on this board in this release).
-  * Hardware status: This release builds cleanly for the Waveshare ESP32-C6-Touch-LCD-1.47, and its screens were
-    checked in a desktop simulation of the interface. It has not yet been run on the real board by the project.
+  * Hardware status: This release has been run on the real board by the project (start-up, scanning and the Track screen); the
+    other screens were checked in a desktop simulation of the interface, so some features have had less
+    testing on hardware.
     Please report what you see, good or bad, with the Bug report form.
 
 USE IT RESPONSIBLY

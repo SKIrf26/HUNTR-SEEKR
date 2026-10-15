@@ -34,7 +34,7 @@ Updates are done the same way, over USB.
 | `HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide.pdf` (+ two booklet versions) | User guide |
 
 ## Please know
-This is a **beta**. AIM is the newest and least proven feature (an estimate, never better than +/-15 degrees). This release builds cleanly for the Waveshare ESP32-C6-Touch-LCD-1.47, and its screens were checked in a desktop simulation of the interface. It has not yet been run on the real board by the project. Please report what you see, good or bad, with the Bug report form. Detection lists are not exhaustive and **results are hints, not proof**.
+This is a **beta**. AIM is the newest and least proven feature (an estimate, never better than +/-15 degrees). This release has been run on the real board by the project (start-up, scanning and the Track screen); the other screens were checked in a desktop simulation of the interface, so some features have had less testing on hardware. Please report what you see, good or bad, with the Bug report form. Detection lists are not exhaustive and **results are hints, not proof**.
 
 Use it responsibly and within your local laws. See the README.
 

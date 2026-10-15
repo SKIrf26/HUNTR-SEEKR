@@ -29,7 +29,7 @@ Each board has its own folder with the source code, the user guide, plain-text h
 |---|---|---|---|---|---|
 | [Waveshare ESP32-C6-Touch-AMOLED-2.06](devices/watch-amoled206/) | ESP32-C6 | 16 MB | Wi-Fi 2.4 GHz, Bluetooth LE, Zigbee/Thread | AIM, SWEEP | Run on the board |
 | [Waveshare ESP32-S3-Touch-LCD-1.69](devices/s3-lcd169/) | ESP32-S3 | 16 MB | Wi-Fi 2.4 GHz, Bluetooth LE | AIM, SWEEP | Builds; not yet run on the board |
-| [Waveshare ESP32-C6-Touch-LCD-1.47](devices/c6-lcd147/) | ESP32-C6 | 8 MB | Wi-Fi 2.4 GHz, Bluetooth LE, Zigbee/Thread | AIM, SWEEP | Builds; not yet run on the board |
+| [Waveshare ESP32-C6-Touch-LCD-1.47](devices/c6-lcd147/) | ESP32-C6 | 8 MB | Wi-Fi 2.4 GHz, Bluetooth LE, Zigbee/Thread | AIM, SWEEP | Run on the board |
 | [NM-CYD-C5](devices/c5-cyd/) | ESP32-C5 | 8 MB | Wi-Fi 2.4 GHz + 5 GHz, Bluetooth LE, Zigbee/Thread | - | Run on the board |
 | [ESP32-2432S028 (CYD 2.8)](devices/cyd-2432s028/) | ESP32 | 4 MB | Wi-Fi 2.4 GHz, Bluetooth LE | - | Builds; not yet run on the board |
 

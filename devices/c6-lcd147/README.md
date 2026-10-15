@@ -91,7 +91,7 @@ The illustrated user guide covers set-up, every screen, the settings, troublesho
 
 This is the **first public release**. It is a beta: expect rough edges, and expect some behaviour to change.
 
-- **Hardware status.** This release builds cleanly for the Waveshare ESP32-C6-Touch-LCD-1.47, and its screens were checked in a desktop simulation of the interface. It has not yet been run on the real board by the project. Please report what you see, good or bad, with the Bug report form.
+- **Hardware status.** This release has been run on the real board by the project (start-up, scanning and the Track screen); the other screens were checked in a desktop simulation of the interface, so some features have had less testing on hardware. Please report what you see, good or bad, with the Bug report form.
 - **AIM** is the newest feature and the least proven. It is an estimate, never better than +/-15 degrees.
 - There is no speaker on the board. Sound needs a small passive buzzer or piezo on IO7 (see the user guide).
 - Update over USB: the phone update page is not supported on this board in this release.
