@@ -41,7 +41,7 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 - Custom signatures (oui, ssid, ble, cid, uuid and ie rules) and a signature update file you can upload from your phone
 - Tracker "following" alert, ignore list, scenes, session report and logs (with a GPS module also as KML and GeoJSON map files)
 - Discreet mode, power saver, watch face, side-button controls
-- Phone page over the watch's own Wi-Fi hotspot: live view, clock sync, firmware update
+- Phone page over the watch's own Wi-Fi hotspot: live view, clock sync
 - Self-test screen that checks every part of the hardware
 
 <table>
@@ -70,8 +70,6 @@ You need the **Waveshare ESP32-C6-Touch-AMOLED-2.06** board and a USB-C **data**
 4. The watch restarts. The boot screen shows **Public Beta 1** at the bottom.
 
 Writing the image resets saved settings; saved logs stay. Step-by-step help, including checking the download, is in [help/2_FLASHING.txt](help/2_FLASHING.txt) and [firmware/README.md](firmware/README.md).
-
-Already running a beta? Use `HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin` on the watch's phone update page (join the watch's hotspot, open `192.168.4.1/update`).
 
 Prefer a browser? The project's [web flasher](https://skirf-labs.tech/) writes the same file from Chrome or Edge, with nothing to install.
 

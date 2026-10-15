@@ -6,10 +6,12 @@ This board needs no display set-up file: GFX Library for Arduino is configured f
 
 - Board: "ESP32C6 Dev Module"
 - USB CDC On Boot: "Enabled"
-- Flash Size: "16MB (128Mb)"
-- Partition Scheme: "16M Flash (3MB APP/9.9MB FATFS)"
+- Flash Size: "4MB (32Mb)"
+- Partition Scheme: "Huge APP (3MB No OTA/1MB SPIFFS)"
 
-(`arduino-cli` users: `--fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=16M,PartitionScheme=app3M_fat9M_16MB`)
+(`arduino-cli` users: `--fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=4M,PartitionScheme=huge_app`)
+
+The 4 MB layout is used on purpose even though the watch has 16 MB of flash: the same file then survives flashers that rewrite the image to a smaller flash size (a 16 MB layout fails to start after that). The firmware uses about 2 MB of the 3 MB application slot and about 0.9 MB is left for logs and settings. Over-the-air (phone) update needs two application slots, which do not fit, so the watch is updated over USB. To build with a larger layout and phone updates, build with `FlashSize=16M,PartitionScheme=app3M_fat9M_16MB`.
 
 ## Board definitions
 

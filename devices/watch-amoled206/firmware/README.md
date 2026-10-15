@@ -7,7 +7,6 @@ The release `.bin` files are **attached to the GitHub Release**, not committed i
 | File | What it is | When to use it |
 |---|---|---|
 | `HUNTR-SEEKR_Watch_Public_Beta_1.bin` | One complete image (bootloader, partition table, application) | First install, or a clean re-flash. Write at address `0x0`. Resets saved **settings**; saved **logs** stay. |
-| `HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin` | The application only | Updating from your phone: join the watch's Wi-Fi hotspot and open `192.168.4.1/update` |
 | `SHA256SUMS.txt` | Checksums of the files | Check your download is intact |
 
 ## Flash the image

@@ -23,13 +23,12 @@ Download `HUNTR-SEEKR_Watch_Public_Beta_1.bin` below and write it at `0x0`:
 esptool --chip esp32c6 --port YOUR_PORT --baud 460800 write-flash 0x0 HUNTR-SEEKR_Watch_Public_Beta_1.bin
 ```
 
-This resets saved settings; saved logs stay. Already running a beta? Use `..._app-only.bin` on the watch's phone update page.
+This resets saved settings. Updates are done the same way, over USB.
 
 ## Files
 | File | Purpose |
 |---|---|
 | `HUNTR-SEEKR_Watch_Public_Beta_1.bin` | Complete image, write at `0x0` |
-| `HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin` | Application only, for phone/OTA update |
 | `SHA256SUMS.txt` | Checksums |
 | `HUNTR-SEEKR_Watch_Public_Beta_1_User_Guide.pdf` (+ two booklet versions) | User guide |
 

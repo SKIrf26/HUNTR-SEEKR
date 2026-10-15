@@ -11,7 +11,7 @@ Wi-Fi finds nothing ......................................... help/3_TROUBLESHOO
 Bluetooth finds are slow .................................... SETUP > Bluetooth share (help/3_TROUBLESHOOTING.txt, E)
 The watch face says "clock not set" ......................... Open the Live page from your phone (help/3_TROUBLESHOOTING.txt, F)
 My phone cannot join the watch's Wi-Fi ...................... help/3_TROUBLESHOOTING.txt, G
-How do I update to a newer release? ......................... Flash the new .bin again, or use the phone update page (help/2_FLASHING.txt)
+How do I update to a newer release? ......................... Flash the new .bin again over USB (help/2_FLASHING.txt)
 Anything else ................................................ help/4_FAQ.txt and the user guide (docs folder)
 
 If it is still stuck, open an issue on the project page (Bug report form). Include the release name shown on the

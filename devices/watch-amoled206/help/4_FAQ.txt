@@ -33,7 +33,7 @@ Can I add my own devices to detect?
   Yes: your own rules ("signatures") can be added from your phone, up to 128; see the user guide, section 9.3. A signature update file (sigs_update.txt) uploaded from the same page is read after them.
 
 How do I update?
-  Flash the newer .bin over USB, or use the phone update page with the app-only file (help/2_FLASHING.txt).
+  Flash the newer .bin over USB (help/2_FLASHING.txt).
 
 Is it legal to use?
   Receiving openly broadcast radio signals is lawful in many places, but laws differ. You are responsible for following

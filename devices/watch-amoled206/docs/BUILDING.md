@@ -26,8 +26,8 @@ The display is driven by GFX Library for Arduino, which is configured entirely f
 3. Choose **Tools** settings:
    - Board: "ESP32C6 Dev Module"
    - USB CDC On Boot: "Enabled"
-   - Flash Size: "16MB (128Mb)"
-   - Partition Scheme: "16M Flash (3MB APP/9.9MB FATFS)"
+   - Flash Size: "4MB (32Mb)"
+   - Partition Scheme: "Huge APP (3MB No OTA/1MB SPIFFS)"
 4. Press **Upload**. The first build takes a few minutes. If the upload does not start, unplug the cable, HOLD the watch's BOOT side button, plug the cable in, release BOOT, and upload again.
 5. Open **Tools > Serial Monitor** at 115200 baud to see the start-up messages. The boot screen ends with `ready  Public Beta 1`.
 The boards with native USB need **USB CDC On Boot: Enabled** to print to the Serial Monitor.
@@ -37,8 +37,8 @@ If you pick the wrong board, the sketch stops at build time with a message that 
 ## Build with arduino-cli
 
 ```
-arduino-cli compile --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=16M,PartitionScheme=app3M_fat9M_16MB --export-binaries src/HUNTR-SEEKR_Watch_AMOLED206
-arduino-cli upload  --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=16M,PartitionScheme=app3M_fat9M_16MB --port YOUR_PORT src/HUNTR-SEEKR_Watch_AMOLED206
+arduino-cli compile --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=4M,PartitionScheme=huge_app --export-binaries src/HUNTR-SEEKR_Watch_AMOLED206
+arduino-cli upload  --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=4M,PartitionScheme=huge_app --port YOUR_PORT src/HUNTR-SEEKR_Watch_AMOLED206
 ```
 
 The compiled files are written to `src/HUNTR-SEEKR_Watch_AMOLED206/build/espressif.esp32.esp32c6/`.
@@ -51,8 +51,8 @@ The compiled files are written to `src/HUNTR-SEEKR_Watch_AMOLED206/build/espress
 python3 tools/make_release_bin.py src/HUNTR-SEEKR_Watch_AMOLED206/build/espressif.esp32.esp32c6 out
 ```
 
-It writes `HUNTR-SEEKR_Watch_Public_Beta_1.bin` and `HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin` and `SHA256SUMS.txt` into `out/`, after checking the layout (bootloader, partition table and application at their expected addresses).
-`HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin` is the application-only file (`*.ino.bin`) used by the phone update page; it is copied as it is.
+It writes `HUNTR-SEEKR_Watch_Public_Beta_1.bin` and `SHA256SUMS.txt` into `out/`, after checking the layout (bootloader, partition table and application at their expected addresses).
+The 4 MB "Huge APP" layout is used on purpose (see [../config/README.md](../config/README.md)): it has no second application slot, so the phone update page is not available. A layout with two slots (for example `FlashSize=16M,PartitionScheme=app3M_fat9M_16MB`) turns it on for your own builds.
 
 ## Where things are
 

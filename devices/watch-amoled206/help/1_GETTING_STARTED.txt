@@ -10,7 +10,7 @@ Parts you may want to add (all optional)
 ----------------------------------------
   Battery      A lithium battery of the type Waveshare specifies for the board. Without one it runs from USB power.
   GPS          A module connected to the board's UART pads; it adds your position to the log.
-  Phone        Used for the Live view, to set the clock and to update the software, over the watch's own Wi-Fi.
+  Phone        Used for the Live view and to set the clock, over the watch's own Wi-Fi.
 
 Step by step
 ------------

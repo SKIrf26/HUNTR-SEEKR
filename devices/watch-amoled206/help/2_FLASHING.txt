@@ -39,9 +39,7 @@ Writing this file replaces the software and RESETS THE SAVED SETTINGS. Logs save
 
 Updating later
 --------------
-Either flash the newer .bin the same way, or update from your phone without a computer: press SHARE on the LOG page,
-join the watch's hotspot, open http://192.168.4.1/update, choose HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin and press Install. Do not remove
-power while it installs; the watch restarts by itself.
+Flash the newer .bin the same way, over USB. (The phone update page is not used in this release.)
 
 Prefer a browser?
 -----------------

@@ -11,7 +11,6 @@ Turn an Arduino build folder into the release file(s) and a checksum list.
 
 Outputs (default folder: ./out):
   HUNTR-SEEKR_Watch_Public_Beta_1.bin   single image, write at address 0x0
-  HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin   application only (phone update page)
   SHA256SUMS.txt
 
 Why not just use the *.merged.bin? It is padded with blank bytes to the full flash size, so writing it also
@@ -24,12 +23,11 @@ import os
 import sys
 
 NAME = "HUNTR-SEEKR_Watch_Public_Beta_1"
-APP_ONLY_NAME = NAME + "_app-only.bin"
 CHIP = "esp32c6"
 BOOT_OFFSET = 0x0  # where the bootloader image (starts with 0xE9) sits in the merged file
 PART_OFFSET = 0x8000  # partition table
 APP_OFFSET = 0x10000  # application (first app slot)
-LAYOUT_HINT = "Board: ESP32C6 Dev Module, Flash Size 16MB, Partition Scheme 16M Flash (3MB APP/9.9MB FATFS)"
+LAYOUT_HINT = "Board: ESP32C6 Dev Module, Flash Size 4MB, Partition Scheme Huge APP (3MB No OTA/1MB SPIFFS)"
 
 
 def one(folder, pattern):
@@ -75,10 +73,6 @@ def main():
     with open(full, "wb") as f:
         f.write(merged[:end])
     files = [full]
-    app_only = os.path.join(out, APP_ONLY_NAME)
-    with open(app_only, "wb") as f:
-        f.write(app)
-    files.append(app_only)
     sums = os.path.join(out, "SHA256SUMS.txt")
     with open(sums, "w") as f:
         for p in files:

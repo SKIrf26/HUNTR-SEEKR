@@ -3,6 +3,12 @@
 All notable changes to this project are listed here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+- Flash layout is now the 4 MB "Huge APP" layout. The release image starts reliably after flashers that rewrite it to a smaller flash size (the earlier 16 MB layout stopped at a black screen after that).
+- The phone update page and the application-only update file are no longer part of the release: update over USB. About 0.9 MB of flash is available for logs and settings; logs saved under the earlier layout are not read by this one.
+
 ## [Public Beta 1] - 2026-10-14
 
 First public release, for the **Waveshare ESP32-C6-Touch-AMOLED-2.06** watch board.
