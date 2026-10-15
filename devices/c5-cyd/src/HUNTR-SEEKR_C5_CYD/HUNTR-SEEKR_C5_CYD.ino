@@ -12755,7 +12755,7 @@ static void drawPageSetup() {
   int x = 12, w = W - 24, top = contentTop(), bot = contentBot(), viewH = bot - top;
   const int H1 = 56, HR = 44, G = 6;
   int rows =
-      19 + (HAS_IMU_BOARD ? 2 : 0) + (HAS_TOUCH_CAL ? 1 : 0) + (HAS_BOOTSOUND ? 1 : 0) + 1 + (orient == 4 ? 2 : 0);
+      20 + (HAS_IMU_BOARD ? 2 : 0) + (HAS_TOUCH_CAL ? 1 : 0) + (HAS_BOOTSOUND ? 1 : 0) + 1 + (orient == 4 ? 2 : 0);
   int total = 2 * (H1 + G) + rows * (HR + G);
   sc.max = total > viewH ? (float)(total - viewH) : 0;
   clipSet(0, top, W, viewH);
