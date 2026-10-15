@@ -50,6 +50,8 @@ To use one of the other two, copy it over `User_Setup.h` in the library and **ke
 
 ## If the picture appears but the colours are wrong
 
+The easy fix needs no rebuild: open **SETUP > Screen colors** on the board and tap it until the colours look right (Swap R/B, Invert, or both). The choice is kept. The notes below are for building your own.
+
 - Red and blue swapped: in `User_Setup.h` remove the `//` before `#define TFT_RGB_ORDER TFT_BGR`.
 - Everything looks like a photo negative: make sure `#define TFT_INVERSION_OFF` is present (it is, in this file).
 

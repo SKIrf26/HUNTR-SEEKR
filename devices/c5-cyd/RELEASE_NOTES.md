@@ -13,6 +13,7 @@ First public release for the **NM-CYD-C5** board (ESP32-C5, 2.8 inch touch scree
 - Wide maker lists including many camera and tracker makers, and your own rules (up to 128) with a `sigs_update.txt` file
 - Tracker "following" alert, possible card-skimmer tags, session report, logs (with KML and GeoJSON map files when a GPS module is fitted), ignore list
 - Phone page over the board's own Wi-Fi (live view, clock sync)
+- **SETUP > Screen colors** corrects a board whose display shows swapped or inverted colours (Normal, Swap R/B, Invert, Swap + invert)
 - Illustrated user guide included (PDF, normal and booklet), plain-text help and the full source code
 
 ## Install

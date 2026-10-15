@@ -3,6 +3,11 @@
 All notable changes to this project are listed here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+- **SETUP > Screen colors**: corrects a board whose display shows the wrong colours. It steps through Normal, Swap R/B (red and blue traded), Invert (photo negative) and Swap + invert; the picture changes at once and the choice is kept.
+
 ## [Public Beta 1] - 2026-10-14
 
 First public release, for the **NM-CYD-C5** (ESP32-C5, 2.8 inch touch screen) board.

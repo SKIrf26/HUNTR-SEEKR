@@ -13,6 +13,9 @@ A. The computer does not see the board / flashing fails
    - If you have a magnetic buzzer fitted, unplug it while you flash (IO26 is a boot-mode pin).
 
 B. Nothing shows on the screen, or the colours are wrong
+   - The picture appears but the colours are wrong (red and blue traded, or like a photo negative): open
+     SETUP > Screen colors and tap it until the colours look right. Swap R/B fixes red and blue traded places,
+     Invert fixes a photo-negative picture, Swap + invert does both. The choice is kept.
    - Unplug the board, wait 10 seconds, plug it in again. Try another cable or USB port.
    - Flash the .bin again (help/2_FLASHING.txt).
    - If it stays black or shows noise or wrong colours, your board may have a different display panel than this release
