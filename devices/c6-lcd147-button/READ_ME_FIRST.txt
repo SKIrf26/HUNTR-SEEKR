@@ -79,7 +79,7 @@ GOOD TO KNOW (THIS IS A BETA)
   * The board has one radio shared by Wi-Fi and Bluetooth, and it listens on 2.4 GHz only.
   * There is no speaker on the board. Sound needs a small passive buzzer (see the user guide, section 10).
   * The board is updated over USB (the phone update page is not supported on this board in this release).
-  * Hardware status: The software was rebuilt on the current detection code for this release and its interface was checked in a desktop simulation, but this release has not yet been run on a real board. An earlier one-button build of the same interface (version 3.6-btn) has been run on a real plain ESP32-C6-LCD-1.47 by the project and works there, including the display settings, the LED and reading BOOT as the button.
+  * Hardware status: This release has been flashed and run on a real plain ESP32-C6-LCD-1.47 by the project: it starts, shows the interface and finds Wi-Fi networks. An earlier one-button build of the same interface (version 3.6-btn) also ran on that board, including the display settings, the LED and reading BOOT as the button. Not every feature has been tried one by one on this release yet (Bluetooth, Zigbee/Thread, the phone page and the saved logs in particular).
     Please report what you see, good or bad, with the Bug report form.
 
 USE IT RESPONSIBLY

@@ -7,7 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Public Beta 1] - 2026-10-15
 
 ### Added
-- One-button edition for the plain Waveshare ESP32-C6-LCD-1.47 (no touch panel), in `devices/c6-lcd147-button/`: the whole interface runs on the BOOT button (TAP = next, HOLD = select, LONG = back). Built on the current detection code; the previous one-button build of this interface ran on a real board, this rebuild has not yet.
+- One-button edition for the plain Waveshare ESP32-C6-LCD-1.47 (no touch panel), in `devices/c6-lcd147-button/`: the whole interface runs on the BOOT button (TAP = next, HOLD = select, LONG = back). Built on the current detection code and run on a real board (starts, shows the interface, finds Wi-Fi networks).
 
 ## [Public Beta 1] - 2026-10-14
 

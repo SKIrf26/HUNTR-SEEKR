@@ -32,7 +32,7 @@ This resets saved settings; saved logs stay. Updates are done the same way, over
 | `HUNTR-SEEKR_C6_LCD147_BUTTON_Public_Beta_1_User_Guide.pdf` (+ two booklet versions) | User guide |
 
 ## Please know
-This is a **beta**. The software was rebuilt on the current detection code for this release and its interface was checked in a desktop simulation, but this release has not yet been run on a real board. An earlier one-button build of the same interface (version 3.6-btn) has been run on a real plain ESP32-C6-LCD-1.47 by the project and works there, including the display settings, the LED and reading BOOT as the button. Please report what you see, good or bad, with the Bug report form.
+This is a **beta**. This release has been flashed and run on a real plain ESP32-C6-LCD-1.47 by the project: it starts, shows the interface and finds Wi-Fi networks. An earlier one-button build of the same interface (version 3.6-btn) also ran on that board, including the display settings, the LED and reading BOOT as the button. Not every feature has been tried one by one on this release yet (Bluetooth, Zigbee/Thread, the phone page and the saved logs in particular). Please report what you see, good or bad, with the Bug report form.
 
 This edition has no direction finder (AIM), landscape screen, settings pages, session report or self-test: those need a touch screen or a motion sensor. Detection lists are not exhaustive and **results are hints, not proof**.
 
