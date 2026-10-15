@@ -3,6 +3,14 @@
 All notable changes to this project are listed here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+- **SETUP > Screen colors**: corrects a board whose display shows the wrong colours. It steps through Normal, Swap R/B (red and blue traded), Invert (photo negative) and Swap + invert; the picture changes at once and the choice is kept.
+
+### Fixed
+- Bluetooth scanning failed to start ("Bluetooth failed to start") with Arduino core 3.3.9, because the core freed the Bluetooth memory at start-up. The sketch now tells the core that it uses Bluetooth LE.
+
 ## [Public Beta 1] - 2026-10-14
 
 First public release, for the **ESP32-2432S028 (CYD 2.8)**.
@@ -22,7 +30,7 @@ First public release, for the **ESP32-2432S028 (CYD 2.8)**.
 - Full source code, build notes and a code map.
 
 ### Known limitations
-- Hardware status: This release builds cleanly for the ESP32-2432S028 (CYD 2.8), and its screens were checked in a desktop simulation of the interface. It has not yet been run on the real board by the project. Please report what you see, good or bad, with the Bug report form.
+- Hardware status: This release has been run on the real board by the project (start-up and Wi-Fi scanning); the other screens were checked in a desktop simulation of the interface, so some features have had less testing on hardware. A Bluetooth start-up fault found on the board is fixed in this release but not yet confirmed there. Please report what you see, good or bad, with the Bug report form.
 - The board listens on 2.4 GHz only (the chip has no 5 GHz Wi-Fi), and Wi-Fi and Bluetooth share one radio.
 - Updates are done over USB; the phone update page is not supported on this board in this release.
 - Detection lists are not exhaustive. Results are hints, not proof.

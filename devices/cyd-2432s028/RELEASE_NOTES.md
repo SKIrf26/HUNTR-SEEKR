@@ -13,6 +13,7 @@ First public release for the **ESP32-2432S028 (CYD 2.8)**.
 - Wide maker lists including many camera and tracker makers, and your own rules (up to 128), plus a signature update file
 - Tracker "following" alert, possible card-skimmer tags, session report, logs (with KML and GeoJSON map files when a GPS module is fitted), ignore list
 - Phone page over the board's own Wi-Fi (live view, clock sync)
+- **SETUP > Screen colors** corrects a board whose display shows swapped or inverted colours (Normal, Swap R/B, Invert, Swap + invert)
 - Illustrated user guide included (PDF, normal and booklet), plain-text help and the full source code
 
 ## Install
@@ -33,7 +34,7 @@ Updates are done the same way, over USB.
 | `HUNTR-SEEKR_CYD_2432S028_Public_Beta_1_User_Guide.pdf` (+ two booklet versions) | User guide |
 
 ## Please know
-This is a **beta**. Signal strength is only a rough guide to distance, and the board cannot tell which direction a signal comes from. This release builds cleanly for the ESP32-2432S028 (CYD 2.8), and its screens were checked in a desktop simulation of the interface. It has not yet been run on the real board by the project. Please report what you see, good or bad, with the Bug report form. Detection lists are not exhaustive and **results are hints, not proof**.
+This is a **beta**. Signal strength is only a rough guide to distance, and the board cannot tell which direction a signal comes from. This release has been run on the real board by the project (start-up and Wi-Fi scanning); the other screens were checked in a desktop simulation of the interface, so some features have had less testing on hardware. A Bluetooth start-up fault found on the board is fixed in this release but not yet confirmed there. Please report what you see, good or bad, with the Bug report form. Detection lists are not exhaustive and **results are hints, not proof**.
 
 Use it responsibly and within your local laws. See the README.
 

@@ -21,6 +21,8 @@ Other pins used by the sketch (touch, SD card, speaker, GPS) are listed in the *
 
 ## If the picture appears but the colours are wrong
 
+The easy fix needs no rebuild: open **SETUP > Screen colors** on the board and tap it until the colours look right (Swap R/B, Invert, or both). The choice is kept. The notes below are for building your own.
+
 - Photo negative: in `User_Setup.h` remove the `//` before `#define TFT_INVERSION_ON`.
 - Red and blue swapped: remove the `//` before `#define TFT_RGB_ORDER TFT_BGR`.
 

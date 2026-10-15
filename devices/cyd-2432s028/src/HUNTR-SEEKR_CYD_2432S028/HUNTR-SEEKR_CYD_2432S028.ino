@@ -64,6 +64,11 @@
 #include <TinyGPSPlus.h>
 #include <NimBLEDevice.h>
 #include <esp_bt.h>
+// Tell the Arduino core that this sketch uses Bluetooth LE. Newer cores free the Bluetooth memory at start-up
+// unless a library says it is in use, and NimBLE no longer does, so Bluetooth then fails to start.
+#if __has_include("esp32-hal-alloc-ble-mem.h")
+#include "esp32-hal-alloc-ble-mem.h"
+#endif
 #include <esp_heap_caps.h>
 #include <Preferences.h>
 #include "esp_timer.h"
@@ -578,6 +583,32 @@ struct PanelShim {
 };
 PanelShim panelObj;
 PanelShim* panel = &panelObj;
+// Screen colours (SETUP > Screen colors): corrects a board whose panel wiring differs from the usual one.
+// Bit 0 = swap red and blue, bit 1 = invert. 0 = the panel set-up in User_Setup.h.
+static uint8_t colorMode = 0;
+static void applyColorMode() {
+#if defined(ILI9341_DRIVER) || defined(ILI9341_2_DRIVER)
+  uint8_t madctl = TFT_MAD_MX | TFT_MAD_COLOR_ORDER;  // portrait, as the driver sets it
+#else
+  uint8_t madctl = TFT_MAD_COLOR_ORDER;
+#endif
+  if (colorMode & 1)
+    madctl ^= TFT_MAD_BGR;  // flip the red / blue order
+#if defined(TFT_INVERSION_ON)
+  bool inv = true;
+#elif defined(TFT_INVERSION_OFF)
+  bool inv = false;
+#elif defined(ST7789_DRIVER)
+  bool inv = true;  // the ST7789 driver switches inversion on by itself
+#else
+  bool inv = false;
+#endif
+  if (colorMode & 2)
+    inv = !inv;
+  tft.writecommand(TFT_MADCTL);
+  tft.writedata(madctl);
+  tft.invertDisplay(inv);
+}
 // px = c0 + c1*rawX + c2*rawY ; py = c3 + c4*rawX + c5*rawY  (native panel pixels)
 struct TCal {
   float c[6];
@@ -8143,6 +8174,7 @@ static void savePrefs() {
   prefs.putBool("aliens", hudOn);
   // "dim2": a new key, so the new default (off) applies to boards that saved the old one
   prefs.putBool("dim2", autoDim);
+  prefs.putUChar("colr", colorMode);
   BOARD_PREFS_SAVE
   prefs.end();
 }
@@ -8199,6 +8231,7 @@ static void loadPrefs() {
     bootLogoMode = 0;
   applyThemeMode(prefs.getBool("aliens", false) ? 2 : (prefs.getBool("alien", false) ? 1 : 0));
   autoDim = prefs.getBool("dim2", false);
+  colorMode = prefs.getUChar("colr", 0) & 3;
   BOARD_PREFS_LOAD
   prefs.end();
   if (bright < 20)
@@ -11919,7 +11952,7 @@ static void drawPageSetup() {
   int x = 12, w = W - 24, top = contentTop(), bot = contentBot(), viewH = bot - top;
   const int H1 = 56, HR = 44, G = 6;
   int rows =
-      16 + (HAS_IMU_BOARD ? 2 : 0) + (HAS_TOUCH_CAL ? 1 : 0) + (HAS_BOOTSOUND ? 1 : 0) + 1 + (orient == 4 ? 2 : 0);
+      17 + (HAS_IMU_BOARD ? 2 : 0) + (HAS_TOUCH_CAL ? 1 : 0) + (HAS_BOOTSOUND ? 1 : 0) + 1 + (orient == 4 ? 2 : 0);
   int total = 2 * (H1 + G) + rows * (HR + G);
   sc.max = total > viewH ? (float)(total - viewH) : 0;
   clipSet(0, top, W, viewH);
@@ -12010,6 +12043,10 @@ static void drawPageSetup() {
 #if HAS_TOUCH_CAL
   valueRow(10, "Calibrate touch", tcal.ok ? "done" : "do this first", tcal.ok ? C_TEAL : C_AMBER);
 #endif
+  {
+    static const char* const CM[4] = {"Normal", "Swap R/B", "Invert", "Swap + invert"};
+    valueRow(22, "Screen colors", CM[colorMode & 3], colorMode ? C_AMBER : C_MUTE);
+  }
   {
     char fv[16];
     if (followMin)
@@ -14240,6 +14277,16 @@ static void setRowTap(int id) {
     case 12:
       cycleListView();
       return;
+    case 22: {  // Normal -> Swap R/B -> Invert -> Swap + invert; shows on the screen at once
+      static const char* const CT[4] = {"Screen colors: normal", "Screen colors: red and blue swapped",
+                                        "Screen colors: inverted", "Screen colors: swapped and inverted"};
+      colorMode = (colorMode + 1) & 3;
+      applyColorMode();
+      savePrefs();
+      showToast(CT[colorMode]);
+      needRender = true;
+      return;
+    }
     case 14:
       bootLogoCycle();
       return;
@@ -15042,6 +15089,7 @@ void setup() {
   SPI.begin(PIN_SPI_SCK, PIN_SPI_MISO, PIN_SPI_MOSI, PIN_SD_CS);
   panel->begin();
   loadPrefs();
+  applyColorMode();
   panel->fillScreen(0);
   ledcAttach(PIN_TFT_BL, 5000, 10);
   blSet(0);

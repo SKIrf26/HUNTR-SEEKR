@@ -38,7 +38,7 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 - Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), device-fingerprint codes and Bluetooth spam detection
 - Custom signatures (oui, ssid, ble, cid, uuid and ie rules, up to 128) and a signature update file (`sigs_update.txt`)
 - Tracker "following" alert, ignore list, scenes, session report and logs (saved to a microSD card or the board's flash; with a GPS module also as KML and GeoJSON map files)
-- Discreet mode, power saver, landscape and portrait screens, touch calibration
+- Discreet mode, power saver, landscape and portrait screens, touch calibration, and a Screen colors setting that corrects boards whose display shows swapped or inverted colours
 - Phone page over the board's own Wi-Fi hotspot: live view and clock sync
 - Self-test screen that checks every part of the hardware
 
@@ -88,7 +88,7 @@ The illustrated user guide covers set-up, every screen, the settings, troublesho
 
 This is the **first public release**. It is a beta: expect rough edges, and expect some behaviour to change.
 
-- **Hardware status.** This release builds cleanly for the ESP32-2432S028 (CYD 2.8), and its screens were checked in a desktop simulation of the interface. It has not yet been run on the real board by the project. Please report what you see, good or bad, with the Bug report form.
+- **Hardware status.** This release has been run on the real board by the project (start-up and Wi-Fi scanning); the other screens were checked in a desktop simulation of the interface, so some features have had less testing on hardware. A Bluetooth start-up fault found on the board is fixed in this release but not yet confirmed there. Please report what you see, good or bad, with the Bug report form.
 - Signal strength is only a rough guide to distance, and one antenna cannot tell which direction a signal comes from. Use the warmer / colder reading and walk around.
 - Sound needs a small 8 ohm speaker fitted to the board (see the user guide).
 - Update over USB: the phone update page is not supported on this board in this release.
