@@ -9813,7 +9813,7 @@ static void handleUpdateForm() {
   h += "<h2><b>Update</b> firmware</h2>";
   if (!otaSlotAvailable()) {
     h +=
-        "<div class=c><span class=w>This partition scheme has no update slot.</span></div><div class=s>In the Arduino IDE choose Tools > Partition Scheme > <b>16M Flash (3MB APP/9.9MB FATFS)</b>, upload once over USB, then updates work from here.</div>";
+        "<div class=c><span class=w>This build has no update slot.</span></div><div class=s>Flash the newer .bin over USB (see the Releases page). To get phone updates, build from source with a layout that has two app slots.</div>";
   } else if (!(pmuVbus || batPct() >= 30)) {
     h +=
         "<div class=c><span class=w>Battery too low to update safely.</span></div><div class=s>Connect USB power or charge above 30% first.</div>";
