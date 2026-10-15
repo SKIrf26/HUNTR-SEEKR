@@ -1,0 +1,60 @@
+1. GETTING STARTED
+==================
+
+What the board is
+-----------------
+The Waveshare ESP32-C6-LCD-1.47 is a small board with an ESP32-C6 chip, a 1.47 inch screen (172 x 320), an RGB LED,
+a BOOT button and a RESET button. It has NO touch panel, no motion sensor, no speaker and no clock chip.
+HUNTR/SEEKR is the software that runs on it. (The board that has a touch screen has "Touch" in its name; it uses the
+touch edition of the software.)
+
+The one button
+--------------
+Everything is done with the BOOT button. How long you hold it decides what it does, and it acts when you let go:
+  TAP   (under half a second)     NEXT     move to the next item
+  HOLD  (half a second to 1.5 s)  SELECT   open / start / apply the highlighted item
+  LONG  (over 1.5 seconds)        BACK     go back (on the home screen: screen off, any press wakes it)
+The three boxes along the bottom of every screen show what each gesture does now, and the box for the gesture you are
+making lights up while the button is down. The RGB LED changes colour at the same moments (teal-green past half a
+second, violet past one and a half), so it also works by feel.
+
+Parts you may want to add (all optional)
+----------------------------------------
+  Buzzer       A small PASSIVE buzzer or piezo between a free header pin and GND; put that pin in PIN_BUZZER in the
+               sketch (user guide, section 10). Without it the board makes no sound.
+  Buttons      Up to two extra push buttons between free header pins and GND (PIN_BTN_EXT1, PIN_BTN_EXT2) make
+               the interface quicker: EXT1 = NEXT, EXT2 = SELECT, BOOT = BACK.
+  GPS          A module connected to the board's GPS pads; it adds your position to the log.
+  Phone        Used for the Live view, to set the clock (the board has no clock chip) and to download saved logs.
+
+Step by step
+------------
+ 1. Put the software on the board: help/2_FLASHING.txt.
+ 2. The boot screen ends with "ready  Public Beta 1". A few seconds later the Home screen appears. It says IDLE.
+ 3. TAP twice to move the highlight to SCENE, then HOLD to open the scene list.
+ 4. TAP to the scene you want (for example STREET) and HOLD to arm it. The Home screen says LISTENING and the LED
+    gives a slow teal blip every few seconds.
+ 5. When something is found a banner drops down and the LED pulses in the group's colour. TAP skips the banner,
+    HOLD tracks that device.
+ 6. To see everything heard: on Home, highlight FINDS and HOLD. TAP walks down the list, HOLD tracks the highlighted
+    device (a number closer to zero means closer), LONG goes back.
+ 7. To put the screen away: LONG on the Home screen. Scanning goes on; any press wakes the screen.
+
+The clock
+---------
+The board has no clock chip. Choose More > Phone page (TAP to MORE, HOLD, HOLD on Phone page), join the board's Wi-Fi
+hotspot with your phone (the name and password are shown on the screen) and open http://192.168.4.1 (not https), then
+open the Live view. The board takes the time and time zone from the phone, so your saved logs have time stamps.
+
+Saved findings
+--------------
+Findings are saved automatically, every five minutes and when scanning stops. Download them from the same phone page
+(the file list on its first screen).
+
+Hardware status
+---------------
+The software was rebuilt on the current detection code for this release and its interface was checked in a desktop simulation, but this release has not yet been run on a real board. An earlier one-button build of the same interface (version 3.6-btn) has been run on a real plain ESP32-C6-LCD-1.47 by the project and works there, including the display settings, the LED and reading BOOT as the button. Please report what you see, good or bad, with the Bug report form.
+
+Next
+----
+The user guide (PDF in the docs folder) explains every screen. If something does not work: help/3_TROUBLESHOOTING.txt.

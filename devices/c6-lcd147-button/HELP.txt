@@ -1,0 +1,20 @@
+HELP - FIND YOUR PROBLEM FAST
+=============================
+
+I want to put the software on my board.... help/2_FLASHING.txt
+The computer does not see the board....... Use a USB data cable. Try another USB port. Hold BOOT while plugging in.
+                                           (help/3_TROUBLESHOOTING.txt, A)
+The screen is black....................... help/3_TROUBLESHOOTING.txt, B
+The picture looks like a photo negative... Set LCD_IPS to 0 in the sketch (help/3_TROUBLESHOOTING.txt, C)
+The picture is shifted sideways........... Change LCD_COL_OFS (help/3_TROUBLESHOOTING.txt, C)
+The button does nothing................... help/3_TROUBLESHOOTING.txt, D
+The LED never lights...................... help/3_TROUBLESHOOTING.txt, E
+No sound.................................. Needs a passive buzzer and PIN_BUZZER (help/3_TROUBLESHOOTING.txt, F)
+Wi-Fi finds nothing....................... help/3_TROUBLESHOOTING.txt, G
+Log times are blank....................... Open the Live page from your phone (help/3_TROUBLESHOOTING.txt, H)
+My phone cannot join the board's Wi-Fi.... help/3_TROUBLESHOOTING.txt, I
+How do I update to a newer release?....... Flash the new .bin again (help/2_FLASHING.txt)
+Anything else............................. help/4_FAQ.txt and the user guide (docs folder)
+
+If it is still stuck, open an issue on the project page (Bug report form). Include the release name shown on the
+boot screen, what you did, and what the Serial Monitor (115200 baud) printed.

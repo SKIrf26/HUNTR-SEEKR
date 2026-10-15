@@ -1,0 +1,49 @@
+2. FLASHING THE .bin FILE
+=========================
+
+You need: the file HUNTR-SEEKR_C6_LCD147_BUTTON_Public_Beta_1.bin (and SHA256SUMS.txt) from the project's Releases page, the board, a USB data cable,
+and a computer with Python 3.
+
+ 1. Check the download (optional but recommended)
+      Windows PowerShell:   Get-FileHash .\HUNTR-SEEKR_C6_LCD147_BUTTON_Public_Beta_1.bin -Algorithm SHA256
+      macOS / Linux:        shasum -a 256 -c SHA256SUMS.txt
+    The value must match the line for that file in SHA256SUMS.txt.
+
+ 2. Install the flashing tool (once)
+      pip install esptool
+    (On Windows, if "pip" is not found, use:  py -m pip install esptool )
+
+ 3. Plug the board into the computer with the USB-C cable.
+    Find its port:
+      Windows   Device Manager > Ports (COM & LPT): for example COM5
+      macOS     /dev/cu.usbmodem...   (list with:  ls /dev/cu.*)
+      Linux     /dev/ttyACM0          (you may need to be in the "dialout" group)
+
+ 4. Write the file (replace YOUR_PORT):
+      esptool --chip esp32c6 --port YOUR_PORT --baud 460800 write-flash 0x0 HUNTR-SEEKR_C6_LCD147_BUTTON_Public_Beta_1.bin
+    ("write_flash" with an underscore is the older spelling and also works on older esptool versions.)
+
+ 5. When it says "Hash of data verified" and "Hard resetting", the board restarts by itself.
+    The boot screen ends with "ready  Public Beta 1".
+
+If the computer cannot connect to the board
+-----------------------------------------
+  * Use a USB DATA cable, not a charge-only one. Try another cable and another USB port.
+  * Put the chip in download mode: unplug the cable, HOLD the board's BOOT button, plug the cable in, release BOOT, and run the command again.
+  * Slow connection? Lower the speed:  --baud 115200
+
+What flashing changes
+---------------------
+Writing this file replaces the software and RESETS THE SAVED SETTINGS. Logs saved on the board are kept.
+
+Updating later
+--------------
+Flash the newer .bin the same way. Updates are done over USB; the phone update page is not supported on this board
+in this release.
+
+Prefer a browser?
+-----------------
+The project's web flasher (https://skirf-labs.tech/) writes the same file from Google Chrome or Microsoft Edge on a computer. Plug
+the board in, choose it in the list, press the flash button and pick the port. Phones and other browsers cannot flash a board.
+
+Still stuck?  help/3_TROUBLESHOOTING.txt

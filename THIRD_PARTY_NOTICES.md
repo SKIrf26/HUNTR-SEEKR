@@ -7,6 +7,7 @@ Each board is built with a slightly different set of third-party libraries, so t
 - [Waveshare ESP32-C6-Touch-AMOLED-2.06](devices/watch-amoled206/THIRD_PARTY_NOTICES.md): licence texts in [devices/watch-amoled206/licenses/](devices/watch-amoled206/licenses/)
 - [Waveshare ESP32-S3-Touch-LCD-1.69](devices/s3-lcd169/THIRD_PARTY_NOTICES.md): licence texts in [devices/s3-lcd169/licenses/](devices/s3-lcd169/licenses/)
 - [Waveshare ESP32-C6-Touch-LCD-1.47](devices/c6-lcd147/THIRD_PARTY_NOTICES.md): licence texts in [devices/c6-lcd147/licenses/](devices/c6-lcd147/licenses/)
+- [Waveshare ESP32-C6-LCD-1.47, no touch (one button)](devices/c6-lcd147-button/THIRD_PARTY_NOTICES.md): licence texts in [devices/c6-lcd147-button/licenses/](devices/c6-lcd147-button/licenses/)
 - [NM-CYD-C5](devices/c5-cyd/THIRD_PARTY_NOTICES.md): licence texts in [devices/c5-cyd/licenses/](devices/c5-cyd/licenses/)
 - [ESP32-2432S028 (CYD 2.8)](devices/cyd-2432s028/THIRD_PARTY_NOTICES.md): licence texts in [devices/cyd-2432s028/licenses/](devices/cyd-2432s028/licenses/)
 

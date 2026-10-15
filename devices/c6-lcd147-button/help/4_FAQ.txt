@@ -1,0 +1,54 @@
+4. FREQUENTLY ASKED QUESTIONS
+=============================
+
+Does it transmit anything?
+  No attacks, no jamming, no joining other people's networks. It listens. It does run a small Wi-Fi hotspot of its own
+  (with a password) while the phone page is on, so you can use it from a phone.
+
+Does it find everything?
+  No. It matches what it hears against built-in lists. Names and addresses can be changed or randomized, many devices
+  are not in the lists, and a quiet device may be out of range. "Nothing found" never proves nothing is there, and a
+  match is a hint, not proof.
+
+Which board is this for?
+  The plain Waveshare ESP32-C6-LCD-1.47, the one WITHOUT a touch panel. The board with a touch screen has its own
+  edition (folder c6-lcd147).
+
+Why one button?
+  BOOT is the only button on the board that software can read. TAP moves to the next item, HOLD selects, LONG goes back,
+  and the strip along the bottom of every screen shows what each one does.
+
+Can it tell me which direction a signal comes from?
+  Not in this edition. The board has one antenna and no motion sensor, so there is no direction finder (AIM). Track
+  shows signal strength (dBm): the number closer to zero means closer, and the LED blinks faster as you get closer.
+
+Does it scan 5 GHz Wi-Fi?
+  No. This chip has 2.4 GHz Wi-Fi only.
+
+Why do Bluetooth finds sometimes appear slowly?
+  Wi-Fi and Bluetooth share one radio. With both armed, each hears a little less than it would alone. Arming only
+  Bluetooth groups gives Bluetooth the whole radio.
+
+Why is there no sound?
+  The board has no speaker. Add a small passive buzzer between a free pin and GND and set PIN_BUZZER (user guide, section 10).
+
+Does it need a battery?
+  No: it runs from USB power. The board has no battery gauge, so the software shows no battery level.
+
+Does it save what it finds?
+  Yes, automatically: the findings record is written to the board's flash every five minutes and when scanning stops.
+  Download the files from the phone page (More > Phone page).
+
+Can I add my own devices to detect?
+  Yes: your own rules ("signatures") can be added from your phone, up to 128; see the user guide, section 9.3. A signature
+  update file (sigs_update.txt) uploaded from the same page is read after them.
+
+How do I update?
+  Flash the newer .bin over USB (help/2_FLASHING.txt). The phone update page is not supported on this board in this release.
+
+Is it legal to use?
+  Receiving openly broadcast radio signals is lawful in many places, but laws differ. You are responsible for following
+  the laws where you are. Do not use it to identify, follow or harass people.
+
+Where do I report a problem or suggest a device?
+  On the project page: Issues tab, Bug report or Feature request form.

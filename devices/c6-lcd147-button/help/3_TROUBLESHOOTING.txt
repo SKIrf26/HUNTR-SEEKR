@@ -1,0 +1,72 @@
+3. TROUBLESHOOTING
+==================
+
+The board prints start-up messages over USB that help a lot: open any serial terminal at 115200 baud on its port.
+
+A. The computer does not see the board / flashing fails
+   - Use a USB DATA cable. Try another USB port on the computer.
+   - Hold the board's BOOT button while plugging the cable in, release it, then try again.
+   - If the connection is unreliable, add --baud 115200 to the command.
+
+B. Nothing shows on the screen
+   - Press the button once: the screen may have gone to sleep (LONG on the Home screen turns it off, any press
+     wakes it). The first press after the screen is off only wakes it.
+   - Unplug the cable, wait 10 seconds, plug it in again. Try another cable or USB port.
+   - Flash the .bin again (help/2_FLASHING.txt).
+   - The Serial Monitor (115200) prints "free heap ... fs ok" at start-up. If it does not, the program did not start.
+
+C. The picture is wrong
+   - It looks like a photo negative (colours inverted): in the sketch set LCD_IPS to 0, then upload again.
+   - It is shifted sideways or has a coloured edge: change LCD_COL_OFS (34 is the usual value for this 172 pixel
+     wide panel; try 0 or 35), then upload again.
+   (Both are #defines near the top of the sketch. You need to build the sketch yourself to change them: docs/BUILDING.md.)
+
+D. The button does nothing, or does the wrong thing
+   - BOOT is the only button the software reads. RESET only restarts the chip.
+   - A button that is already held when the board powers up does nothing until it has been let go once.
+   - When the screen is off or dimmed the first press only wakes it.
+   - A press longer than 9 seconds is treated as a stuck button and ignored until it is released.
+   - TAP is under half a second, HOLD is half a second to 1.5 seconds, LONG is over 1.5 seconds. Watch the three
+     boxes at the bottom: the one for your gesture lights up while the button is down. Let go while the box you want is lit.
+   - Too quick or too slow for you? BTN_SEL_MS (500) and BTN_BACK_MS (1500) in the sketch.
+
+E. The LED never lights
+   - Check More > Alerts: LED OFF and DISCREET switch it off. The LED is also dark while nothing is armed.
+   - If the sketch will not build at the LED lines, update the esp32 board package to 3.3.5 or newer
+     (the sketch uses rgbLedWrite()).
+
+F. No sound
+   The board has no speaker. You need a PASSIVE buzzer between a free header pin and GND, with that pin number in
+   PIN_BUZZER in the sketch (it is -1, meaning none, by default). With it fitted, More > Alerts has sound choices.
+
+G. Wi-Fi or Bluetooth finds are missing or slow
+   - Make sure a Wi-Fi group (not ZB/TH) is armed. A group that says "blocked" means you armed groups from the other
+     side of the radio rule: switch the other side off first (ZB/TH and the Wi-Fi groups cannot run together).
+   - Wi-Fi pauses while the phone page (Share) is on.
+   - The list says "Wi-Fi radio: no frames yet" at first. After a few seconds it falls back to scanning access points,
+     which only sees them in bursts.
+   - Bluetooth finds slow while a Wi-Fi group is armed: the board has one radio for Wi-Fi and Bluetooth. Arming only
+     Bluetooth groups (BT, TAGS) gives Bluetooth the whole radio.
+   - The board listens on 2.4 GHz only. A device on 5 GHz Wi-Fi is not heard.
+
+H. Log times are blank
+   The clock is not set. Open the Live view from your phone once (help/1_GETTING_STARTED.txt).
+
+I. The phone will not join the board's Wi-Fi / will not stay connected
+   - Join the exact name shown on the board (it ends in four characters that change every time), with the password shown.
+   - If the phone refuses, forget any older saved network called HUNTR-SEEKR (iPhone: Settings > Wi-Fi > the i next to
+     the name > Forget This Network; Android: touch and hold the name > Forget) and join again.
+   - Some phones drop networks without internet: turn off "auto-switch to mobile data" while connected.
+   - The address is http://192.168.4.1 (not https).
+
+J. The phone update page does not work
+   Not supported on this board in this release. Update over USB (help/2_FLASHING.txt).
+
+K. A watch or phone shows only "Apple", or does not appear
+   Normal. Apple devices rotate their address and send very little, so they cannot be told apart.
+
+L. Reset everything
+   Flash the .bin again (help/2_FLASHING.txt): this resets the saved settings. Saved logs are kept; wipe them from the
+   phone page if you want.
+
+Still stuck? Open an issue (Bug report form) with the release name from the boot screen and the Serial Monitor output.
