@@ -3,6 +3,12 @@
 All notable changes to this project are listed here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+- Flash layout is now the 4 MB "Huge APP" layout. The same image works on 4 MB and 8 MB boards and no longer fails to start when a flasher rewrites it to the flash size it detects.
+- The blue ALIENS tracker now matches the one on the ESP32-S3-Touch-LCD-1.69: in AIM it shows the real bearing, the uncertainty arc and turn chevrons, and the network name is the title. Text is laid out for the narrow screen and the short landscape.
+
 ## [Public Beta 1] - 2026-10-14
 
 First public release, for the **Waveshare ESP32-C6-Touch-LCD-1.47**.

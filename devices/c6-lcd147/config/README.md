@@ -6,10 +6,12 @@ This board needs no display set-up file: GFX Library for Arduino is configured f
 
 - Board: "ESP32C6 Dev Module"
 - USB CDC On Boot: "Enabled"
-- Flash Size: "8MB (64Mb)"
-- Partition Scheme: "8M with spiffs (3MB APP/1.5MB SPIFFS)"
+- Flash Size: "4MB (32Mb)"
+- Partition Scheme: "Huge APP (3MB No OTA/1MB SPIFFS)"
 
-(`arduino-cli` users: `--fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=8M,PartitionScheme=default_8MB`)
+(`arduino-cli` users: `--fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=4M,PartitionScheme=huge_app`)
+
+The 4 MB layout is used on purpose even though the board has 8 MB of flash: the same file then works on 4 MB and 8 MB boards, and it survives flashers that rewrite the image to the flash size they detect. The firmware uses about 2 MB of the 3 MB application slot. Over-the-air update is not used on this board.
 
 ## Board definitions
 

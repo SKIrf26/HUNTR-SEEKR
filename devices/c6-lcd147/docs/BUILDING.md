@@ -26,8 +26,8 @@ The display is driven by GFX Library for Arduino, which is configured entirely f
 3. Choose **Tools** settings:
    - Board: "ESP32C6 Dev Module"
    - USB CDC On Boot: "Enabled"
-   - Flash Size: "8MB (64Mb)"
-   - Partition Scheme: "8M with spiffs (3MB APP/1.5MB SPIFFS)"
+   - Flash Size: "4MB (32Mb)"
+   - Partition Scheme: "Huge APP (3MB No OTA/1MB SPIFFS)"
 4. Press **Upload**. The first build takes a few minutes. If the upload does not start, unplug the cable, HOLD the board's BOOT button, plug the cable in, release BOOT, and upload again.
 5. Open **Tools > Serial Monitor** at 115200 baud to see the start-up messages. The boot screen ends with `ready  Public Beta 1`.
 The boards with native USB need **USB CDC On Boot: Enabled** to print to the Serial Monitor.
@@ -37,8 +37,8 @@ If you pick the wrong board, the sketch stops at build time with a message that 
 ## Build with arduino-cli
 
 ```
-arduino-cli compile --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=8M,PartitionScheme=default_8MB --export-binaries src/HUNTR-SEEKR_C6_LCD147
-arduino-cli upload  --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=8M,PartitionScheme=default_8MB --port YOUR_PORT src/HUNTR-SEEKR_C6_LCD147
+arduino-cli compile --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=4M,PartitionScheme=huge_app --export-binaries src/HUNTR-SEEKR_C6_LCD147
+arduino-cli upload  --fqbn espressif:esp32:esp32c6:CDCOnBoot=cdc,FlashSize=4M,PartitionScheme=huge_app --port YOUR_PORT src/HUNTR-SEEKR_C6_LCD147
 ```
 
 The compiled files are written to `src/HUNTR-SEEKR_C6_LCD147/build/espressif.esp32.esp32c6/`.

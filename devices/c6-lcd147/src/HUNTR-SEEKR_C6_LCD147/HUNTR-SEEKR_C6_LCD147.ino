@@ -23,8 +23,8 @@
  * Build (Arduino IDE 2.x, board package esp32 by Espressif 3.3.5 or newer):
  *   Board    : "ESP32C6 Dev Module"
  *   USB CDC On Boot: Enabled
- *   Flash Size: 8MB
- *   Partition Scheme: "8M with spiffs (3MB APP/1.5MB SPIFFS)"
+ *   Flash Size: 4MB
+ *   Partition Scheme: "Huge APP (3MB No OTA/1MB SPIFFS)"
  * Libraries:
  *   GFX Library for Arduino 1.6.x
  *   TinyGPSPlus 1.1.x
@@ -11836,7 +11836,8 @@ static void hudWave(float ox, float oy, float R, int32_t t) {
   }
 }
 // the smudge a contact leaves when the ring passes it
-static void hudEcho(float ox, float oy, float R, int32_t t, float rfrac, float theta, uint8_t strength, int seed) {
+static void hudEcho(float ox, float oy, float R, int32_t t, float rfrac, float theta, uint8_t strength, int seed,
+                    float sp = 0.115f) {
   float tp = (rfrac - 0.28f) / 0.90f * 290.0f;
   if (tp < 0)
     tp = 0;
@@ -11848,191 +11849,14 @@ static void hudEcho(float ox, float oy, float R, int32_t t, float rfrac, float t
   if (al < 6)
     return;
   for (int q = 0; q < 7; q++) {
-    float th = theta + (q - 3) * 0.115f + ((seed >> q) & 3) * 0.012f - 0.018f;
+    float th = theta + (q - 3) * sp + ((seed >> q) & 3) * 0.012f - 0.018f;
     float rr = R * (rfrac + (((seed >> (q + 3)) & 7) - 3.5f) * 0.012f);
     float x = ox + sinf(th) * rr, y = oy - cosf(th) * rr;
     float sz = R * (0.072f + 0.018f * ((seed >> (q + 1)) & 3));
     disc(x, y, sz, RGB(150, 160, 172), al);
   }
 }
-static void drawHuntHud() {
-  const float PI_ = 3.14159265f, UP = 1.5f * PI_;
-  const Contact& c = hc;
-  bool ok = hcOk;
-  bool wide = W > H;
-  int top = contentTop(), bot = contentBot();
-  bool ridShow = ok && (c.rid.flags & 7);
-  int ridLn = ridShow ? (((c.rid.flags & 1) ? 1 : 0) + ((c.rid.flags & 2) ? 1 : 0) + ((c.rid.flags & 4) ? 1 : 0)) : 0;
-  uint16_t fam = ok ? famColor(c.fam) : C_TEAL;
-  float norm = clamp01((huntShown + 100.0f) / 70.0f);
-  int hTrend = 0;
-  if (histN > 9) {
-    float d = huntEma - hist[histN - 9];
-    hTrend = d > 2.5f ? 1 : (d < -2.5f ? -1 : 0);
-  }
-  int32_t t = (int32_t)(gNow - huntPingAt);
-  char b[48], nb[8];
-  snprintf(nb, sizeof(nb), "%d", (int)lroundf(huntShown));
-  char mac[20] = "--";
-  if (ok)
-    macStr(c.mac, mac);
-  // ---- layout: the footer bar is 0.36 R high, the art above it 1.14 R
-  float R, ox, oy;
-  if (wide) {
-    R = fminf((float)(bot - top - 4) / 1.50f, (W - 100) / 2.0f);
-    ox = 6 + R;
-  } else {
-    R = fminf((float)(bot - top - 4 - 50 - ridLn * 13) / 1.50f, (W - 6) / 2.0f);
-    ox = W / 2.0f;
-  }
-  if (R < 50)
-    R = 50;
-  oy = top + 2 + 1.14f * R;
-  int fh = (int)(0.36f * R);
-  hudHud(ox, oy, R, RGB(1, 3, 12));
-  bool contact = ok && !huntSearching;
-  float rangeM = termRangeM(huntShown);
-  float rfrac = clamp01(rangeM / 16.0f);
-  if (rfrac < 0.14f)
-    rfrac = 0.14f;
-  // a steady, arbitrary bearing: the real one is not known
-  float theta = (((c.mac[5] * 37 + c.mac[4] * 11 + c.mac[3]) & 255) / 255.0f - 0.5f) * 1.5f;
-  if (contact) {
-    int seed = c.mac[5] * 7 + c.mac[4] * 13 + c.mac[3];
-    hudEcho(ox, oy, R, t, rfrac, theta, (uint8_t)(110 + 120 * norm), seed);
-  }
-  // everything else heard lately: small fainter echoes
-  {
-    uint8_t om[6][6];
-    float oe[6];
-    int on = 0;
-    portENTER_CRITICAL(&mux);
-    for (int i = 0; i < nContacts && on < 6; i++)
-      if (!macEq(contacts[i].mac, huntMac) && (int32_t)(gNow - contacts[i].lastMs) < 20000) {
-        memcpy(om[on], contacts[i].mac, 6);
-        oe[on++] = contacts[i].ema;
-      }
-    portEXIT_CRITICAL(&mux);
-    for (int i = 0; i < on; i++) {
-      float th = (((om[i][5] * 37 + om[i][4] * 11 + om[i][3]) & 255) / 255.0f - 0.5f) * 1.5f;
-      float rf = clamp01(termRangeM(oe[i]) / 16.0f);
-      if (rf < 0.14f)
-        rf = 0.14f;
-      float tp = (rf - 0.28f) / 0.90f * 290.0f;
-      if (tp < 0)
-        tp = 0;
-      float age = t - tp;
-      if (age >= 0 && age < 700) {
-        float k = expf(-age / 330.0f);
-        disc(ox + sinf(th) * R * rf, oy - cosf(th) * R * rf, R * 0.04f, RGB(120, 132, 146), (uint8_t)(120 * k));
-      }
-    }
-  }
-  hudWave(ox, oy, R, t);
-  if (!contact && ((gNow >> 8) & 2))
-    textC(&SKI_MDB, huntSearching ? "SEARCHING" : "NO CONTACT", (int)ox, (int)(oy - R * 0.55f), RGB(150, 214, 255));
-  // ---- footer: the blue bar, the notch and the red range
-  int fx = (int)(ox - R), fw = (int)(2 * R), fy = (int)oy;
-  fillRect(fx, fy, fw, fh, RGB(0, 148, 255));
-  int nw = (int)(0.50f * R), nh = (int)(0.27f * R) + 4;
-  rrFillP((int)ox - nw / 2, fy - 1, nw, nh + 1, 6, RGB(4, 12, 44), 255);
-  fillRect((int)ox - nw / 2, fy - 1, nw, 6, RGB(4, 12, 44));
-  {
-    bool far99 = !contact || huntShown <= -99;
-    int whole = far99 ? 0 : (int)rangeM, dec = far99 ? 0 : (int)((rangeM - (int)rangeM) * 100.0f);
-    char big[6], sm[6];
-    snprintf(big, sizeof(big), "%d", whole);
-    snprintf(sm, sizeof(sm), "%02d", dec);
-    const uint16_t RED = RGB(255, 36, 36);
-    int bw = textW(&SKI_LG, big), tw = bw + 3 + textW(&SKI_SM, sm);
-    int x0 = (int)ox - tw / 2, ty = fy + 2;
-    drawText(&SKI_LG, big, x0, ty, RED);
-    drawText(&SKI_SM, sm, x0 + bw + 3, ty, RED);
-    drawText(&SKI_SM, "m", x0 + bw + 3, ty + SKI_SM.capH + 3, RED);
-  }
-  {
-    snprintf(b, sizeof(b), "SIG %s DBM", nb);
-    drawText(&SKI_SM, b, fx + 5, fy + fh / 2 - SKI_SM.capH / 2 + 1, RGB(255, 255, 255));
-  }
-  {
-    const char* kl = ok ? kindLabel(c) : "LOST";
-    char kb[24];
-    ellipsize(&SKI_SM, kl, (int)(R * 0.62f), kb, sizeof(kb));
-    textR(&SKI_SM, kb, fx + fw - 5, fy + fh / 2 - SKI_SM.capH / 2 + 1, RGB(255, 255, 255));
-  }
-  // ---- the rest
-  const char* zone = huntSearching ? "SEARCHING" : (huntShown > -55 ? "CLOSE" : (huntShown > -80 ? "NEAR" : "FAR"));
-  const char* tt = huntSearching ? "" : (hTrend > 0 ? "^ HOTTER" : (hTrend < 0 ? "v COLDER" : "STEADY"));
-  uint16_t hot = huntShown > -55 ? C_INK : (huntShown > -72 ? C_AMBER : C_TEAL);
-  if (wide) {
-    int rx = fx + fw + 10, y0 = top + 2;
-    {
-      char kb[40];
-      ellipsize(&SKI_SM, ok ? kindLabel(c) : "LOST", W - rx - 4, kb, sizeof(kb));
-      drawText(&SKI_SM, kb, rx, y0, C_INK);
-    }
-    if (ok && c.nick[0]) {
-      ellipsize(&SKI_SM, c.nick, W - rx - 4, b, sizeof(b));
-      drawText(&SKI_SM, b, rx, y0 + 14, C_MUTE);
-    }
-    snprintf(b, sizeof(b), "%s DBM", nb);
-    drawText(&SKI_MDB, b, rx, y0 + 34, hot);
-    drawText(&SKI_SM, zone, rx, y0 + 56, hot);
-    drawText(&SKI_SM, tt, rx, y0 + 70, hTrend > 0 ? C_INK : C_MUTE);
-    char pk[24];
-    snprintf(pk, sizeof(pk), "PEAK %d", ok ? (int)c.peak : 0);
-    // (the short landscape of the 1.47: peak shares the trend line)
-    if (H >= 200)
-      drawText(&SKI_SM, pk, rx, y0 + 84, C_MUTE);
-    else
-      drawText(&SKI_SM, pk, rx + textW(&SKI_SM, tt) + 10, y0 + 70, C_MUTE);
-    if (H >= 200)
-      drawText(&SKI_SM, "RANGE EST", rx, y0 + 98, C_DIM);
-    // (the narrow landscape of the S3: shift left rather than cut off)
-    drawText(&SKI_SM, mac, imin(rx, W - 2 - textW(&SKI_SM, mac)), bot - 12, C_DIM);
-  } else {
-    int mg = 12, ty = fy + fh + 6;
-    disc(mg + 3, ty + 5, 3.2f, fam);
-    ellipsize(&SKI_MDB, ok ? kindLabel(c) : "LOST", W / 2 - 12, b, sizeof(b));
-    drawText(&SKI_MDB, b, mg + 12, ty, C_INK);
-    if (ok && c.nick[0]) {
-      ellipsize(&SKI_SM, c.nick, W / 2 - 18, b, sizeof(b));
-      textR(&SKI_SM, b, W - mg, ty + 1, C_MUTE);
-    }
-    snprintf(b, sizeof(b), "%s  %s", zone, tt);
-    drawText(&SKI_SM, b, mg, ty + 20, hot);
-    char pk[24];
-    snprintf(pk, sizeof(pk), W < 200 ? "PEAK %d" : "PEAK %d  RANGE EST", ok ? (int)c.peak : 0);
-    textR(&SKI_SM, pk, W - mg, ty + 20, C_MUTE);
-    int by0 = bot - 11;
-    if (ridShow) {
-      int ty2 = bot - ridLn * 13 + 2;
-      char rb[48];
-      by0 = ty2 - 14;
-      if (c.rid.flags & 1) {
-        snprintf(rb, sizeof(rb), "ID  %s", c.rid.id);
-        ellipsize(&SKI_SM, rb, W - 24, b, sizeof(b));
-        drawText(&SKI_SM, b, mg, ty2, C_INK);
-        ty2 += 13;
-      }
-      if (c.rid.flags & 2) {
-        snprintf(rb, sizeof(rb), "%.5f %.5f %dM", c.rid.lat / 1e7, c.rid.lon / 1e7, (int)c.rid.alt);
-        drawText(&SKI_SM, rb, mg, ty2, C_MUTE);
-        ty2 += 13;
-      }
-      if (c.rid.flags & 4) {
-        snprintf(rb, sizeof(rb), "PILOT %.5f %.5f", c.rid.opLat / 1e7, c.rid.opLon / 1e7);
-        drawText(&SKI_SM, rb, mg, ty2, C_AMBER);
-      }
-    }
-    drawText(&SKI_SM, mac, mg, by0, C_DIM);
-  }
-  drawHeader("Track", false);
-  {
-    const char* n[3] = {"BACK", "AIM", muted ? "SOUND" : "QUIET"};
-    drawNav(HAS_SOUND ? 3 : 2, n, -1);
-  }
-}
+static void drawHuntHud();
 static void drawHuntOrig() {
   if (hudOn) {
     drawHuntHud();
@@ -15058,8 +14882,291 @@ static void dirDrawTerm() {
     dirTextAt(&SKI_SM, e, mg, ly + 20, dirPc == C_OK ? C_MUTE : C_DIM);
   }
 }
+static void drawHuntHud() {
+  const float PI_ = 3.14159265f, UP = 1.5f * PI_;
+  const Contact& c = hc;
+  bool ok = hcOk;
+  bool wide = W > H;
+  int top = contentTop(), bot = contentBot();
+  // AIM, calibrated: this same HUD, with the echo at the REAL bearing
+  bool aim = dirView && !dirFault && dirChkDone && dirCalStep >= DIR_PTS;
+  float rel = 0;
+  bool clear = false, inFan = false;
+  if (aim) {
+    rel = dirWrap180(dirBearing - dirWrap360(dirYaw));
+    clear = dirState == 2;
+    inFan = fabsf(rel) <= 90.0f;
+    dirStatus(wide);
+  }
+  bool ridShow = ok && (c.rid.flags & 7);
+  int ridLn = ridShow ? (((c.rid.flags & 1) ? 1 : 0) + ((c.rid.flags & 2) ? 1 : 0) + ((c.rid.flags & 4) ? 1 : 0)) : 0;
+  uint16_t fam = ok ? famColor(c.fam) : C_TEAL;
+  bool showNick = ok && c.nick[0] && !ridShow;  // the network name gets a line of its own
+  float norm = clamp01((huntShown + 100.0f) / 70.0f);
+  int hTrend = 0;
+  if (histN > 9) {
+    float d = huntEma - hist[histN - 9];
+    hTrend = d > 2.5f ? 1 : (d < -2.5f ? -1 : 0);
+  }
+  int32_t t = (int32_t)(gNow - huntPingAt);
+  char b[48], nb[8];
+  snprintf(nb, sizeof(nb), "%d", (int)lroundf(huntShown));
+  char mac[20] = "--";
+  if (ok)
+    macStr(c.mac, mac);
+  // ---- layout: the footer bar is 0.36 R high, the art above it 1.14 R
+  float R, ox, oy;
+  if (wide) {
+    R = fminf((float)(bot - top - 4 - (showNick ? 20 : 0)) / 1.50f, (W - 100) / 2.0f);
+    ox = 6 + R;
+  } else {
+    R = fminf((float)(bot - top - 4 - 66 - ridLn * 13) / 1.50f, (W - 6) / 2.0f);
+    ox = W / 2.0f;
+  }
+  if (R < 50)
+    R = 50;
+  // the ring maths (32-bit) overflows above about 180 physical px
+  if (R > 116.0f)
+    R = 116.0f;
+  oy = top + 2 + 1.14f * R;
+  int fh = (int)(0.36f * R);
+  hudHud(ox, oy, R, RGB(1, 3, 12));
+  bool contact = ok && !huntSearching;
+  float rangeM = termRangeM(huntShown);
+  float rfrac = clamp01(rangeM / 16.0f);
+  if (rfrac < 0.14f)
+    rfrac = 0.14f;
+  // a steady, arbitrary bearing: the real one is not known
+  float theta = (((c.mac[5] * 37 + c.mac[4] * 11 + c.mac[3]) & 255) / 255.0f - 0.5f) * 1.5f;
+  if (contact && !aim) {
+    int seed = c.mac[5] * 7 + c.mac[4] * 13 + c.mac[3];
+    hudEcho(ox, oy, R, t, rfrac, theta, (uint8_t)(110 + 120 * norm), seed);
+  }
+  if (contact && aim && clear) {
+    int seed = c.mac[5] * 7 + c.mac[4] * 13 + c.mac[3];
+    if (inFan) {
+      float th = rel * 0.0174532925f, sg = dirSigma * 0.0174532925f;  // th: from straight up, clockwise
+      // the bearing
+      lineAA(ox + sinf(th) * R * 0.14f, oy - cosf(th) * R * 0.14f, ox + sinf(th) * R * 0.90f, oy - cosf(th) * R * 0.90f,
+             1.3f, RGB(120, 214, 255), 200);
+      hudBox(ox, oy, R * 0.905f, th, R * 0.05f + 2.0f, 4.0f, RGB(220, 244, 255));  // ... and its marker on the ring
+      float a0 = UP + th - sg, a1 = UP + th + sg;
+      if (a0 < PI_)
+        a0 = PI_;
+      if (a1 > 2 * PI_)
+        a1 = 2 * PI_;
+      if (a1 > a0)
+        hudArc(ox, oy, R * 0.905f, 2.4f, a0, a1, RGB(150, 224, 255), 170);  // how unsure it is
+      float sp = sg / 3.2f;
+      if (sp < 0.05f)
+        sp = 0.05f;
+      if (sp > 0.2f)
+        sp = 0.2f;
+      hudEcho(ox, oy, R, t, rfrac, th, (uint8_t)(120 + 120 * norm), seed, sp);
+      // behind you: chevrons at the edge of the fan, on the side to turn towards
+    } else {
+      int sgn = rel > 0 ? 1 : -1;
+      float ex = ox + sgn * (R + 2), ey = oy - 6;
+      for (int k = 0; k < 3; k++) {
+        float o = k * 7.0f;
+        float x0 = ex - sgn * (12 + o), x1 = ex - sgn * (4 + o);
+        lineAA(x1, ey, x0, ey - 6, 2.2f, C_AMBER, (uint8_t)(255 - k * 70));
+        lineAA(x1, ey, x0, ey + 6, 2.2f, C_AMBER, (uint8_t)(255 - k * 70));
+      }
+    }
+  }
+  // everything else heard lately: small fainter echoes (their bearings are arbitrary, so not in AIM)
+  if (!aim) {
+    uint8_t om[6][6];
+    float oe[6];
+    int on = 0;
+    portENTER_CRITICAL(&mux);
+    for (int i = 0; i < nContacts && on < 6; i++)
+      if (!macEq(contacts[i].mac, huntMac) && (int32_t)(gNow - contacts[i].lastMs) < 20000) {
+        memcpy(om[on], contacts[i].mac, 6);
+        oe[on++] = contacts[i].ema;
+      }
+    portEXIT_CRITICAL(&mux);
+    for (int i = 0; i < on; i++) {
+      float th = (((om[i][5] * 37 + om[i][4] * 11 + om[i][3]) & 255) / 255.0f - 0.5f) * 1.5f;
+      float rf = clamp01(termRangeM(oe[i]) / 16.0f);
+      if (rf < 0.14f)
+        rf = 0.14f;
+      float tp = (rf - 0.28f) / 0.90f * 290.0f;
+      if (tp < 0)
+        tp = 0;
+      float age = t - tp;
+      if (age >= 0 && age < 700) {
+        float k = expf(-age / 330.0f);
+        disc(ox + sinf(th) * R * rf, oy - cosf(th) * R * rf, R * 0.04f, RGB(120, 132, 146), (uint8_t)(120 * k));
+      }
+    }
+  }
+  hudWave(ox, oy, R, t);
+  if (!contact && ((gNow >> 8) & 2))
+    textC(&SKI_MDB, huntSearching ? "SEARCHING" : "NO CONTACT", (int)ox, (int)(oy - R * 0.55f), RGB(150, 214, 255));
+  // ---- footer: the blue bar, the notch and the red range
+  int fx = (int)(ox - R), fw = (int)(2 * R), fy = (int)oy;
+  fillRect(fx, fy, fw, fh, RGB(0, 148, 255));
+  int nw = (int)(0.50f * R), nh = (int)(0.27f * R) + 4;
+  rrFillP((int)ox - nw / 2, fy - 1, nw, nh + 1, 6, RGB(4, 12, 44), 255);
+  fillRect((int)ox - nw / 2, fy - 1, nw, 6, RGB(4, 12, 44));
+  {
+    bool far99 = !contact || huntShown <= -99;
+    int whole = far99 ? 0 : (int)rangeM, dec = far99 ? 0 : (int)((rangeM - (int)rangeM) * 100.0f);
+    char big[6], sm[6];
+    snprintf(big, sizeof(big), "%d", whole);
+    snprintf(sm, sizeof(sm), "%02d", dec);
+    const uint16_t RED = RGB(255, 36, 36);
+    int bw = textW(&SKI_LG, big), tw = bw + 3 + textW(&SKI_SM, sm);
+    int x0 = (int)ox - tw / 2, ty = fy + 2;
+    drawText(&SKI_LG, big, x0, ty, RED);
+    drawText(&SKI_SM, sm, x0 + bw + 3, ty, RED);
+    drawText(&SKI_SM, "m", x0 + bw + 3, ty + SKI_SM.capH + 3, RED);
+  }
+  {
+    snprintf(b, sizeof(b), "SIG %s DBM", nb);
+    if (5 + textW(&SKI_SM, b) > (int)(R * 0.75f) - 3)
+      snprintf(b, sizeof(b), "SIG %s", nb);
+    drawText(&SKI_SM, b, fx + 5, fy + fh / 2 - SKI_SM.capH / 2 + 1, RGB(255, 255, 255));
+  }
+  {
+    const char* kl = ok ? kindLabel(c) : "LOST";
+    char kb[24];
+    ellipsize(&SKI_SM, kl, (int)(R * 0.62f), kb, sizeof(kb));
+    textR(&SKI_SM, kb, fx + fw - 5, fy + fh / 2 - SKI_SM.capH / 2 + 1, RGB(255, 255, 255));
+  }
+  // the network name, large, under the blue bar
+  if (wide && showNick) {
+    char nk[28];
+    bool big = textW(&SKI_MDB, c.nick) <= fw - 4;
+    const SkiFont* nf = big ? &SKI_MDB : &SKI_SM;
+    ellipsize(nf, c.nick, fw - 4, nk, sizeof(nk));
+    textC(nf, nk, (int)ox, fy + fh + (big ? 3 : 6), C_INK);
+  }
+  // ---- the rest
+  const char* zone = huntSearching ? "SEARCHING" : (huntShown > -55 ? "CLOSE" : (huntShown > -80 ? "NEAR" : "FAR"));
+  const char* tt = huntSearching ? "" : (hTrend > 0 ? "^ HOTTER" : (hTrend < 0 ? "v COLDER" : "STEADY"));
+  uint16_t hot = huntShown > -55 ? C_INK : (huntShown > -72 ? C_AMBER : C_TEAL);
+  if (aim && wide) {
+    int rx = fx + fw + 10, y0 = top + 2, cw = W - rx - 4;
+    // (the short landscape of the 1.47 has no room for the kind line or a second line of advice)
+    bool tight = H < 200;
+    if (!tight) {
+      char kb[40];
+      ellipsize(&SKI_SM, ok ? kindLabel(c) : "LOST", cw, kb, sizeof(kb));
+      drawText(&SKI_SM, kb, rx, y0, C_INK);
+    }
+    {
+      char gy[24];
+      uint16_t gc = dirGyroLine(gy, sizeof(gy));
+      drawText(&SKI_SM, gy, rx, tight ? y0 : y0 + 14, gc);
+    }
+    snprintf(b, sizeof(b), "%s DBM", nb);
+    drawText(&SKI_MDB, b, rx, tight ? y0 + 14 : y0 + 32, hot);
+    char l1[40];
+    snprintf(l1, sizeof(l1), "%s", dirL1);
+    if (strncmp(l1, "TURN ", 5) == 0)
+      memmove(l1, l1 + 5, strlen(l1 + 5) + 1);
+    const SkiFont* f1 = dirTextW(&SKI_MDB, l1) <= cw ? &SKI_MDB : &SKI_SM;
+    dirTextAt(f1, l1, rx, tight ? y0 + 36 : y0 + 56, dirPc);
+    int ny = dirLines(&SKI_SM, dirL2, rx, tight ? y0 + 58 : y0 + 78, cw, 12, dirPc == C_OK ? C_MUTE : C_DIM, tight ? 1 : 2);
+    if (dirL3[0] && !tight)
+      dirLines(&SKI_SM, dirL3, rx, ny, cw, 12, C_DIM, 2);
+    drawText(&SKI_SM, mac, imin(rx, W - 2 - textW(&SKI_SM, mac)), bot - 12, C_DIM);
+  } else if (wide) {
+    int rx = fx + fw + 10, y0 = top + 2;
+    {
+      char kb[40];
+      ellipsize(&SKI_SM, ok ? kindLabel(c) : "LOST", W - rx - 4, kb, sizeof(kb));
+      drawText(&SKI_SM, kb, rx, y0, C_INK);
+    }
+    snprintf(b, sizeof(b), "%s DBM", nb);
+    drawText(&SKI_MDB, b, rx, y0 + 22, hot);
+    drawText(&SKI_SM, zone, rx, y0 + 46, hot);
+    drawText(&SKI_SM, tt, rx, y0 + 60, hTrend > 0 ? C_INK : C_MUTE);
+    char pk[24];
+    snprintf(pk, sizeof(pk), "PEAK %d", ok ? (int)c.peak : 0);
+    // (the short landscape of the 1.47: peak shares the trend line)
+    if (H >= 200)
+      drawText(&SKI_SM, pk, rx, y0 + 74, C_MUTE);
+    else
+      drawText(&SKI_SM, pk, rx + textW(&SKI_SM, tt) + 10, y0 + 60, C_MUTE);
+    if (H >= 200)
+      drawText(&SKI_SM, "RANGE EST", rx, y0 + 88, C_DIM);
+    drawText(&SKI_SM, mac, imin(rx, W - 2 - textW(&SKI_SM, mac)), bot - 12, C_DIM);
+  } else {
+    int mg = 12, ty = fy + fh + 6;
+    disc(mg + 3, ty + 5, 3.2f, fam);
+    char gy[24] = "";
+    uint16_t gc = C_MUTE;
+    if (aim)
+      gc = dirGyroLine(gy, sizeof(gy));
+    // the network name is the title; what kind of thing it is goes underneath
+    if (showNick) {
+      int tw = W - 2 * mg - 12 - (aim ? textW(&SKI_SM, gy) + 8 : 0);
+      ellipsize(&SKI_MDB, c.nick, tw, b, sizeof(b));
+      drawText(&SKI_MDB, b, mg + 12, ty, C_INK);
+      ellipsize(&SKI_SM, ok ? kindLabel(c) : "LOST", W - 2 * mg - 12, b, sizeof(b));
+      drawText(&SKI_SM, b, mg + 12, ty + 17, C_MUTE);
+    } else {
+      ellipsize(&SKI_MDB, ok ? kindLabel(c) : "LOST", W / 2 - 12, b, sizeof(b));
+      drawText(&SKI_MDB, b, mg + 12, ty, C_INK);
+    }
+    if (aim)
+      textR(&SKI_SM, gy, W - mg, ty + 3, gc);
+    if (aim) {
+      const SkiFont* f1 = dirTextW(&SKI_MDB, dirL1) <= W - 2 * mg ? &SKI_MDB : &SKI_SM;
+      dirTextAt(f1, dirL1, mg, ty + 32, dirPc);
+      char e[48];
+      ellipsize(&SKI_SM, dirL2, W - 2 * mg, e, sizeof(e));
+      dirTextAt(&SKI_SM, e, mg, ty + 52, dirPc == C_OK ? C_MUTE : C_DIM);
+    } else {
+      snprintf(b, sizeof(b), "%s  %s", zone, tt);
+      drawText(&SKI_SM, b, mg, ty + 32, hot);
+      char pk[24];
+      snprintf(pk, sizeof(pk), W < 200 ? "PEAK %d" : "PEAK %d  RANGE EST", ok ? (int)c.peak : 0);  // (the narrow panel has no room for the second part)
+      textR(&SKI_SM, pk, W - mg, ty + 32, C_MUTE);
+    }
+    int by0 = bot - 11;
+    if (ridShow) {
+      int ty2 = bot - ridLn * 13 + 2;
+      char rb[48];
+      by0 = ty2 - 14;
+      if (c.rid.flags & 1) {
+        snprintf(rb, sizeof(rb), "ID  %s", c.rid.id);
+        ellipsize(&SKI_SM, rb, W - 24, b, sizeof(b));
+        drawText(&SKI_SM, b, mg, ty2, C_INK);
+        ty2 += 13;
+      }
+      if (c.rid.flags & 2) {
+        snprintf(rb, sizeof(rb), "%.5f %.5f %dM", c.rid.lat / 1e7, c.rid.lon / 1e7, (int)c.rid.alt);
+        drawText(&SKI_SM, rb, mg, ty2, C_MUTE);
+        ty2 += 13;
+      }
+      if (c.rid.flags & 4) {
+        snprintf(rb, sizeof(rb), "PILOT %.5f %.5f", c.rid.opLat / 1e7, c.rid.opLon / 1e7);
+        drawText(&SKI_SM, rb, mg, ty2, C_AMBER);
+      }
+    }
+    if (!aim)
+      drawText(&SKI_SM, mac, mg, by0, C_DIM);  // (AIM: the text above needs the room)
+  }
+  drawHeader("Track", false);
+  if (aim)
+    dirNavDraw();
+  else {
+    const char* n[3] = {"BACK", "AIM", muted ? "SOUND" : "QUIET"};
+    drawNav(HAS_SOUND ? 3 : 2, n, -1);
+  }
+}
 static void dirDrawScreen() {
   bool pointing = !dirFault && dirChkDone && dirCalStep >= DIR_PTS;
+  // HUD, calibrated: the blue HUD tracker with the real bearing
+  if (hudOn && pointing) {
+    drawHuntHud();
+    return;
+  }
   if (termOn && pointing)
     dirDrawTerm();
   else

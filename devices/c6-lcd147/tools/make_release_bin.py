@@ -28,7 +28,7 @@ CHIP = "esp32c6"
 BOOT_OFFSET = 0x0  # where the bootloader image (starts with 0xE9) sits in the merged file
 PART_OFFSET = 0x8000  # partition table
 APP_OFFSET = 0x10000  # application (first app slot)
-LAYOUT_HINT = "Board: ESP32C6 Dev Module, Flash Size 8MB, Partition Scheme 8M with spiffs (3MB APP/1.5MB SPIFFS)"
+LAYOUT_HINT = "Board: ESP32C6 Dev Module, Flash Size 4MB, Partition Scheme Huge APP (3MB No OTA/1MB SPIFFS)"
 
 
 def one(folder, pattern):
