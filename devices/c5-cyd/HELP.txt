@@ -1,0 +1,18 @@
+HELP - FIND YOUR PROBLEM FAST
+=============================
+
+I want to put the software on my board ..................... help/2_FLASHING.txt
+The computer does not see the board ........................ Use a USB-C DATA cable. Try the other USB-C port and another
+                                                              USB port. Hold BOOT while plugging in. (help/3_TROUBLESHOOTING.txt, A)
+The screen is black ......................................... help/3_TROUBLESHOOTING.txt, B
+Colours are wrong ............................................ help/3_TROUBLESHOOTING.txt, B
+Touch does nothing / lands in the wrong place ............... SETUP > Calibrate touch (help/3_TROUBLESHOOTING.txt, C)
+No sound ..................................................... Needs a passive buzzer on IO26 and GND (help/3_TROUBLESHOOTING.txt, D)
+Wi-Fi finds nothing ......................................... help/3_TROUBLESHOOTING.txt, E
+Logs are not saved to the SD card ........................... help/3_TROUBLESHOOTING.txt, F
+My phone cannot join the board's Wi-Fi ...................... help/3_TROUBLESHOOTING.txt, G
+How do I update to a newer release? ......................... Flash the new .bin again (help/2_FLASHING.txt)
+Anything else ................................................ help/4_FAQ.txt and the user guide (docs folder)
+
+If it is still stuck, open an issue on the project page (Bug report form). Include the release name shown on the
+boot screen, what you did, and what the Serial Monitor (115200 baud) printed.

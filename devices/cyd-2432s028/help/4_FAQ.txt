@@ -1,0 +1,47 @@
+4. FREQUENTLY ASKED QUESTIONS
+=============================
+
+Does it transmit anything?
+  No attacks, no jamming, no joining other people's networks. It listens. It does run a small Wi-Fi hotspot of its own
+  (with a password) when you press SHARE, so you can use it from a phone.
+
+Does it find everything?
+  No. It matches what it hears against built-in lists. Names and addresses can be changed or randomized, many devices
+  are not in the lists, and a quiet device may be out of range. "Nothing found" never proves nothing is there, and a
+  match is a hint, not proof.
+
+Can it tell me which direction a signal comes from?
+  No. The board has one antenna. Track shows signal strength (dBm): the number closer to zero means closer. Walk around
+  and watch whether it gets warmer or colder.
+
+Does it scan 5 GHz Wi-Fi?
+  No. The ESP32 has 2.4 GHz Wi-Fi only.
+
+Why do Bluetooth finds sometimes appear slowly?
+  Wi-Fi and Bluetooth share one radio. With both armed, each hears a little less than it would alone. Turn on
+  SETUP > Bluetooth share to give Bluetooth the whole radio for a while in every few seconds.
+
+Why is there no sound?
+  Most boards are sold without a speaker. Plug a small 8 ohm speaker into the speaker socket.
+
+Does it need a battery?
+  No: it runs from USB power. The board has no battery or clock chip.
+
+Does it save what it finds?
+  When you choose SAVE LOG on the LOG page, the findings record is written to the microSD card (or the board's flash).
+  Use a FAT32 card, fitted before you switch the board on.
+
+Can I add my own devices to detect?
+  Yes: your own rules ("signatures") can be added, up to 128; see the user guide, section 9.3. A sigs_update.txt file
+  on the microSD card is read as well, so a list from someone else can simply be copied onto the card.
+
+How do I update?
+  Flash the newer .bin over USB (help/2_FLASHING.txt). The phone update page is not supported on this board in
+  this release.
+
+Is it legal to use?
+  Receiving openly broadcast radio signals is lawful in many places, but laws differ. You are responsible for following
+  the laws where you are. Do not use it to identify, follow or harass people.
+
+Where do I report a problem or suggest a device?
+  On the project page: Issues tab, Bug report or Feature request form.

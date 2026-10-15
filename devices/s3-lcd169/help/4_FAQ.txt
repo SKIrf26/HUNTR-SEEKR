@@ -1,0 +1,44 @@
+4. FREQUENTLY ASKED QUESTIONS
+=============================
+
+Does it transmit anything?
+  No attacks, no jamming, no joining other people's networks. It listens. It does run a small Wi-Fi hotspot of its own
+  (with a password) when you press SHARE, so you can use it from a phone.
+
+Does it find everything?
+  No. It matches what it hears against built-in lists. Names and addresses can be changed or randomized, many devices
+  are not in the lists, and a quiet device may be out of range. "Nothing found" never proves nothing is there, and a
+  match is a hint, not proof.
+
+Can it tell me which direction a signal comes from?
+  The board has one antenna, so it cannot measure a direction directly. Track shows signal strength (dBm): the number
+  closer to zero means closer. AIM works out a direction estimate by recording the signal while you turn on the spot;
+  it is an estimate, never better than +/-15 degrees.
+
+Does it scan 5 GHz Wi-Fi?
+  No. This chip has 2.4 GHz Wi-Fi only.
+
+Why do Bluetooth finds sometimes appear slowly?
+  Wi-Fi and Bluetooth share one radio. With both armed, each hears a little less than it would alone. Turn on
+  SETUP > Bluetooth share to give Bluetooth the whole radio for a while in every few seconds.
+
+Does it need a battery?
+  No: it can run from USB power. If you add a battery, use only the type Waveshare specifies for the board.
+
+Does it save what it finds?
+  When you choose SAVE LOG on the LOG page, the findings record is written to the board's flash. With a GPS module
+  fitted it is also written as KML and GeoJSON map files.
+
+Can I add my own devices to detect?
+  Yes: your own rules ("signatures") can be added from your phone, up to 128; see the user guide, section 9.3. A signature
+  update file (sigs_update.txt) uploaded from the same page is read after them.
+
+How do I update?
+  Flash the newer .bin over USB, or use the phone update page with the app-only file (help/2_FLASHING.txt).
+
+Is it legal to use?
+  Receiving openly broadcast radio signals is lawful in many places, but laws differ. You are responsible for following
+  the laws where you are. Do not use it to identify, follow or harass people.
+
+Where do I report a problem or suggest a device?
+  On the project page: Issues tab, Bug report or Feature request form.

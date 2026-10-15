@@ -1,0 +1,14 @@
+# Build output
+build/
+*.elf
+*.map
+*.o
+*.merged.bin
+# Release binaries are attached to GitHub Releases, not committed.
+out/
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

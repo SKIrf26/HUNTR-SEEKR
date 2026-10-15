@@ -1,0 +1,30 @@
+# Firmware files
+
+The release `.bin` files are **attached to the GitHub Release**, not committed in this repository (they are large and change every release). To make them yourself from the source, see [../docs/BUILDING.md](../docs/BUILDING.md).
+
+## What is in a release
+
+| File | What it is | When to use it |
+|---|---|---|
+| `HUNTR-SEEKR_Watch_Public_Beta_1.bin` | One complete image (bootloader, partition table, application) | First install, or a clean re-flash. Write at address `0x0`. Resets saved **settings**; saved **logs** stay. |
+| `HUNTR-SEEKR_Watch_Public_Beta_1_app-only.bin` | The application only | Updating from your phone: join the watch's Wi-Fi hotspot and open `192.168.4.1/update` |
+| `SHA256SUMS.txt` | Checksums of the files | Check your download is intact |
+
+## Flash the image
+
+1. Install Python 3, then `pip install esptool`.
+2. Plug the watch into the computer with a USB **data** cable.
+3. Find the port (Windows: `COM3` or similar in Device Manager; macOS: `/dev/cu.usbmodem...`; Linux: `/dev/ttyACM0`).
+4. Run:
+
+   ```
+   esptool --chip esp32c6 --port YOUR_PORT --baud 460800 write-flash 0x0 HUNTR-SEEKR_Watch_Public_Beta_1.bin
+   ```
+5. If the board is not found or the upload cannot connect, unplug the cable, HOLD the watch's BOOT side button, plug the cable in, release BOOT, and run the command again (this puts the chip in download mode).
+6. After it finishes the watch restarts. The boot screen shows **Public Beta 1** in small text at the bottom.
+
+Check the download first: on Linux/macOS `shasum -a 256 -c SHA256SUMS.txt`, on Windows PowerShell `Get-FileHash .\HUNTR-SEEKR_Watch_Public_Beta_1.bin -Algorithm SHA256`.
+
+## Browser flasher
+
+The project's [web flasher](https://skirf-labs.tech/) writes the same image from Google Chrome or Microsoft Edge over USB, with nothing to install.

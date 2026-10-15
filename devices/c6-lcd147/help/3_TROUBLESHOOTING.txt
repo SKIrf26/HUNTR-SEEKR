@@ -1,0 +1,63 @@
+3. TROUBLESHOOTING
+==================
+
+The board prints start-up messages over USB that help a lot: open any serial terminal at 115200 baud on its port.
+The board's own check: SETUP > Self-test (green dot = healthy, red dot = not, grey = a part your board does not have).
+
+A. The computer does not see the board / flashing fails
+   - Use a USB DATA cable. Try another USB port on the computer.
+   - Hold the board's BOOT button while plugging the cable in, release it, then try again.
+   - If the connection is unreliable, add --baud 115200 to the command.
+
+B. Nothing shows on the screen
+   - Unplug the cable, wait 10 seconds, plug it in again. Try another cable or USB port.
+   - Flash the .bin again (help/2_FLASHING.txt).
+   - If the board seems off: unplug it, wait 10 seconds and plug it in again.
+
+C. Touch does nothing
+   - The boot screen says "touch NOT detected": unplug, wait, plug in again. Check SETUP > Self-test > Touch.
+   - The first touch after a pause does nothing: normal, that touch wakes the screen.
+
+D. No sound
+   The board has no speaker. Check in this order:
+   1. a PASSIVE buzzer with + on pad IO7 and - on GND;
+   2. the Volume slider is above zero and Discreet mode is off (the status pill does not say QUIET);
+   3. SETUP > Self-test > BEEP plays a tone.
+   In Track, QUIET silences the beeps and SOUND brings them back.
+
+E. Wi-Fi or Bluetooth finds are missing or slow
+   - Make sure a Wi-Fi group (not ZIGBEE/THREAD) is armed. A tile that is dim red and says "blocked" means you armed
+     groups from the other side of the radio rule: switch the other side off first.
+   - Wi-Fi pauses while the Share hotspot is on.
+   - The list says "Wi-Fi radio: no frames yet" at first, then after 10 seconds "scanning access points". In that
+     mode only access points are seen, in bursts.
+   - Bluetooth finds slow while a Wi-Fi group is armed: the board has one radio for Wi-Fi and Bluetooth. Turn on
+     SETUP > Bluetooth share so Wi-Fi pauses regularly and Bluetooth gets the whole radio. Arming only Bluetooth
+     groups also gives Bluetooth the whole radio.
+   - The board listens on 2.4 GHz only. A device on 5 GHz Wi-Fi is not heard.
+
+F. Log times are blank or amber
+   The clock is not set. Open the Live view from your phone once (help/1_GETTING_STARTED.txt).
+
+G. The phone will not join the board's Wi-Fi / will not stay connected
+   - Join the exact name shown on the board, with the password shown.
+   - If the phone refuses, forget any older saved network called HUNTR-SEEKR (iPhone: Settings > Wi-Fi > the i next to
+     the name > Forget This Network; Android: touch and hold the name > Forget) and join again.
+   - Some phones drop networks without internet: turn off "auto-switch to mobile data" while connected.
+   - The address is http://192.168.4.1 (not https).
+
+H. AIM says GYRO NOT WORKING / NO CLEAR SIDE, or the arrow turns the wrong way
+   See the troubleshooting table in the user guide (docs folder). In short: open SETUP > Self-test >
+   Motion (it should show changing numbers), move to open space, hold the board the same way throughout, and tap REDO
+   (or FLIP if the arrow turns the wrong way).
+
+I. The phone update page does not work
+   Not supported on this board in this release. Update over USB (help/2_FLASHING.txt).
+
+J. A watch or phone shows only "Apple", or does not appear
+   Normal. Apple devices rotate their address and send very little, so they cannot be told apart.
+
+K. Reset everything
+   Flash the .bin again (help/2_FLASHING.txt): this resets the saved settings. Saved logs are kept.
+
+Still stuck? Open an issue (Bug report form) with the release name from the boot screen and the Serial Monitor output.

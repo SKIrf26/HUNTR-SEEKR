@@ -1,0 +1,15 @@
+name: Feature request or device to detect
+description: Suggest an improvement, or a device the scanner should recognise
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+    validations:
+      required: true
+  - type: textarea
+    id: signature
+    attributes:
+      label: For a new device - how does it announce itself?
+      description: Wi-Fi network name pattern, Bluetooth name, and the first three bytes of its address (OUI), and how you know. Please do not include anyone's private details.

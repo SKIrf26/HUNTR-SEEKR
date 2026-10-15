@@ -1,0 +1,40 @@
+1. GETTING STARTED
+==================
+
+What the board is
+-----------------
+The Waveshare ESP32-S3-Touch-LCD-1.69 is a small board with an ESP32-S3 chip, a 1.69 inch touch screen (240 x 280), a
+buzzer, a motion sensor, a clock chip and a battery connector. HUNTR/SEEKR is the software that runs on it.
+
+Parts you may want to add (all optional)
+----------------------------------------
+  Battery      A lithium battery of the type Waveshare specifies for the board. Without one it runs from USB power.
+  GPS          A module connected to the board's GPS pads; it adds your position to the log.
+  Phone        Used for the Live view, to set the clock and to update the software, over the board's own Wi-Fi.
+
+Step by step
+------------
+ 1. Put the software on the board: help/2_FLASHING.txt.
+ 2. The boot screen ends with "ready  Public Beta 1". A few seconds later the ARM page appears with eight group tiles (ALPR, AXON, CAMS, GLASS, DRONE, BT, TAGS, WIFI).
+ 3. Tap a tile to arm that group. Swipe left and right, or tap the icons along the bottom, to move between the
+    pages: ARM, FINDS, SWEEP, GROUPS, LOG and SETUP.
+ 4. Open FINDS to see what has been heard. Tap a device, then TRACK to follow its signal: the number closer to
+    zero means closer.
+ 5. Open SETUP > Self-test. Every dot should be green. Grey means a part your board does not have. Clock and
+    Battery can be amber until a clock is set or a battery is fitted.
+
+The clock
+---------
+Press SHARE on the LOG page, join the board's Wi-Fi hotspot with your phone (the name and password are shown on the
+screen) and open http://192.168.4.1 (not https). The board takes the time and time zone from the phone, so your
+saved logs have time stamps.
+
+Hardware status
+---------------
+This release builds cleanly for the Waveshare ESP32-S3-Touch-LCD-1.69, and its screens were checked in a desktop
+simulation of the interface. It has not yet been run on the real board by the project. Please report what you
+see, good or bad, with the Bug report form.
+
+Next
+----
+The user guide (PDF in the docs folder) explains every screen. If something does not work: help/3_TROUBLESHOOTING.txt.

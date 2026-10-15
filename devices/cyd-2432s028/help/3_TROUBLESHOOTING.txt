@@ -1,0 +1,64 @@
+3. TROUBLESHOOTING
+==================
+
+The board prints start-up messages over USB that help a lot: open any serial terminal at 115200 baud on the board's port.
+The board's own check: SETUP > Self-test (green dot = healthy, red dot = not). On this board Motion is grey (no motion
+sensor) and Clock is amber until you set it from your phone. Both are normal.
+
+A. The computer does not see the board / flashing fails
+   - Use a USB DATA cable. Try another USB port on the computer.
+   - If no port appears, install the free driver for the board's USB chip (WCH CH340, or Silicon Labs CP210x).
+   - Hold the board's BOOT button while plugging the cable in, release it, then try again.
+   - If the connection is unreliable, add --baud 115200 to the command.
+
+B. Nothing shows on the screen, or the colours are wrong
+   - Unplug the board, wait 10 seconds, plug it in again. Try another cable or USB port.
+   - Flash the .bin again (help/2_FLASHING.txt).
+   - If it stays black or shows noise or wrong colours, your board may have a different display panel than this release
+     expects. Look in config/ for the alternative display set-up files (needed only if you build the firmware
+     yourself), and please report it (Bug report form) with a photo of the board's back and the Serial Monitor output.
+
+C. Touch does nothing, or lands in the wrong place
+   - The boot screen says "touch NOT detected": unplug, wait, plug in again. Check SETUP > Self-test > Touch.
+   - Taps land beside the target, or only work near the edges: SETUP > Calibrate touch, and press each cross exactly
+     (a stylus or fingernail tip helps).
+   - The first touch after a pause does nothing: normal, that touch wakes the screen.
+
+D. No sound
+   The board has a small amplifier and a speaker socket, but most units are sold without a speaker. Check in this order:
+   1. a small 8 ohm speaker is plugged into the speaker socket;
+   2. the Volume slider is up and Discreet mode is off (a long-press on the status pill toggles it);
+   3. SETUP > Self-test > BEEP plays a tone.
+   In Track, QUIET silences the beeps and SOUND brings them back.
+
+E. Wi-Fi or Bluetooth finds are missing or slow
+   - Make sure the group you expect is armed on the ARM page.
+   - Wi-Fi pauses while the Share hotspot is on.
+   - Bluetooth finds slow while a Wi-Fi group is armed: the board has one radio for Wi-Fi and Bluetooth. Turn on
+     SETUP > Bluetooth share so Wi-Fi pauses regularly and Bluetooth gets the whole radio. Arming only Bluetooth
+     groups also gives Bluetooth the whole radio.
+   - The board listens on 2.4 GHz only. A device on 5 GHz Wi-Fi is not heard.
+
+F. Logs are not saved to the microSD card
+   - SETUP > Self-test, drag down to the SD card row: it says whether the card was found.
+   - Fit the card BEFORE switching the board on. Use FAT32 (cards over 32 GB are often exFAT, which the board cannot
+     read). SETUP > Save to must not be "Flash only".
+
+G. The phone will not join the board's Wi-Fi / will not stay connected
+   - Join the exact name shown on the board: it ends in four characters that change every time you press SHARE,
+     together with the password shown.
+   - If the phone refuses, forget any older saved network called HUNTR-SEEKR (iPhone: Settings > Wi-Fi > the i next to
+     the name > Forget This Network; Android: touch and hold the name > Forget) and join again.
+   - Some phones drop networks without internet: turn off "auto-switch to mobile data" while connected.
+   - The address is http://192.168.4.1 (not https).
+
+H. The phone update page does not work
+   Not supported on this board in this release. Update over USB (help/2_FLASHING.txt).
+
+I. A watch or phone shows only "Apple", or does not appear
+   Normal. Apple devices rotate their address and send very little, so they cannot be told apart.
+
+J. Reset everything
+   Flash the .bin again (help/2_FLASHING.txt): this resets the saved settings. Logs on the microSD card are not touched.
+
+Still stuck? Open an issue (Bug report form) with the release name from the boot screen and the Serial Monitor output.

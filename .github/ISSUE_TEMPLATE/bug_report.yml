@@ -1,0 +1,55 @@
+name: Bug report
+description: Something does not work as the guide says
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing. Please fill in as much as you can. Results are hints, not proof, so also tell us if you were checking something you could verify.
+  - type: input
+    id: release
+    attributes:
+      label: Release
+      description: Shown in small text at the bottom of the boot screen.
+      placeholder: Public Beta 1
+    validations:
+      required: true
+  - type: dropdown
+    id: how
+    attributes:
+      label: How did you install it?
+      options:
+        - Flashed the release .bin with esptool
+        - Flashed with the web flasher
+        - Updated from my phone
+        - Built from source
+    validations:
+      required: true
+  - type: dropdown
+    id: board
+    attributes:
+      label: Board
+      options:
+        - Waveshare ESP32-C6-Touch-AMOLED-2.06
+        - Waveshare ESP32-S3-Touch-LCD-1.69
+        - Waveshare ESP32-C6-Touch-LCD-1.47
+        - NM-CYD-C5
+        - ESP32-2432S028 (CYD 2.8)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: textarea
+    id: serial
+    attributes:
+      label: Serial Monitor output (115200 baud)
+      description: For AIM problems include the lines starting DIR, DIRPTS and DIRBINS.
+      render: text

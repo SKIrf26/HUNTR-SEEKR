@@ -1,0 +1,46 @@
+1. GETTING STARTED
+==================
+
+What the board is
+-----------------
+The ESP32-2432S028 (the "CYD 2.8", sold as the "cheap yellow display") is a small board with a classic ESP32 chip, a 2.8 inch
+resistive touch screen (240 x 320), a microSD card slot, a speaker socket and a USB port. HUNTR/SEEKR is the software that runs on it.
+
+Parts you may want to add (all optional)
+----------------------------------------
+  Speaker      A small 8 ohm speaker (1 watt is plenty) in the board's two-pin speaker socket. Without one the board makes
+               no sound. The software drives the amplifier from IO26.
+  microSD      FAT32, 32 GB or smaller is safest. Fit it BEFORE you switch the board on (it is not noticed later).
+               Logs, the ignore list and your own rules are kept on the card; with no card they go to the board's flash.
+  GPS          A module on the 4-pin CN1 connector: its TX to IO27, its RX to IO22, plus 3V3 and GND (9600 baud).
+  Phone        Used for the Live view and to set the clock (the board has no clock chip) over the board's own Wi-Fi.
+
+Step by step
+------------
+ 1. Put the software on the board: help/2_FLASHING.txt.
+ 2. After the boot screen (it ends with "ready  Public Beta 1") the first start asks you to calibrate touch.
+    Press and hold the cross near each corner until the bar fills and the cross turns green, then lift. Four crosses.
+    A stylus or fingernail tip works best. If it says TRY AGAIN, just repeat it. When it says "Touch calibrated",
+    tap CONTINUE.
+ 3. You land on the ARM page: eight group tiles (ALPR, AXON, CAMS, GLASS, DRONE, BT, TAGS, WIFI).
+    Tap a tile to arm that group. Swipe left and right, or tap the tabs along the bottom, to move between ARM, FINDS, GROUPS, LOG and SETUP.
+ 4. Open FINDS to see what has been heard. Tap a device, then TRACK to follow its signal: the number closer to
+    zero means closer.
+ 5. Open SETUP > Self-test. Every dot should be green. Motion is grey and says "not fitted" (this board has no motion
+    sensor), and Clock is amber until you set it from your phone.
+
+The clock
+---------
+The board has no clock chip. Press SHARE on the LOG page, join the board's Wi-Fi hotspot with your phone (the name
+and password are shown on the screen) and open http://192.168.4.1 (not https). The board takes the time and time zone
+from the phone, so your saved logs have time stamps.
+
+Hardware status
+---------------
+This release builds cleanly for the ESP32-2432S028 (CYD 2.8), and its screens were checked in a desktop
+simulation of the interface. It has not yet been run on the real board by the project. Please report what you
+see, good or bad, with the Bug report form.
+
+Next
+----
+The user guide (PDF in the docs folder) explains every screen. If something does not work: help/3_TROUBLESHOOTING.txt.
