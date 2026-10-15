@@ -1,6 +1,6 @@
 <div align="center">
 
-# HUNTR/SEEKR
+![](docs/images/banner.png)
 
 **Counter-surveillance signal scanner for ESP32 boards**
 
