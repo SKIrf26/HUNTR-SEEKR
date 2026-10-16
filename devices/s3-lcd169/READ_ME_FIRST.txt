@@ -63,9 +63,10 @@ GOOD TO KNOW (THIS IS A BETA)
   * The board has one radio shared by Wi-Fi and Bluetooth. If Bluetooth finds are slow while a Wi-Fi group is
     armed, turn on SETUP > Bluetooth share.
   * The board listens on 2.4 GHz only.
-  * Hardware status: This release builds cleanly for the Waveshare ESP32-S3-Touch-LCD-1.69, and its screens were
-    checked in a desktop simulation of the interface. It has not yet been run on the real board by the project.
-    Please report what you see, good or bad, with the Bug report form.
+  * Hardware status: This release has been run on a real Waveshare ESP32-S3-Touch-LCD-1.69 by the project and
+    works, including Wi-Fi scanning and Bluetooth. Not every feature has been tried one by one on the board yet,
+    so some may have had less testing on hardware. Please report what you see, good or bad, with the Bug report
+    form.
 
 USE IT RESPONSIBLY
 ------------------

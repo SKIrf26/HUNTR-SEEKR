@@ -25,6 +25,6 @@ First public release, for the **Waveshare ESP32-S3-Touch-LCD-1.69**.
 
 ### Known limitations
 - AIM is the newest feature and the least proven. It is an estimate, never better than +/-15 degrees.
-- Hardware status: This release builds cleanly for the Waveshare ESP32-S3-Touch-LCD-1.69, and its screens were checked in a desktop simulation of the interface. It has not yet been run on the real board by the project. Please report what you see, good or bad, with the Bug report form.
+- Hardware status: This release has been run on a real Waveshare ESP32-S3-Touch-LCD-1.69 by the project and works, including Wi-Fi scanning and Bluetooth. Not every feature has been tried one by one on the board yet, so some may have had less testing on hardware. Please report what you see, good or bad, with the Bug report form.
 - The board listens on 2.4 GHz only (the chip has no 5 GHz Wi-Fi), and Wi-Fi and Bluetooth share one radio.
 - Detection lists are not exhaustive. Results are hints, not proof.

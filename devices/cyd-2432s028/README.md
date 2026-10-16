@@ -88,7 +88,7 @@ The illustrated user guide covers set-up, every screen, the settings, troublesho
 
 This is the **first public release**. It is a beta: expect rough edges, and expect some behaviour to change.
 
-- **Hardware status.** This release has been run on the real board by the project (start-up and Wi-Fi scanning); the other screens were checked in a desktop simulation of the interface, so some features have had less testing on hardware. A Bluetooth start-up fault found on the board is fixed in this release but not yet confirmed there. Please report what you see, good or bad, with the Bug report form.
+- **Hardware status.** This release has been run on the real board by the project and works, including Wi-Fi scanning and Bluetooth. A Bluetooth start-up fault found on an earlier build is fixed. Not every feature has been tried one by one on the board yet, so some may have had less testing on hardware. Please report what you see, good or bad, with the Bug report form.
 - Signal strength is only a rough guide to distance, and one antenna cannot tell which direction a signal comes from. Use the warmer / colder reading and walk around.
 - Sound needs a small 8 ohm speaker fitted to the board (see the user guide).
 - Update over USB: the phone update page is not supported on this board in this release.
