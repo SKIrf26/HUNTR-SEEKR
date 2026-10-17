@@ -21,6 +21,12 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 
 > **Results are hints, not proof.** Names and addresses can be changed or randomized, many devices are not in the lists, and a quiet device may simply be out of range. "Nothing found" never proves nothing is there.
 
+## What it scans for
+
+Everything it hears is sorted into groups. Arm any mix of them on the board; each group has its own colour on screen.
+
+![The detection groups and what each one scans for: ALPR, AXON, CAMS, GLASS, DRONE, TAGS, BT, WIFI and ZB/TH](docs/images/groups.png)
+
 ## Supported boards
 
 Each board has its own folder with the source code, the user guide, plain-text help, build notes and licence notices. Start in the folder for your board.
