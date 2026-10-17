@@ -1,0 +1,45 @@
+1. GETTING STARTED
+==================
+
+What the board is
+-----------------
+The Waveshare ESP32-S3-Touch-LCD-1.47 is a small board with an ESP32-S3 chip, a 1.47 inch touch screen (172 x 320), a
+battery connector, a BOOT button and header pads for an optional buzzer and GPS. It has no motion sensor and no clock chip. HUNTR/SEEKR is the software that runs on it.
+
+Parts you may want to add (all optional)
+----------------------------------------
+  Buzzer       A passive buzzer on header pin IO4 (without one the board is silent).
+  Battery      A lithium battery of the type Waveshare specifies for the board. Without one it runs from USB power.
+  GPS          A module connected to the board's GPS pads; it adds your position to the log.
+  Phone        Used for the Live view, to set the clock and to update the software, over the board's own Wi-Fi.
+
+Step by step
+------------
+ 1. Put the software on the board: help/2_FLASHING.txt.
+ 2. The boot screen ends with "ready  Public Beta 1". A few seconds later the ARM page appears with eight group tiles (ALPR, AXON, CAMS, GLASS, DRONE, BT, TAGS, WIFI).
+ 3. Tap a tile to arm that group. Swipe left and right, or tap the icons along the bottom, to move between the
+    pages: ARM, FINDS, SWEEP, GROUPS, LOG and SETUP.
+ 4. Open FINDS to see what has been heard. Tap a device, then TRACK to follow its signal: the number closer to
+    zero means closer.
+ 5. Open SETUP > Self-test. Every dot should be green. Grey means a part your board does not have. Clock and
+    Battery can be amber until a clock is set or a battery is fitted. Motion is grey: the board has no motion sensor.
+
+The clock
+---------
+Press SHARE on the LOG page, join the board's Wi-Fi hotspot with your phone (the name and password are shown on the
+screen) and open http://192.168.4.1 (not https). The board takes the time and time zone from the phone, so your
+saved logs have time stamps.
+
+Hardware status
+---------------
+This release has been flashed and run on a real Waveshare ESP32-S3-Touch-LCD-1.47 by the project. Not every feature has been tried one by one on the board yet, so some may have had less testing on hardware. Please report what you see, good or bad, with the Bug report form.
+
+Switching it off
+----------------
+The board has no power switch. Open SETUP > Power and tap SLEEP (deep sleep: screen and radios go dark, BOOT wakes it with a full restart)
+or RESTART. Each has a 2.5 second countdown and any touch cancels it. Holding BOOT for about 2 seconds and letting go also
+puts it to sleep. An empty battery (under 3.30 V, not on USB) sleeps by itself.
+
+Next
+----
+The user guide for the 1.69 inch board (devices/s3-lcd169/docs) explains the same screens. If something does not work: help/3_TROUBLESHOOTING.txt.

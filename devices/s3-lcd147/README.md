@@ -1,0 +1,112 @@
+<div align="center">
+
+# HUNTR/SEEKR
+
+**Counter-surveillance signal scanner for the Waveshare ESP32-S3-Touch-LCD-1.47**
+
+![Status](https://img.shields.io/badge/status-Public%20Beta%201-orange)
+![Board](https://img.shields.io/badge/board-Waveshare%20ESP32--S3--Touch--LCD--1.47-blue)
+![Licence](https://img.shields.io/badge/licence-GPL%20v3-green)
+
+</div>
+
+## What it is
+
+HUNTR/SEEKR turns the Waveshare ESP32-S3-Touch-LCD-1.47 into a pocket radio scanner. It **listens** on the 2.4 GHz band for the wireless signals that certain kinds of devices give off, compares them with built-in lists of known makers and names, and shows you what it heard, how strong each signal is, and lets you follow a signal toward its source.
+
+It is passive: it only receives. It does not jam, attack, or connect to anyone's network.
+
+> **Results are hints, not proof.** Names and addresses can be changed or randomized, many devices are not in the lists, and a quiet device may simply be out of range. "Nothing found" never proves nothing is there.
+
+## What it can find
+
+- **Wi-Fi** devices such as security cameras, doorbells, smart glasses, drones and license-plate readers, from their network names and hardware addresses
+- **Rogue Wi-Fi signs**: de-authentication floods, open "evil twin" copies of a protected network name, and one transmitter answering to many names - flagged as warnings, not proof
+- **Bluetooth LE** devices such as trackers (AirTag and other Find My trackers, Tile, SmartTag, Google Find Hub, Chipolo, Pebblebee), body cameras, smart glasses, Flipper Zero devices, drones, beacons, wearables, smart lights and Fast Pair accessories, each with a type tag
+- **Gunshot sensors and police cameras**: ShotSpotter (SoundThinking) and Flock Raven sensors (shown as GUNSHOT), and body or in-car cameras from makers other than Axon, such as Motorola Solutions and WatchGuard, Digital Ally, COBAN and Utility (shown as BODYCAM). Most are matched by address block or set-up network name, so confidence is lower than for Axon.
+- **Drone Remote ID**: the serial number and position many drones broadcast
+- **Possible card skimmers**: Bluetooth modules still wearing a factory name (the kind sometimes hidden in gas pumps and ATM readers). This is a clue, not a verdict.
+
+## Features
+
+- Detection groups with live counts: ALPR, AXON, CAMS, GLASS, DRONE, BT, TAGS, WIFI
+- Groups can be armed and disarmed in any order; Wi-Fi and Bluetooth groups keep working together, with a **Bluetooth share** option for when Bluetooth finds are slow
+- **Track** screen: a live signal-strength (dBm) display with audible feedback so you can walk toward a source
+- **AIM (beta)**: a direction arrow with an uncertainty arc after a 5-point calibration. It needs a motion sensor (QMI8658); the board does not list one, so the AIM button is only shown if one is found at start-up
+- **Power screen** (SETUP > Power): SLEEP (deep sleep, the closest this board gets to "off") and RESTART, each with a short countdown. Holding BOOT for about 2 seconds also puts the board to sleep
+- **SWEEP** page: walkthrough marks (which room was each device strongest in), a baseline of what is normally in a place, and a list of what is new
+- Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), home-camera and doorbell makers (Ring, Wyze, Arlo, Blink, Eufy, Canary, Swann, Abode), gunshot sensors, device-fingerprint codes and Bluetooth spam detection
+- Custom signatures (oui, ssid, ble, cid, uuid and ie rules, up to 128) and a signature update file (`sigs_update.txt`)
+- Tracker "following" alert, ignore list, scenes, session report and logs (a GPS module adds your position to the log)
+- Discreet mode, power saver, landscape and portrait screens, touch calibration
+- Phone page over the board's own Wi-Fi hotspot: live view, clock sync, firmware update
+- Self-test screen that checks every part of the hardware
+
+## Install
+
+You need a **Waveshare ESP32-S3-Touch-LCD-1.47** board and a USB **data** cable. Not sure where to start? Read [READ_ME_FIRST.txt](READ_ME_FIRST.txt) and the [help folder](help/).
+
+### Flash the firmware file
+
+1. Download `HUNTR-SEEKR_S3_LCD147_Public_Beta_1.bin` and `SHA256SUMS.txt` from the [Releases page](https://github.com/SKIrf26/HUNTR-SEEKR/releases).
+2. Install Python 3, then `pip install esptool`.
+3. Plug in the board and run:
+
+   ```
+   esptool --chip esp32s3 --port YOUR_PORT --baud 460800 write-flash 0x0 HUNTR-SEEKR_S3_LCD147_Public_Beta_1.bin
+   ```
+4. The board restarts. The boot screen shows **Public Beta 1** at the bottom.
+
+Writing the image resets saved settings; saved logs stay. Step-by-step help, including checking the download, is in [help/2_FLASHING.txt](help/2_FLASHING.txt) and [firmware/README.md](firmware/README.md).
+
+Prefer a browser? The project's [web flasher](https://skirf-labs.tech/) writes the same file from Chrome or Edge, with nothing to install.
+
+Already running a beta? Use `HUNTR-SEEKR_S3_LCD147_Public_Beta_1_app-only.bin` on the board's phone update page (join its hotspot, open `192.168.4.1/update`).
+
+### Build it yourself
+
+The complete source is in [`src/`](src/). [docs/BUILDING.md](docs/BUILDING.md) lists the libraries, the Arduino IDE settings and the command-line build; the board definitions (pins and screen settings) are in [`config/`](config/).
+
+## Documentation
+
+There is no illustrated user guide for this board yet. The [user guide for the ESP32-S3-Touch-LCD-1.69](../s3-lcd169/docs/) describes the same screens, settings and groups (this board's screen is 172 x 320 and the layout is a little different). Also:
+
+- Plain-text help: [help/](help/) (getting started, flashing, troubleshooting, FAQ)
+- For developers: [docs/BUILDING.md](docs/BUILDING.md) and [docs/CODE_MAP.md](docs/CODE_MAP.md)
+
+## Beta status - what to expect
+
+This is the **first public release**. It is a beta: expect rough edges, and expect some behaviour to change.
+
+- **Hardware status.** This release has been flashed and run on a real Waveshare ESP32-S3-Touch-LCD-1.47 by the project. Not every feature has been tried one by one on the board yet, so some may have had less testing on hardware. Please report what you see, good or bad, with the Bug report form.
+- **AIM** is the newest feature and the least proven. It is an estimate, never better than +/-15 degrees, and only works if the board has a motion sensor.
+- The board listens on the 2.4 GHz band only. A device on 5 GHz Wi-Fi is not heard.
+- The board has one radio shared by Wi-Fi and Bluetooth, so with both armed each hears a little less than it would alone. Turn on SETUP > Bluetooth share if Bluetooth finds are slow.
+- The detection lists are not exhaustive.
+
+Found a problem? Open an issue with the **Bug report** form and include what the Serial Monitor (115200 baud) printed.
+
+## Responsible use
+
+This project is meant for defensive, privacy-protecting use: finding out what is around you. Receiving radio signals that are openly broadcast is lawful in many places, but laws differ, and some places restrict particular uses of scanners or of the information you collect. You are responsible for following the laws where you are. Do not use it to identify, follow or harass individual people. A match is a clue about a device, not evidence about a person or a place.
+
+## Licence
+
+HUNTR/SEEKR is free software released under the **GNU General Public License v3.0** - see [LICENSE](LICENSE). It comes with **no warranty**. Copyright (C) 2026 SKIrf Labs.
+
+It is built with third-party components under their own licences (LGPL, Apache 2.0, BSD, SIL OFL): see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+Waveshare, Espressif, Arduino and all brand and product names that appear in the detection lists or screenshots belong to their owners. This project is not affiliated with, or endorsed by, any of them.
+
+## Project files
+
+| Path | Contents |
+|---|---|
+| `src/` | The firmware source (Arduino sketch) |
+| `config/` | Board definitions (pins, screen) and build settings |
+| `help/` | Plain-text help: getting started, flashing, troubleshooting, FAQ |
+| `firmware/` | How the release `.bin` is flashed and checked |
+| `docs/` | Build notes and code map |
+| `tools/` | Script that turns a build into the release `.bin` and checksum |
+| `licenses/` | Licence texts of the third-party components |
+| `CHANGELOG.md`, `RELEASE_NOTES.md` | What is in each release |

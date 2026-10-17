@@ -15,6 +15,7 @@ For the maintainer. Each board has its own release, because each board has its o
 |---|---|---|
 | Waveshare ESP32-C6-Touch-AMOLED-2.06 | `watch-amoled206-v0.1.0-beta.1` | `HUNTR-SEEKR_Watch_Public_Beta_1.bin`, `SHA256SUMS.txt`, and the three `HUNTR-SEEKR_Watch_Public_Beta_1_User_Guide*.pdf` files |
 | Waveshare ESP32-S3-Touch-LCD-1.69 | `s3-lcd169-v0.1.0-beta.1` | `HUNTR-SEEKR_S3_LCD169_Public_Beta_1.bin`, `HUNTR-SEEKR_S3_LCD169_Public_Beta_1_app-only.bin`, `SHA256SUMS.txt`, and the three `HUNTR-SEEKR_S3_LCD169_Public_Beta_1_User_Guide*.pdf` files |
+| Waveshare ESP32-S3-Touch-LCD-1.47 | `s3-lcd147-v0.1.0-beta.1` | `HUNTR-SEEKR_S3_LCD147_Public_Beta_1.bin`, `HUNTR-SEEKR_S3_LCD147_Public_Beta_1_app-only.bin` and `SHA256SUMS.txt` (there is no user guide PDF for this board yet) |
 | Waveshare ESP32-C6-Touch-LCD-1.47 | `c6-lcd147-v0.1.0-beta.1` | `HUNTR-SEEKR_C6_LCD147_Public_Beta_1.bin`, `SHA256SUMS.txt`, and the three `HUNTR-SEEKR_C6_LCD147_Public_Beta_1_User_Guide*.pdf` files |
 | Waveshare ESP32-C6-LCD-1.47 (no touch, one button) | `c6-lcd147-button-v0.1.0-beta.1` | `HUNTR-SEEKR_C6_LCD147_BUTTON_Public_Beta_1.bin`, `SHA256SUMS.txt`, and the three `HUNTR-SEEKR_C6_LCD147_BUTTON_Public_Beta_1_User_Guide*.pdf` files |
 | NM-CYD-C5 | `c5-cyd-v0.1.0-beta.1` | `HUNTR-SEEKR_C5_CYD_Public_Beta_1.bin`, `SHA256SUMS.txt`, and the three `HUNTR-SEEKR_C5_CYD_Public_Beta_1_User_Guide*.pdf` files |

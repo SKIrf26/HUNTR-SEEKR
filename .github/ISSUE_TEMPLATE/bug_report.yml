@@ -32,6 +32,7 @@ body:
       options:
         - Waveshare ESP32-C6-Touch-AMOLED-2.06
         - Waveshare ESP32-S3-Touch-LCD-1.69
+        - Waveshare ESP32-S3-Touch-LCD-1.47
         - Waveshare ESP32-C6-Touch-LCD-1.47
         - Waveshare ESP32-C6-LCD-1.47 (no touch, one button)
         - NM-CYD-C5
