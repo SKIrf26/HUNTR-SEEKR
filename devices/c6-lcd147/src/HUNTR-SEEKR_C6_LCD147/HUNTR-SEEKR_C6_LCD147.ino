@@ -501,7 +501,7 @@ static void applyTheme(bool a) {
   for (int i = 0; i < 5; i++)
     fnt[i] = a ? F_ALN[i] : F_STD[i];
   if (a) {
-    C_BG = RGB(1, 7, 3);
+    C_BG = RGB(0, 0, 0);
     C_CARD = RGB(4, 26, 12);
     C_CARD2 = RGB(10, 50, 23);
     C_LINE = RGB(26, 122, 58);
@@ -541,7 +541,7 @@ static void applyThemeMode(int m) {
   applyTheme(m != 0);
   hudOn = (m == 2);
   if (hudOn) {
-    C_BG = RGB(0, 4, 12);
+    C_BG = RGB(0, 0, 0);
     C_CARD = RGB(3, 16, 36);
     C_CARD2 = RGB(8, 32, 68);
     C_LINE = RGB(24, 96, 176);
@@ -11758,7 +11758,7 @@ static void hudHud(float ox, float oy, float R, uint16_t bgc) {
   fillRect((int)(ox - R - 1), (int)(oy - 1.14f * R), (int)(2 * R + 2), (int)(1.14f * R) + 1, bgc);
   // ... with a navy glow round the origin, in six steps
   for (int i = 0; i < 6; i++) {
-    static const uint8_t GR[6] = {1, 3, 5, 7, 9, 12}, GG[6] = {5, 10, 16, 22, 29, 37}, GB[6] = {16, 30, 46, 60, 74, 90};
+    static const uint8_t GR[6] = {0, 2, 4, 7, 9, 12}, GG[6] = {0, 8, 14, 21, 29, 37}, GB[6] = {0, 22, 38, 54, 72, 90};
     hudSolidDisc((int)ox, yo, (int)(R * (1.12f - 0.15f * i)), yo, RGB(GR[i], GG[i], GB[i]));
   }
   const uint16_t GRID = RGB(10, 36, 84);  // a faint grid
@@ -11834,6 +11834,17 @@ static void hudWave(float ox, float oy, float R, int32_t t) {
       hudArc(ox, oy, r2 + 2.0f, 3.0f, PI_, 2 * PI_, HALO, (uint8_t)(60 * fade / 255));
     }
   }
+}
+// a thin compass-style needle with an arrowhead; inward = the head points at the centre (wrong way)
+static void hudNeedle(float ox, float oy, float R, float th, float f0, float f1, uint16_t col, uint8_t al, bool inward) {
+  float s = sinf(th), c = cosf(th);
+  float x0 = ox + s * R * f0, y0 = oy - c * R * f0, x1 = ox + s * R * f1, y1 = oy - c * R * f1;
+  lineAA(x0, y0, x1, y1, 1.3f, col, al);
+  float tx = inward ? x0 : x1, ty = inward ? y0 : y1, d = inward ? -1.0f : 1.0f;
+  float hl = R * 0.11f, hw = R * 0.05f;
+  float bx = tx - d * s * hl, by = ty + d * c * hl;
+  lineAA(tx, ty, bx - c * hw, by - s * hw, 1.3f, col, al);
+  lineAA(tx, ty, bx + c * hw, by + s * hw, 1.3f, col, al);
 }
 // the smudge a contact leaves when the ring passes it
 static void hudEcho(float ox, float oy, float R, int32_t t, float rfrac, float theta, uint8_t strength, int seed,
@@ -12776,7 +12787,7 @@ static void drawBootTerm(int32_t t, bool customLogo) {
     float tb = clamp01((t - 700) / 900.0f);
     if (hudOn) {
       float RR = W > H ? 54.0f : 78.0f, oyb = W > H ? (float)(H - 106) : (float)(H / 2 - 4);
-      hudHud(cxs, oyb, RR, RGB(1, 3, 12));
+      hudHud(cxs, oyb, RR, RGB(0, 0, 0));
       int32_t tw0 = (int32_t)(t % ALS_CYCLE_MS);
       hudWave(cxs, oyb, RR, tw0);
       if (tb > 0.0f)
@@ -14930,7 +14941,7 @@ static void drawHuntHud() {
     R = 116.0f;
   oy = top + 2 + 1.14f * R;
   int fh = (int)(0.36f * R);
-  hudHud(ox, oy, R, RGB(1, 3, 12));
+  hudHud(ox, oy, R, RGB(0, 0, 0));
   bool contact = ok && !huntSearching;
   float rangeM = termRangeM(huntShown);
   float rfrac = clamp01(rangeM / 16.0f);
@@ -14941,6 +14952,9 @@ static void drawHuntHud() {
   if (contact && !aim) {
     int seed = c.mac[5] * 7 + c.mac[4] * 13 + c.mac[3];
     hudEcho(ox, oy, R, t, rfrac, theta, (uint8_t)(110 + 120 * norm), seed);
+    // no motion sensor here, so no real bearing: the needle shows the trend instead (up = hotter, in = colder)
+    if (hTrend != 0)
+      hudNeedle(ox, oy, R, 0.0f, hTrend > 0 ? 0.14f : 0.40f, hTrend > 0 ? 0.90f : 0.80f, hTrend > 0 ? RGB(120, 214, 255) : C_AMBER, 200, hTrend < 0);
   }
   if (contact && aim && clear) {
     int seed = c.mac[5] * 7 + c.mac[4] * 13 + c.mac[3];
@@ -14949,6 +14963,7 @@ static void drawHuntHud() {
       // the bearing
       lineAA(ox + sinf(th) * R * 0.14f, oy - cosf(th) * R * 0.14f, ox + sinf(th) * R * 0.90f, oy - cosf(th) * R * 0.90f,
              1.3f, RGB(120, 214, 255), 200);
+      hudNeedle(ox, oy, R, th, 0.80f, 0.90f, RGB(120, 214, 255), 200, false);
       hudBox(ox, oy, R * 0.905f, th, R * 0.05f + 2.0f, 4.0f, RGB(220, 244, 255));  // ... and its marker on the ring
       float a0 = UP + th - sg, a1 = UP + th + sg;
       if (a0 < PI_)
