@@ -236,6 +236,8 @@ enum Family : uint8_t {
   FAM_ZIGBEE,
   FAM_THREAD,
   FAM_154,
+  FAM_GUNSHOT,
+  FAM_BODYCAM,
   FAM_COUNT
 };
 enum Conf : uint8_t { CONF_LOW = 1, CONF_MED = 2, CONF_HIGH = 3 };
@@ -1112,25 +1114,25 @@ static inline float easeOut(float t) {
 // clang-format off
 static const SigOUI WIFI_OUI[] = {
   {0xB4,0x1E,0x52, FAM_FLOCK, CONF_HIGH,"FLOCK"},
-  {0x70,0xC9,0x4E, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x3C,0x91,0x80, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0xD8,0xF3,0xBC, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x80,0x30,0x49, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x14,0x5A,0xFC, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x74,0x4C,0xA1, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x9C,0x2F,0x9D, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x94,0x08,0x53, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0xE4,0xAA,0xEA, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0xF4,0x6A,0xDD, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x00,0xF4,0x8D, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0xD0,0x39,0x57, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0xE8,0xD0,0xFC, FAM_FLOCK, CONF_MED,"FLOCK"},
-  {0x58,0x8E,0x81, FAM_FLOCK, CONF_MED,"FS-BATT"},
-  {0xEC,0x1B,0xBD, FAM_FLOCK, CONF_MED,"FS-BATT"},
+  {0x70,0xC9,0x4E, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x3C,0x91,0x80, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0xD8,0xF3,0xBC, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x80,0x30,0x49, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x14,0x5A,0xFC, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x74,0x4C,0xA1, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x9C,0x2F,0x9D, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x94,0x08,0x53, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0xE4,0xAA,0xEA, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0xF4,0x6A,0xDD, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x00,0xF4,0x8D, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0xD0,0x39,0x57, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0xE8,0xD0,0xFC, FAM_FLOCK, CONF_LOW,"FLOCK"},
+  {0x58,0x8E,0x81, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0xEC,0x1B,0xBD, FAM_FLOCK, CONF_LOW,"FS-BATT"},
   {0x82,0x6B,0xF2, FAM_FLOCK, CONF_MED,"FLOCK"},
   {0x00,0x25,0xDF, FAM_AXON,  CONF_HIGH,"AXON"},
   {0xE4,0x05,0x40, FAM_AXON,  CONF_HIGH,"AXON"},
-  {0x28,0x24,0xFF, FAM_AXON,  CONF_MED,"AXON"},
+  {0x28,0x24,0xFF, FAM_AXON,  CONF_LOW,"AXON"},
   {0x2C,0xAA,0x8E, FAM_WYZE,  CONF_MED,"WYZE"},
   {0x7C,0x78,0xB2, FAM_WYZE,  CONF_MED,"WYZE"},
   {0x80,0x48,0x2C, FAM_WYZE,  CONF_MED,"WYZE"},
@@ -1150,14 +1152,14 @@ static const SigOUI WIFI_OUI[] = {
   {0x24,0x2B,0xD6, FAM_RING,  CONF_MED,"RING"},
   {0x50,0xE4,0x67, FAM_RING,  CONF_MED,"RING"},
   {0xEC,0x71,0xDB, FAM_REOLINK,CONF_MED,"REOLINK"},
-  {0xB4,0x6D,0x83, FAM_REOLINK,CONF_MED,"REOLINK"},
+  {0xB4,0x6D,0x83, FAM_REOLINK,CONF_LOW,"REOLINK"},
   {0x8C,0x85,0x80, FAM_EUFY,  CONF_LOW,"EUFY"},
   {0x98,0xF1,0x99, FAM_EUFY,  CONF_LOW,"EUFY"},
   {0x18,0xB4,0x30, FAM_NEST,  CONF_LOW,"NEST"},
   {0x7C,0x2A,0x9E, FAM_GLASS, CONF_MED,"META"},
-  {0xCC,0x66,0x0A, FAM_GLASS, CONF_MED,"META"},
-  {0xF4,0x03,0x43, FAM_GLASS, CONF_MED,"META"},
-  {0x5C,0xE9,0x1E, FAM_GLASS, CONF_MED,"META"},
+  {0xCC,0x66,0x0A, FAM_GLASS, CONF_LOW,"META"},
+  {0xF4,0x03,0x43, FAM_GLASS, CONF_LOW,"META"},
+  {0x5C,0xE9,0x1E, FAM_GLASS, CONF_LOW,"META"},
   {0x98,0x59,0x49, FAM_GLASS, CONF_MED,"LUXOTTICA"},
   {0x98,0xDA,0x92, FAM_GLASS, CONF_MED,"VUZIX"},
   {0x60,0x60,0x1F, FAM_DRONE, CONF_HIGH,"DJI"},
@@ -1179,8 +1181,8 @@ static const SigOUI WIFI_OUI[] = {
   {0x10,0x56,0xCA, FAM_WIFI, CONF_MED,"PEPLINK"},
   {0x6C,0xA3,0xD3, FAM_WIFI, CONF_MED,"PEPLINK"},
   {0xD4,0x13,0xF8, FAM_WIFI, CONF_MED,"PEPLINK"},
-  {0x00,0x23,0xBD, FAM_CAM, CONF_MED,"DIGITAL ALLY"},
-  {0x00,0x1D,0x96, FAM_CAM, CONF_MED,"WATCHGUARD"},
+  {0x00,0x23,0xBD, FAM_BODYCAM, CONF_MED,"DIGITAL ALLY"},
+  {0x00,0x1D,0x96, FAM_BODYCAM, CONF_MED,"WATCHGUARD"},
   {0xD4,0x2D,0xC5, FAM_CAM, CONF_MED,"I-PRO"},
   {0x4C,0x36,0x4E, FAM_WIFI, CONF_LOW,"TOUGHBOOK"},
   {0xB8,0x20,0x8E, FAM_WIFI, CONF_LOW,"TOUGHBOOK"},
@@ -1211,7 +1213,7 @@ static const SigOUI WIFI_OUI[] = {
   {0x00,0xBF,0x15, FAM_FLOCK, CONF_LOW,"GENETEC"},
   {0x0C,0xBF,0x15, FAM_FLOCK, CONF_LOW,"GENETEC"},
   {0x70,0x1A,0xD5, FAM_CAM, CONF_LOW,"AVIGILON"},
-  {0xD4,0x11,0xD6, FAM_WIFI, CONF_MED,"SOUNDTHINK"},
+  {0xD4,0x11,0xD6, FAM_GUNSHOT, CONF_MED,"SHOTSPOTTER"},
   {0xB8,0x35,0x32, FAM_FLOCK, CONF_LOW,"FLOCK"},
   {0x08,0x3A,0x88, FAM_FLOCK, CONF_LOW,"FLOCK"},
   {0xC0,0x35,0x32, FAM_FLOCK, CONF_LOW,"FLOCK"},
@@ -1234,6 +1236,213 @@ static const SigOUI WIFI_OUI[] = {
   {0x38,0x1D,0x14, FAM_DRONE, CONF_MED,"SKYDIO"},
   {0x00,0x26,0x7E, FAM_DRONE, CONF_LOW,"PARROT"},
   {0x90,0x3A,0xE6, FAM_DRONE, CONF_LOW,"PARROT"},
+
+  // ---- vendor blocks from the IEEE registry (camera, doorbell and gunshot-sensor makers) ----
+  {0x3C,0xA0,0x70, FAM_CAM, CONF_MED,"BLINK"},
+  {0x70,0xAD,0x43, FAM_CAM, CONF_MED,"BLINK"},
+  {0x74,0xAB,0x93, FAM_CAM, CONF_MED,"BLINK"},
+  {0xF0,0x74,0xC1, FAM_CAM, CONF_MED,"BLINK"},
+  {0x48,0x62,0x64, FAM_CAM, CONF_MED,"ARLO"},
+  {0xA4,0x11,0x62, FAM_CAM, CONF_MED,"ARLO"},
+  {0xFC,0x9C,0x98, FAM_CAM, CONF_MED,"ARLO"},
+  {0x00,0xBC,0x99, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x04,0x03,0x12, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x04,0xEE,0xCD, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x08,0x3B,0xC1, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x08,0x54,0x11, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x08,0xA1,0x89, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x08,0xCC,0x81, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x0C,0x75,0xD2, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x10,0x12,0xFB, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x18,0x68,0xCB, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x18,0x80,0x25, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x24,0x0F,0x9B, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x24,0x28,0xFD, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x24,0x32,0xAE, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x24,0x48,0x45, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x28,0x57,0xBE, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x2C,0xA5,0x9C, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x34,0x09,0x62, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x3C,0x1B,0xF8, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x40,0xAC,0xBF, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x44,0x19,0xB6, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x44,0x47,0xCC, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x44,0xA6,0x42, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x48,0x78,0x5B, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x4C,0x1F,0x86, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x4C,0x62,0xDF, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x4C,0xBD,0x8F, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x4C,0xF5,0xDC, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x50,0xE5,0x38, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x54,0x8C,0x81, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x54,0xC4,0x15, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x58,0x03,0xFB, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x58,0x50,0xED, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x5C,0x34,0x5B, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x64,0xDB,0x8B, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x68,0x6D,0xBC, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x74,0x3F,0xC2, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x80,0x48,0x9F, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x80,0x7C,0x62, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x80,0xBE,0xAF, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x80,0xF5,0xAE, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x84,0x94,0x59, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x84,0x9A,0x40, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x88,0xDE,0x39, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x8C,0x22,0xD2, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x8C,0xE7,0x48, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x94,0xE1,0xAC, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x98,0x8B,0x0A, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x98,0x9D,0xE5, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x98,0xDF,0x82, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x98,0xF1,0x12, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xA0,0xFF,0x0C, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xA4,0x14,0x37, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xA4,0x29,0x02, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xA4,0x4B,0xD9, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xA4,0xA4,0x59, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xA4,0xD5,0xC2, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xAC,0xB9,0x2F, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xAC,0xCB,0x51, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xB4,0xA3,0x82, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xBC,0x5E,0x33, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xBC,0x9B,0x5E, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xBC,0xAD,0x28, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xBC,0xBA,0xC2, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xC0,0x51,0x7E, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xC0,0x56,0xE3, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xC0,0x6D,0xED, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xC4,0x2F,0x90, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xC8,0xA7,0x02, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xD4,0xE8,0x53, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xDC,0x07,0xF8, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xDC,0xD2,0x6A, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xE0,0xBA,0xAD, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xE0,0xCA,0x3C, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xE0,0xDF,0x13, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xE4,0xD5,0x8B, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xE8,0xA0,0xED, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xEC,0xA9,0x71, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xEC,0xC8,0x9C, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xF8,0x4D,0xFC, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xFC,0x9F,0xFD, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x08,0xED,0xED, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x14,0xA7,0x8B, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x24,0x52,0x6A, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x38,0xAF,0x29, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x3C,0xE3,0x6B, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x3C,0xEF,0x8C, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x4C,0x11,0xBF, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x5C,0xF5,0x1A, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x64,0xFD,0x29, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x6C,0x1C,0x71, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x74,0xC9,0x29, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x8C,0xE9,0xB4, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x90,0x02,0xA9, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x98,0xF9,0xCC, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x9C,0x14,0x63, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xA0,0xBD,0x1D, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xB4,0x4C,0x3B, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xBC,0x32,0x5F, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xC0,0x39,0x5A, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xC4,0xAA,0xC4, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xD4,0x43,0x0E, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xE0,0x2E,0xFE, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xE0,0x50,0x8B, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xE4,0x24,0x6C, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xF4,0xB1,0xC2, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xFC,0x5F,0x49, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xFC,0xB6,0x9D, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x30,0xDD,0xAA, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x40,0x7A,0xA4, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x4C,0x99,0xE8, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xF8,0xCE,0x07, FAM_CAM, CONF_MED,"DAHUA"},
+  {0xA8,0xCA,0x87, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x48,0xEA,0x63, FAM_CAM, CONF_MED,"UNIVIEW"},
+  {0x6C,0xF1,0x7E, FAM_CAM, CONF_MED,"UNIVIEW"},
+  {0x88,0x26,0x3F, FAM_CAM, CONF_MED,"UNIVIEW"},
+  {0xC4,0x79,0x05, FAM_CAM, CONF_MED,"UNIVIEW"},
+  {0x0C,0xA6,0x4C, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x20,0xBB,0xBC, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x34,0xC6,0xDD, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x54,0xD6,0x0D, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x58,0x8F,0xCF, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x64,0x24,0x4D, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x64,0xF2,0xFB, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x78,0xA6,0xA0, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x78,0xC1,0xAE, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x94,0xEC,0x13, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0xAC,0x1C,0x26, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0xEC,0x97,0xE0, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0xF4,0x70,0x18, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0x00,0x1F,0x54, FAM_CAM, CONF_MED,"LOREX"},
+  {0xBC,0x51,0xFE, FAM_CAM, CONF_MED,"SWANN"},
+  {0x00,0x65,0x1E, FAM_CAM, CONF_MED,"AMCREST"},
+  {0x9C,0x8E,0xCD, FAM_CAM, CONF_MED,"AMCREST"},
+  {0xA0,0x60,0x32, FAM_CAM, CONF_MED,"AMCREST"},
+  {0x00,0x02,0xD1, FAM_CAM, CONF_MED,"VIVOTEK"},
+  {0x00,0x13,0xE2, FAM_CAM, CONF_MED,"GEOVISION"},
+  {0x00,0x03,0xC5, FAM_CAM, CONF_MED,"MOBOTIX"},
+  {0x00,0x40,0x8C, FAM_CAM, CONF_MED,"AXIS"},
+  {0xAC,0xCC,0x8E, FAM_CAM, CONF_MED,"AXIS"},
+  {0xB8,0xA4,0x4F, FAM_CAM, CONF_MED,"AXIS"},
+  {0xE8,0x27,0x25, FAM_CAM, CONF_MED,"AXIS"},
+  {0x8C,0x1D,0x55, FAM_CAM, CONF_MED,"HANWHA"},
+  {0xE4,0x30,0x22, FAM_CAM, CONF_MED,"HANWHA"},
+  {0x44,0xB4,0x23, FAM_CAM, CONF_MED,"HANWHA"},
+  {0x00,0x09,0x18, FAM_CAM, CONF_MED,"HANWHA"},
+  {0x54,0x2B,0x57, FAM_CAM, CONF_MED,"NIGHTOWL"},
+  {0x04,0x5C,0x06, FAM_CAM, CONF_MED,"ZMODO"},
+  {0xF8,0x51,0x28, FAM_CAM, CONF_MED,"SIMPLISAFE"},
+  {0x68,0xF0,0xD0, FAM_CAM, CONF_MED,"SKYBELL"},
+  {0x9C,0x54,0xDA, FAM_CAM, CONF_MED,"SKYBELL"},
+  {0xD0,0xC1,0x93, FAM_CAM, CONF_MED,"SKYBELL"},
+  {0x00,0xC0,0xFA, FAM_CAM, CONF_MED,"CANARY"},
+  {0xD8,0x42,0xE2, FAM_CAM, CONF_MED,"CANARY"},
+  {0x84,0xEB,0x3F, FAM_CAM, CONF_MED,"VIVINT"},
+  {0x84,0xEB,0x3E, FAM_CAM, CONF_MED,"VIVINT"},
+  {0x5C,0x2B,0xF5, FAM_CAM, CONF_MED,"VIVINT"},
+  {0xA0,0xFE,0x61, FAM_CAM, CONF_MED,"VIVINT"},
+  {0x58,0x70,0xC6, FAM_CAM, CONF_MED,"YI"},
+  {0x70,0xEE,0x50, FAM_CAM, CONF_LOW,"NETATMO"},
+  {0x64,0x16,0x66, FAM_NEST, CONF_LOW,"NEST"},
+  {0x04,0x17,0xB6, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0x10,0x2C,0xB1, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0x2C,0x8D,0x48, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0x90,0xBF,0xD9, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0x7C,0xE9,0x13, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0xAC,0x12,0x2F, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0xE8,0xEE,0xCC, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0xF4,0x9D,0x8A, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0x00,0x0B,0xAA, FAM_CAM, CONF_LOW,"INTERCOM"},
+  {0x7C,0x1E,0xB3, FAM_CAM, CONF_LOW,"INTERCOM"},
+  {0x0C,0x11,0x05, FAM_CAM, CONF_LOW,"INTERCOM"},
+  {0x64,0x74,0xF6, FAM_GUNSHOT, CONF_MED,"SDS"},
+  {0x00,0x18,0xAE, FAM_CAM, CONF_MED,"TVT"},
+  {0xBC,0xF8,0x11, FAM_CAM, CONF_LOW,"INTERCOM"},
+  {0xBC,0x29,0x78, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x3C,0xDA,0x6D, FAM_CAM, CONF_MED,"TIANDY"},
+  {0x58,0x5B,0x69, FAM_CAM, CONF_MED,"TVT"},
+  {0xCC,0x13,0xF3, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x74,0x13,0x48, FAM_CAM, CONF_MED,"BLINK"},
+  {0xFC,0x24,0x22, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0xB0,0xFF,0x0D, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x14,0xBA,0x88, FAM_CAM, CONF_MED,"UNIVIEW"},
+  {0x5C,0xD1,0x9C, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0x00,0x7F,0x1D, FAM_EUFY, CONF_LOW,"EUFY"},
+  {0x20,0x2C,0x05, FAM_CAM, CONF_MED,"DAHUA"},
+  {0x38,0xF2,0x5D, FAM_CAM, CONF_MED,"EZVIZ"},
+  {0xC8,0x19,0xD8, FAM_CAM, CONF_MED,"BLINK"},
+  {0x24,0xB1,0x05, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0xE4,0xE6,0x6C, FAM_CAM, CONF_MED,"TIANDY"},
+  {0x40,0xB5,0x70, FAM_CAM, CONF_MED,"HIKVISION"},
+  {0x00,0x40,0xDE, FAM_FLOCK, CONF_LOW,"ELSAG"},
+  {0xBC,0x51,0x6C, FAM_CAM, CONF_MED,"TIANDY"},
+  // ---- police body and in-car camera makers (besides Axon) ----
+  {0xFC,0x01,0x9E, FAM_BODYCAM, CONF_MED,"VIEVU"},
+  {0x9C,0x83,0xBF, FAM_BODYCAM, CONF_MED,"PRO-VISION"},
+  {0x00,0x1B,0xBE, FAM_BODYCAM, CONF_MED,"ICOP"},
+  {0x48,0x46,0x8D, FAM_BODYCAM, CONF_MED,"ZEPCAM"},
   {0x00,0x65,0x1E, FAM_CAM, CONF_LOW,"AMCREST"},
   {0x9C,0x8E,0xCD, FAM_CAM, CONF_LOW,"AMCREST"},
   {0xA0,0x60,0x32, FAM_CAM, CONF_LOW,"AMCREST"},
@@ -1413,7 +1622,7 @@ static const SigOUI BLE_OUI[] = {
   {0x00,0x25,0xDF,FAM_AXON,CONF_HIGH,"AXON"},
   {0xB4,0x1E,0x52,FAM_FLOCK,CONF_HIGH,"FLOCK"},
   {0x7C,0x2A,0x9E,FAM_GLASS,CONF_MED,"META"},
-  {0xCC,0x66,0x0A,FAM_GLASS,CONF_MED,"META"},
+  {0xCC,0x66,0x0A,FAM_GLASS,CONF_LOW,"META"},
   {0x98,0x59,0x49,FAM_GLASS,CONF_MED,"LUXOTTICA"},
   {0x98,0xDA,0x92,FAM_GLASS,CONF_MED,"VUZIX"},
   {0x60,0x60,0x1F,FAM_DRONE,CONF_HIGH,"DJI"},
@@ -1430,11 +1639,11 @@ static const SigOUI BLE_OUI[] = {
   {0x10,0x56,0xCA, FAM_BT, CONF_MED,"PEPLINK"},
   {0x6C,0xA3,0xD3, FAM_BT, CONF_MED,"PEPLINK"},
   {0xD4,0x13,0xF8, FAM_BT, CONF_MED,"PEPLINK"},
-  {0x00,0x23,0xBD, FAM_CAM, CONF_MED,"DIGITAL ALLY"},
-  {0x00,0x1D,0x96, FAM_CAM, CONF_MED,"WATCHGUARD"},
+  {0x00,0x23,0xBD, FAM_BODYCAM, CONF_MED,"DIGITAL ALLY"},
+  {0x00,0x1D,0x96, FAM_BODYCAM, CONF_MED,"WATCHGUARD"},
   {0xD4,0x2D,0xC5, FAM_CAM, CONF_MED,"I-PRO"},
-  {0x00,0x09,0xBC, FAM_CAM, CONF_MED,"UTILITY"},
-  {0x00,0x16,0xED, FAM_CAM, CONF_MED,"UTILITY"},
+  {0x00,0x09,0xBC, FAM_BODYCAM, CONF_MED,"UTILITY"},
+  {0x00,0x16,0xED, FAM_BODYCAM, CONF_MED,"UTILITY"},
   {0x00,0x04,0x7D, FAM_BT, CONF_LOW,"MOTOROLA"},
   {0x00,0x18,0x85, FAM_BT, CONF_LOW,"MOTOROLA"},
   {0x00,0x1F,0x92, FAM_BT, CONF_LOW,"MOTOROLA"},
@@ -1470,7 +1679,7 @@ static const SigOUI BLE_OUI[] = {
   {0x94,0x7B,0xBE, FAM_FLOCK, CONF_MED,"UBICQUIA"},
   {0xE0,0xA7,0x00, FAM_CAM, CONF_MED,"VERKADA"},
   {0x70,0x1A,0xD5, FAM_CAM, CONF_LOW,"AVIGILON"},
-  {0xD4,0x11,0xD6, FAM_BT, CONF_MED,"SOUNDTHINK"},
+  {0xD4,0x11,0xD6, FAM_GUNSHOT, CONF_MED,"SHOTSPOTTER"},
   {0x18,0x7F,0x88, FAM_CAM, CONF_LOW,"RING"},
   {0x24,0x2B,0xD6, FAM_CAM, CONF_LOW,"RING"},
   {0x34,0x3E,0xA4, FAM_CAM, CONF_LOW,"RING"},
@@ -1482,6 +1691,7 @@ static const SigOUI BLE_OUI[] = {
   {0xAC,0x9F,0xC3, FAM_CAM, CONF_LOW,"RING"},
   {0xC4,0xDB,0xAD, FAM_CAM, CONF_LOW,"RING"},
   {0xCC,0x3B,0xFB, FAM_CAM, CONF_LOW,"RING"},
+  {0x64,0x74,0xF6, FAM_GUNSHOT, CONF_MED,"SDS"},
 };
 // clang-format on
 static const int BLE_OUI_N = sizeof(BLE_OUI) / sizeof(BLE_OUI[0]);
@@ -1509,7 +1719,7 @@ static const SigText BLE_NAME[] = {
 static const int BLE_NAME_N = sizeof(BLE_NAME) / sizeof(BLE_NAME[0]);
 
 static const char* FAM_NAME[] = {"UNK", "FLOCK", "AXON",  "RING", "WYZE", "TAPO", "REOLINK", "EUFY",   "NEST",
-                                 "CAM", "GLASS", "DRONE", "BT",   "TAG",  "WIFI", "ZIGBEE",  "THREAD", "802.15.4"};
+                                 "CAM", "GLASS", "DRONE", "BT",   "TAG",  "WIFI", "ZIGBEE",  "THREAD", "802.15.4", "GUNSHOT", "BODYCAM"};
 
 // clang-format off
 static const SigCid BLE_CID[] = {
@@ -1521,6 +1731,9 @@ static const SigCid BLE_CID[] = {
   {0x04EC,FAM_BT,CONF_LOW,"MOTOROLA"},
   {0x0008,FAM_BT,CONF_LOW,"MOTOROLA"},
   {0x09C8,FAM_FLOCK,CONF_HIGH,"FLOCK"},
+  {0x0C19,FAM_CAM,CONF_MED,"ARLO"},{0x0E25,FAM_CAM,CONF_MED,"HIKVISION"},
+  {0x06B1,FAM_CAM,CONF_MED,"SIMPLISAFE"},{0x0DE8,FAM_CAM,CONF_MED,"VIVINT"},
+  {0x0870,FAM_WYZE,CONF_LOW,"WYZE"},{0x0CC2,FAM_EUFY,CONF_LOW,"ANKER"},
 };
 // clang-format on
 static const int BLE_CID_N = sizeof(BLE_CID) / sizeof(BLE_CID[0]);
@@ -1550,21 +1763,40 @@ static bool wifiChOk(uint8_t c) {
 // ---- Signatures from the LE signature files: longer prefixes, anchored patterns, Bluetooth service UUIDs ----
 // clang-format off
 static const SigOUIX WIFI_OUIX[] = {
-  {{0x08,0x3C,0x03,0x00,0x00}, 28, FAM_WIFI, CONF_LOW,"FEDSIGNAL"},
-  {{0x00,0x50,0xC2,0xE8,0x20}, 36, FAM_WIFI, CONF_LOW,"XPLORE"},
   {{0x70,0xB3,0xD5,0x98,0x70}, 36, FAM_CAM, CONF_LOW,"AXIS"},
-  {{0x34,0x46,0x63,0x20,0x00}, 36, FAM_CAM, CONF_LOW,"AMCREST"},
   {{0x00,0x50,0xC2,0xBE,0x70}, 36, FAM_FLOCK, CONF_LOW,"GENETEC"},
-  {{0x70,0xB3,0xD5,0x1C,0x50}, 36, FAM_FLOCK, CONF_LOW,"ELSAG"},
   {{0x70,0xB3,0xD5,0x52,0x10}, 36, FAM_FLOCK, CONF_LOW,"SELEX"},
   {{0x70,0xB3,0xD5,0xF5,0xE0}, 36, FAM_FLOCK, CONF_LOW,"SELEX"},
   {{0x70,0xB3,0xD5,0x88,0xA0}, 36, FAM_FLOCK, CONF_LOW,"PERCEPTICS"},
   {{0x04,0xC3,0xE6,0x90,0x00}, 28, FAM_FLOCK, CONF_LOW,"EKIN"},
   {{0xE4,0x1E,0x0A,0xB0,0x00}, 28, FAM_CAM, CONF_LOW,"SAFETY VISION"},
-  {{0x38,0x73,0xEA,0x00,0x00}, 28, FAM_CAM, CONF_LOW,"L3 MOBILEVISION"},
   {{0xF4,0x69,0xD5,0x70,0x00}, 28, FAM_CAM, CONF_LOW,"ROSCO"},
   {{0x1C,0x82,0x59,0xD0,0x00}, 28, FAM_WIFI, CONF_LOW,"STALKER RADAR"},
   {{0x58,0xE8,0x76,0xC0,0x00}, 28, FAM_WIFI, CONF_LOW,"KUSTOM SIGNALS"},
+  {{0x08, 0x3C, 0x03, 0x00, 0x00}, 28, FAM_WIFI, CONF_LOW, "FEDSIGNAL"},
+  {{0x00, 0x50, 0xC2, 0xE8, 0x20}, 36, FAM_WIFI, CONF_LOW, "XPLORE"},
+  {{0xA4, 0xDA, 0x22, 0x20, 0x00}, 28, FAM_WYZE, CONF_MED, "WYZE"},
+  {{0x34, 0x46, 0x63, 0x20, 0x00}, 28, FAM_CAM, CONF_MED, "AMCREST"},
+  {{0x7C, 0x70, 0xBC, 0x50, 0x00}, 28, FAM_CAM, CONF_MED, "CANARY"},
+  {{0x70, 0xB3, 0xD5, 0xEB, 0x20}, 36, FAM_GUNSHOT, CONF_MED, "SDS"},
+  {{0x64, 0x33, 0xB5, 0x40, 0x00}, 28, FAM_CAM, CONF_MED, "EAGLEEYE"},
+  {{0x18, 0x74, 0xE2, 0xB0, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0x74, 0x33, 0x36, 0xA0, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0xA0, 0x24, 0x90, 0xA0, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0x4C, 0x81, 0xBE, 0x90, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0xCC, 0xE7, 0xDE, 0x00, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0x0C, 0x0E, 0xC1, 0x40, 0x00}, 28, FAM_CAM, CONF_MED, "SWANN"},
+  {{0x0C, 0xCC, 0x47, 0x00, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0xB0, 0xC5, 0xCA, 0x30, 0x00}, 28, FAM_CAM, CONF_MED, "ABODE"},
+  {{0x9C, 0xE5, 0x49, 0x30, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0x5C, 0x5C, 0x75, 0xD0, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0x2C, 0x69, 0x1D, 0x20, 0x00}, 28, FAM_CAM, CONF_MED, "ABODE"},
+  {{0x34, 0xC8, 0xD6, 0xA0, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0x4C, 0x6E, 0x44, 0xE0, 0x00}, 28, FAM_CAM, CONF_MED, "JOOAN"},
+  {{0x70, 0xB3, 0xD5, 0xC4, 0xB0}, 36, FAM_EUFY, CONF_LOW, "EUFY"},
+  {{0x8C, 0x1F, 0x64, 0xB1, 0x30}, 36, FAM_CAM, CONF_MED, "ABODE"},
+  {{0x70, 0xB3, 0xD5, 0x1C, 0x50}, 36, FAM_FLOCK, CONF_LOW, "ELSAG"},
+  {{0x38, 0x73, 0xEA, 0x00, 0x00}, 28, FAM_BODYCAM, CONF_MED, "L3-MOBILEVISION"},
   {{0,0,0,0,0}, 0, FAM_UNKNOWN, CONF_LOW, ""},
 };
 // clang-format on
@@ -1572,6 +1804,7 @@ static const int WIFI_OUIX_N = sizeof(WIFI_OUIX) / sizeof(WIFI_OUIX[0]) - 1;
 static const SigOUIX BLE_OUIX[] = {
     {{0x08, 0x3C, 0x03, 0x00, 0x00}, 28, FAM_BT, CONF_LOW, "FEDSIGNAL"},
     {{0x00, 0x50, 0xC2, 0xE8, 0x20}, 36, FAM_BT, CONF_LOW, "XPLORE"},
+    {{0x70, 0xB3, 0xD5, 0xEB, 0x20}, 36, FAM_GUNSHOT, CONF_MED, "SDS"},
     {{0, 0, 0, 0, 0}, 0, FAM_UNKNOWN, CONF_LOW, ""},
 };
 static const int BLE_OUIX_N = sizeof(BLE_OUIX) / sizeof(BLE_OUIX[0]) - 1;
@@ -1587,12 +1820,12 @@ static const SigPat SSID_PAT[] = {
   {"^ABX-[0-9A-Fa-f]{6}$",FAM_AXON,CONF_LOW,"AXON"},
   {"^AB[34]-[0-9A-Fa-f]{6}$",FAM_AXON,CONF_LOW,"AXON"},
   {"^AF3-[0-9A-Fa-f]{6}$",FAM_AXON,CONF_LOW,"AXON"},
-  {"^VM-[0-9A-Fa-f]{6,}$",FAM_CAM,CONF_LOW,"MOTOROLA"},
-  {"^SI500-[0-9A-Fa-f]{4,}$",FAM_CAM,CONF_LOW,"MOTOROLA"},
-  {"^V300-[0-9A-Fa-f]{4,}$",FAM_CAM,CONF_LOW,"WATCHGUARD"},
-  {"^4RE-[0-9A-Fa-f]{4,}$",FAM_CAM,CONF_LOW,"WATCHGUARD"},
-  {"^FirstVu-[0-9A-Fa-f]{4,}$",FAM_CAM,CONF_LOW,"DIGITAL ALLY"},
-  {"^COBAN[-_ ]?[0-9A-Fa-f]{3,}$",FAM_CAM,CONF_LOW,"COBAN"},
+  {"^VM-[0-9A-Fa-f]{6,}$",FAM_BODYCAM,CONF_LOW,"MOTOROLA"},
+  {"^SI500-[0-9A-Fa-f]{4,}$",FAM_BODYCAM,CONF_LOW,"MOTOROLA"},
+  {"^V300-[0-9A-Fa-f]{4,}$",FAM_BODYCAM,CONF_LOW,"WATCHGUARD"},
+  {"^4RE-[0-9A-Fa-f]{4,}$",FAM_BODYCAM,CONF_LOW,"WATCHGUARD"},
+  {"^FirstVu-[0-9A-Fa-f]{4,}$",FAM_BODYCAM,CONF_LOW,"DIGITAL ALLY"},
+  {"^COBAN[-_ ]?[0-9A-Fa-f]{3,}$",FAM_BODYCAM,CONF_LOW,"COBAN"},
   {"^AirLink[-_ ]?[0-9A-Fa-f]{4,}$",FAM_WIFI,CONF_LOW,"SIERRA"},
   {"^IPC-?[0-9A-Fa-f]{5,}$",FAM_CAM,CONF_LOW,"CAMHINT"},
   {"^IPCAM[-_ ]?[0-9A-Za-z]{3,}$",FAM_CAM,CONF_LOW,"CAMHINT"},
@@ -1628,11 +1861,11 @@ static const int BLE_PAT_N = sizeof(BLE_PAT) / sizeof(BLE_PAT[0]) - 1;
 // clang-format off
 static const SigCid BLE_UUID[] = {
   {0xFC81,FAM_AXON,CONF_MED,"AXON"},
-  {0x3100,FAM_FLOCK,CONF_HIGH,"RAVEN"},
-  {0x3200,FAM_FLOCK,CONF_HIGH,"RAVEN"},
-  {0x3300,FAM_FLOCK,CONF_HIGH,"RAVEN"},
-  {0x3400,FAM_FLOCK,CONF_HIGH,"RAVEN"},
-  {0x3500,FAM_FLOCK,CONF_HIGH,"RAVEN"},
+  {0x3100,FAM_GUNSHOT,CONF_MED,"RAVEN"},
+  {0x3200,FAM_GUNSHOT,CONF_MED,"RAVEN"},
+  {0x3300,FAM_GUNSHOT,CONF_MED,"RAVEN"},
+  {0x3400,FAM_GUNSHOT,CONF_MED,"RAVEN"},
+  {0x3500,FAM_GUNSHOT,CONF_MED,"RAVEN"},
   {0xFE6B,FAM_AXON,CONF_MED,"AXON"},
   {0x0000, FAM_UNKNOWN, CONF_LOW, ""},
 };
@@ -1726,8 +1959,10 @@ static uint16_t catColor(int i) {
 static uint16_t famColor(Family f) {
   switch (f) {
     case FAM_FLOCK:
+    case FAM_GUNSHOT:
       return CAT_COL[CAT_ALPR];
     case FAM_AXON:
+    case FAM_BODYCAM:
       return CAT_COL[CAT_AXON];
     case FAM_GLASS:
       return CAT_COL[CAT_GLASS];
@@ -1789,8 +2024,10 @@ static void syncArmed() {
 static bool famWanted(Family f) {
   switch (f) {
     case FAM_FLOCK:
+    case FAM_GUNSHOT:
       return catOn[CAT_ALPR];
     case FAM_AXON:
+    case FAM_BODYCAM:
       return catOn[CAT_AXON];
     case FAM_GLASS:
       return catOn[CAT_GLASS];
@@ -1817,9 +2054,9 @@ static bool famInCat(Family f, int cat) {
     return true;
   switch (cat) {
     case CAT_ALPR:
-      return f == FAM_FLOCK;
+      return f == FAM_FLOCK || f == FAM_GUNSHOT;
     case CAT_AXON:
-      return f == FAM_AXON;
+      return f == FAM_AXON || f == FAM_BODYCAM;
     case CAT_CAM:
       return f == FAM_RING || f == FAM_WYZE || f == FAM_TAPO || f == FAM_REOLINK || f == FAM_EUFY || f == FAM_NEST ||
              f == FAM_CAM;
@@ -6954,10 +7191,10 @@ static bool btClassify(const uint8_t* pl, int pn, const uint8_t* md, int mn, uin
 // the extra type tags that replace the plain "BT" / "WIFI" label in lists
 static bool btKindTag(const char* m) {
   static const char* const K[] = {"IBEACON",  "EDDYSTONE", "ALTBEACON", "FASTPAIR", "MESH",  "LIGHT",
-                                  "WEARABLE", "SKIMMER",   "DEAUTH",    "TWIN",     "KARMA", "PROBE"};
+                                  "WEARABLE", "SKIMMER",   "DEAUTH",    "TWIN",     "KARMA", "PROBE", "FLIPPER"};
   if (!m)
     return false;
-  for (int i = 0; i < 12; i++)
+  for (int i = 0; i < 13; i++)
     if (strcmp(m, K[i]) == 0)
       return true;
   return false;
@@ -7317,6 +7554,50 @@ struct McEnt {
 };
 #define MC_N 256
 static McEnt mcache[MC_N];
+// Flipper Zero, from its own firmware (gap.c, serial_profile.c, furi_hal_version.c) and the open detectors (ESP32 Marauder, GhostESP):
+//  - service UUID 0x3080 | case colour: 0x3081 black, 0x3082 white, 0x3083 transparent (0x3080 = colour not set)
+//  - the advertised name is "Flipper " + the unit's name (the owner can change it with some firmware)
+//  - the Bluetooth address is built from the STM32WB55's ST company id + device id: 80:E1:26:xx:xx:xx (or 80:E1:27). Other products on
+//    the same chip can share it, so on its own it is only a weak hint
+// Returns the Flipper UUID found in the advert's UUID lists (16-bit, 32-bit, or 128-bit in the Bluetooth base form; partial or complete), else 0.
+static uint16_t flipperUuid(const uint8_t* pl, int n) {
+  // the Bluetooth base UUID 0000xxxx-0000-1000-8000-00805F9B34FB, least significant byte first, bytes 0..11 (xxxx follows)
+  static const uint8_t BASE_LE[12] = {0xFB, 0x34, 0x9B, 0x5F, 0x80, 0x00, 0x00, 0x80, 0x00, 0x10, 0x00, 0x00};
+  uint16_t best = 0;
+  for (int i = 0; i + 1 < n;) {
+    int l = pl[i];
+    if (!l || i + 1 + l > n)
+      break;
+    uint8_t t = pl[i + 1];
+    const uint8_t* d = pl + i + 2;
+    int dl = l - 1;
+    int step = (t == 0x02 || t == 0x03) ? 2 : ((t == 0x04 || t == 0x05) ? 4 : ((t == 0x06 || t == 0x07) ? 16 : 0));
+    for (int k = 0; step && k + step <= dl; k += step) {
+      uint16_t u = 0;
+      if (step == 2)
+        u = (uint16_t)(d[k] | (d[k + 1] << 8));
+      else if (step == 4 && d[k + 2] == 0 && d[k + 3] == 0)
+        u = (uint16_t)(d[k] | (d[k + 1] << 8));
+      else if (step == 16 && memcmp(d + k, BASE_LE, 12) == 0 && d[k + 14] == 0 && d[k + 15] == 0)
+        u = (uint16_t)(d[k + 12] | (d[k + 13] << 8));
+      if (u >= 0x3080 && u <= 0x3083 && u > best)
+        best = u;
+    }
+    i += l + 1;
+  }
+  return best;
+}
+// the Bluetooth address of a Flipper's STM32WB55 (80:E1:26 or 80:E1:27; mac[0] is the first byte as written)
+static bool flipperMac(const uint8_t* mac) {
+  return mac[0] == 0x80 && mac[1] == 0xE1 && (mac[2] == 0x26 || mac[2] == 0x27);
+}
+// "Flipper" anywhere in the name, any case
+static bool flipperName(const char* n) {
+  for (; *n; n++)
+    if (tolower((unsigned char)n[0]) == 'f' && strncasecmp(n, "flipper", 7) == 0)
+      return true;
+  return false;
+}
 static void IRAM_ATTR sniffCb(void* buf, wifi_promiscuous_pkt_type_t type) {
   if (type != WIFI_PKT_MGMT && type != WIFI_PKT_DATA)
     return;
@@ -7401,6 +7682,7 @@ static void IRAM_ATTR sniffCb(void* buf, wifi_promiscuous_pkt_type_t type) {
     }
     Family fam = FAM_UNKNOWN;
     Conf conf = CONF_LOW;
+
     const char* tag = "OUI";
     bool hit = ouiMatch(WIFI_OUI, WIFI_OUI_N, mac, &fam, &conf, &tag);
     if (!hit)
@@ -7445,7 +7727,7 @@ static void IRAM_ATTR sniffCb(void* buf, wifi_promiscuous_pkt_type_t type) {
       hit = true;
       tag = "PROBE";
     }
-    if (hit && localAdmin(mac) && fam != FAM_FLOCK && fam != FAM_AXON && fam != FAM_GLASS && fam != FAM_DRONE &&
+    if (hit && localAdmin(mac) && fam != FAM_FLOCK && fam != FAM_GUNSHOT && fam != FAM_AXON && fam != FAM_BODYCAM && fam != FAM_GLASS && fam != FAM_DRONE &&
         fam != FAM_WIFI)
       hit = false;
     const char* meth = how;
@@ -7736,6 +8018,30 @@ class BleCb : public BLEAdvertisedDeviceCallbacks {
         if (!name.length())
           strncpy(shown, BLE_UUID[i].tag, 19);
       }
+    // Raven (Flock's gunshot sensor): two or more of its five custom services together is a firm sign, one alone is medium.
+    // The older 1.1.x firmware advertised the Health and Location services instead; both together is only a hint.
+    {
+      int rv = 0;
+      for (uint16_t u = 0x3100; u <= 0x3500; u += 0x100)
+        if (adv.isAdvertisingService(BLEUUID(u)))
+          rv++;
+      if (rv >= 2) {
+        fam = FAM_GUNSHOT;
+        conf = CONF_HIGH;
+        hit = true;
+        tag = "RAVEN";
+        if (!name.length())
+          strncpy(shown, "Raven", 19);
+      } else if (!hit && adv.isAdvertisingService(BLEUUID((uint16_t)0x1809)) &&
+                 adv.isAdvertisingService(BLEUUID((uint16_t)0x1819))) {
+        fam = FAM_GUNSHOT;
+        conf = CONF_LOW;
+        hit = true;
+        tag = "RAVEN-OLD";
+        if (!name.length())
+          strncpy(shown, "Raven 1.1?", 19);
+      }
+    }
     // ASCII inside the service data (Axon body camera, MAC-agnostic)
     if (adTextFind(adv.getPayload(), adv.getPayloadLength(), "BWCDEVICE")) {
       fam = FAM_AXON;
@@ -7782,6 +8088,26 @@ class BleCb : public BLEAdvertisedDeviceCallbacks {
       conf = CONF_MED;
       hit = true;
       tag = "SKIMMER";
+    }
+    // Flipper Zero (see flipperUuid): its case-colour service is the strong sign, the name is a medium one, the address prefix a weak one
+    {
+      uint16_t fu = flipperUuid(adv.getPayload(), adv.getPayloadLength());
+      for (uint16_t u = 0x3083; !fu && u >= 0x3080; u--)
+        if (adv.isAdvertisingService(BLEUUID(u)))
+          fu = u;
+      bool fName = flipperName(name.c_str()), fMac = flipperMac(mac);
+      if (fu || fName || (fMac && !hit)) {
+        int score = (fu >= 0x3081 ? 3 : (fu ? 2 : 0)) + (fName ? 2 : 0) + (fMac ? 1 : 0);
+        fam = FAM_BT;
+        conf = score >= 3 ? CONF_HIGH : (score == 2 ? CONF_MED : CONF_LOW);
+        hit = true;
+        tag = "FLIPPER";
+        if (!name.length()) {
+          const char* fs = fu == 0x3081 ? "Flipper (black)" : (fu == 0x3082 ? "Flipper (white)" : (fu == 0x3083 ? "Flipper (clear)" : (fu ? "Flipper Zero" : "Flipper?")));
+          memset(shown, 0, sizeof(shown));
+          strncpy(shown, fs, 19);
+        }
+      }
     }
     if (!hit) {
       Family cf;
@@ -8726,7 +9052,7 @@ static void ingestAp(const uint8_t* bssid, const char* ssid, int8_t rssi, uint8_
   }
   if (!hit)
     return;
-  if (localAdmin(bssid) && fam != FAM_FLOCK && fam != FAM_AXON && fam != FAM_GLASS && fam != FAM_DRONE &&
+  if (localAdmin(bssid) && fam != FAM_FLOCK && fam != FAM_GUNSHOT && fam != FAM_AXON && fam != FAM_BODYCAM && fam != FAM_GLASS && fam != FAM_DRONE &&
       fam != FAM_WIFI)
     return;
   upsert(bssid, fam, conf, RAD_WIFI, rssi, (uint16_t)(ch | 0x100), ssid[0] ? ssid : tag,
@@ -11186,7 +11512,7 @@ static void handleSigsForm() {
   cur.replace("<", "&lt;");
   h += cur;
   h +=
-      "</textarea><div class=s>groups: ALPR AXON CAMS GLASS DRONE BT TAGS WIFI and the camera brands (RING WYZE TAPO REOLINK EUFY NEST)</div>";
+      "</textarea><div class=s>groups: ALPR AXON CAMS GLASS DRONE BT TAGS WIFI GUNSHOT BODYCAM and the camera brands (RING WYZE TAPO REOLINK EUFY NEST)</div>";
   h += "<input type=submit value='Save'> &nbsp; <a href='/'>back</a></form>";
   h += "<div class=s style='margin-top:14px'>loaded now: " + String((int)ncsig) + " rules" +
        (csigErrors ? String(", ") + String(csigErrors) + " lines ignored" : String("")) + "</div>";
@@ -13675,12 +14001,12 @@ struct GroupRow {
 };
 // clang-format off
 static const GroupRow GROUPS[] = {
-  {CAT_ALPR, "Flock, Penguin, Pigvision"},
-  {CAT_AXON, "Bodycams, docks, TASER, AB2-AB4"},
-  {CAT_CAM, "Wyze, Ring, Tapo, Reolink, Eufy, Nest, Arlo, Blink"},
+  {CAT_ALPR, "Flock, Raven, ShotSpotter, Penguin"},
+  {CAT_AXON, "Police body and in-car cameras. Axon: bodycams, docks, TASER, AB2-AB4, ABX, AF3. Other makers (shown as BODYCAM): Motorola Solutions and WatchGuard (V300, 4RE, VB and SI500 series), Digital Ally (FirstVu), COBAN, Utility, VIEVU, Pro-Vision, ICOP, L3 Mobile-Vision and Zepcam. Most are found by address block or set-up network name only, so their confidence is lower than Axon's"},
+  {CAT_CAM, "Ring, Wyze, Arlo, Blink, Hikvision, Dahua +more"},
   {CAT_GLASS, "Ray-Ban Meta, Spectacles, Vuzix"},
   {CAT_DRONE, "DJI, Autel, Skydio, Parrot, Remote ID beacons"},
-  {CAT_BT, "Bluetooth devices by name or maker. Type tags: IBEACON, EDDYSTONE, ALTBEACON (beacons), WEARABLE (watches, bands, rings), LIGHT (bulbs, LED strips), FASTPAIR (earbuds), MESH, SKIMMER (a module with a card-skimmer name such as HC-05: possible gas-pump skimmer, Bluetooth LE only)"},
+  {CAT_BT, "Bluetooth devices by name or maker. Type tags: IBEACON, EDDYSTONE, ALTBEACON (beacons), WEARABLE (watches, bands, rings), LIGHT (bulbs, LED strips), FASTPAIR (earbuds), MESH, SKIMMER (a module with a card-skimmer name such as HC-05: possible gas-pump skimmer, Bluetooth LE only), FLIPPER (a Flipper Zero with its Bluetooth on: its case-colour service or a Flipper name, or just the chip address = low confidence)"},
   {CAT_TAG, "Tile, AirTag and other Find My trackers, SmartTag, Google Find Hub trackers, Chipolo, Pebblebee, TrackR, Jiobit"},
   {CAT_WIFI, "Nearby access points (2.4 GHz). Tags: LIGHT (smart bulbs in set-up mode), PROBE (a device asking for a named network), DEAUTH (a de-auth attack), TWIN (an open copy of a protected network), KARMA (answers every name)"},
   {CAT_ZT, "802.15.4 channels 11-26: Zigbee, Thread or plain 802.15.4, told apart by beacon IDs, MAC security and NWK / 6LoWPAN headers"},
@@ -14145,12 +14471,12 @@ struct HelpRow {
 };
 // clang-format off
 static const HelpRow HELP[] = {
-  {CAT_ALPR, "Flock, Penguin, Pigvision"},
-  {CAT_AXON, "Bodycams, docks, TASER, AB2-AB4"},
-  {CAT_CAM, "Wyze, Ring, Tapo, Reolink, Eufy, Nest, Arlo, Blink"},
+  {CAT_ALPR, "Flock, Raven, ShotSpotter, Penguin"},
+  {CAT_AXON, "Police body and in-car cameras. Axon: bodycams, docks, TASER, AB2-AB4, ABX, AF3. Other makers (shown as BODYCAM): Motorola Solutions and WatchGuard (V300, 4RE, VB and SI500 series), Digital Ally (FirstVu), COBAN, Utility, VIEVU, Pro-Vision, ICOP, L3 Mobile-Vision and Zepcam. Most are found by address block or set-up network name only, so their confidence is lower than Axon's"},
+  {CAT_CAM, "Ring, Wyze, Arlo, Blink, Hikvision, Dahua +more"},
   {CAT_GLASS, "Ray-Ban Meta, Spectacles, Vuzix"},
   {CAT_DRONE, "DJI, Autel, Skydio, Parrot, Remote ID beacons"},
-  {CAT_BT, "Bluetooth devices by name or maker. Type tags: IBEACON, EDDYSTONE, ALTBEACON (beacons), WEARABLE (watches, bands, rings), LIGHT (bulbs, LED strips), FASTPAIR (earbuds), MESH, SKIMMER (a module with a card-skimmer name such as HC-05: possible gas-pump skimmer, Bluetooth LE only)"},
+  {CAT_BT, "Bluetooth devices by name or maker. Type tags: IBEACON, EDDYSTONE, ALTBEACON (beacons), WEARABLE (watches, bands, rings), LIGHT (bulbs, LED strips), FASTPAIR (earbuds), MESH, SKIMMER (a module with a card-skimmer name such as HC-05: possible gas-pump skimmer, Bluetooth LE only), FLIPPER (a Flipper Zero with its Bluetooth on: its case-colour service or a Flipper name, or just the chip address = low confidence)"},
   {CAT_TAG, "Tile, AirTag and other Find My trackers, SmartTag, Google Find Hub trackers, Chipolo, Pebblebee, TrackR, Jiobit"},
   {CAT_WIFI, "Nearby access points (2.4 GHz). Tags: LIGHT (smart bulbs in set-up mode), PROBE (a device asking for a named network), DEAUTH (a de-auth attack), TWIN (an open copy of a protected network), KARMA (answers every name)"},
   {CAT_ZT, "802.15.4 channels 11-26, labelled Zigbee, Thread or plain 802.15.4 from beacon IDs, MAC security and NWK / 6LoWPAN headers. Zigbee/Thread and the Wi-Fi groups share one radio, so only one side can be armed at a time. The blocked side turns dim red."},
