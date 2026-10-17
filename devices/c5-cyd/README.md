@@ -26,7 +26,8 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 
 - **Wi-Fi** devices such as security cameras, doorbells, smart glasses, drones and license-plate readers, from their network names and hardware addresses, on the 2.4 GHz or the 5 GHz band (your choice)
 - **Rogue Wi-Fi signs**: de-authentication floods, open "evil twin" copies of a protected network name, and one transmitter answering to many names - flagged as warnings, not proof
-- **Bluetooth LE** devices such as trackers (AirTag and other Find My trackers, Tile, SmartTag, Google Find Hub, Chipolo, Pebblebee), body cameras, smart glasses, drones, beacons, wearables, smart lights and Fast Pair accessories, each with a type tag
+- **Bluetooth LE** devices such as trackers (AirTag and other Find My trackers, Tile, SmartTag, Google Find Hub, Chipolo, Pebblebee), body cameras, smart glasses, Flipper Zero devices, drones, beacons, wearables, smart lights and Fast Pair accessories, each with a type tag
+- **Gunshot sensors and police cameras**: ShotSpotter (SoundThinking) and Flock Raven sensors (shown as GUNSHOT), and body or in-car cameras from makers other than Axon, such as Motorola Solutions and WatchGuard, Digital Ally, COBAN and Utility (shown as BODYCAM). Most are matched by address block or set-up network name, so confidence is lower than for Axon.
 - **Zigbee and Thread** smart-home radios (802.15.4)
 - **Drone Remote ID**: the serial number and position many drones broadcast
 - **Possible card skimmers**: Bluetooth modules still wearing a factory name (the kind sometimes hidden in gas pumps and ATM readers). This is a clue, not a verdict.
@@ -38,7 +39,7 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 - Wi-Fi band choice (2.4 or 5 GHz), shown by a label at the top of the main pages, and a Bluetooth share option for when Wi-Fi and Bluetooth groups run together
 - Tracker "following" alert, ignore list, scenes, session report and logs (saved to a microSD card or the board's flash; with a GPS module also as KML and GeoJSON map files)
 - Custom signatures (up to 128 rules: oui, ssid, ble, cid, uuid and device-fingerprint) plus a `sigs_update.txt` file for lists you receive from others
-- Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), Bluetooth spam detection and Drone Remote ID over Wi-Fi
+- Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), home-camera and doorbell makers (Ring, Wyze, Arlo, Blink, Eufy, Canary, Swann, Abode), gunshot sensors, Bluetooth spam detection and Drone Remote ID over Wi-Fi
 - Discreet mode, power saver, landscape and portrait screens, touch calibration, and a Screen colors setting that corrects boards whose display shows swapped or inverted colours
 - Phone page over the board's own Wi-Fi hotspot: live view and clock sync
 - Self-test screen that checks every part of the hardware

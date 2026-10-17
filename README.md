@@ -15,7 +15,7 @@
 
 ## What it is
 
-HUNTR/SEEKR turns a small ESP32 touch-screen board into a pocket radio scanner. It **listens** for the wireless signals that certain kinds of devices give off (security cameras, license-plate readers, body cameras, smart glasses, drones, Bluetooth trackers and similar), compares them with built-in lists of known makers and names, and shows what it heard and how strong each signal is. A live signal meter lets you walk toward a source.
+HUNTR/SEEKR turns a small ESP32 touch-screen board into a pocket radio scanner. It **listens** for the wireless signals that certain kinds of devices give off (security cameras, doorbells, license-plate readers, gunshot sensors, body cameras, smart glasses, drones, Bluetooth trackers and similar), compares them with built-in lists of known makers and names, and shows what it heard and how strong each signal is. A live signal meter lets you walk toward a source.
 
 It is passive: it only receives. It does not jam, attack, or connect to anyone's network.
 

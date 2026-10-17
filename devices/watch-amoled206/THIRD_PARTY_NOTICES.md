@@ -20,6 +20,9 @@ The firmware contains pre-rendered, anti-aliased glyph bitmaps generated from th
 ## About the Bluetooth company names
 The Bluetooth company names in the built-in lists come from the Bluetooth SIG assigned numbers, as published by Nordic Semiconductor in the bluetooth-numbers-database (BSD 3-Clause, Copyright (c) 2019 - 2020, Nordic Semiconductor ASA). The names are shortened for the display.
 
+## About the hardware-address prefixes
+Many of the maker address prefixes in the built-in lists (the first 3, 7 or 9 characters of a device's hardware address) were checked against, or taken from, the public address-block listings of the IEEE Registration Authority (MA-L, MA-M and MA-S). The firmware keeps only the prefix and a short maker tag. Which maker a block was assigned to says nothing about who owns or uses a particular device.
+
 ## Trademarks
 Names such as Waveshare, Espressif, Arduino, AirTag, Tile, SmartTag, Wyze, Axon, Flock, and the other brand and product names that appear in the detection lists or screenshots belong to their respective owners. They are used only to describe what the scanner recognises. This project is not affiliated with, endorsed by, or sponsored by any of them.
 

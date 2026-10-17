@@ -7,7 +7,7 @@ First public release of the **one-button edition**, for the plain **Waveshare ES
 ## Highlights
 - One-button interface with a hint strip on every screen and the RGB LED as the status light
 - Scenes (STREET, AIRSPACE, PERSONAL, ZB/TH, ALL OFF) and a group-by-group picker
-- Passive scanning of Wi-Fi, Bluetooth LE, 802.15.4 and Drone Remote ID, with the current detection lists and signatures
+- Passive scanning of Wi-Fi, Bluetooth LE, 802.15.4 and Drone Remote ID, with the current detection lists and signatures, including gunshot sensors, police body cameras beyond Axon and Flipper Zero detection
 - Rogue Wi-Fi alerts, Bluetooth spam detection, tracker "following" alert, possible card-skimmer tags
 - Finds list and a Track screen with a live dBm ring; the LED blinks faster as you get closer
 - Findings are saved automatically and can be downloaded from the phone page

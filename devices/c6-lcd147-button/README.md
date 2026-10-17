@@ -36,7 +36,8 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 
 - **Wi-Fi** devices such as security cameras, doorbells, smart glasses, drones and license-plate readers, from their network names and hardware addresses
 - **Rogue Wi-Fi signs**: de-authentication floods, open "evil twin" copies of a protected network name, and one transmitter answering to many names - flagged as warnings, not proof
-- **Bluetooth LE** devices such as trackers (AirTag and other Find My trackers, Tile, SmartTag, Google Find Hub, Chipolo, Pebblebee), body cameras, smart glasses, drones, beacons, wearables, smart lights and Fast Pair accessories, each with a type tag
+- **Bluetooth LE** devices such as trackers (AirTag and other Find My trackers, Tile, SmartTag, Google Find Hub, Chipolo, Pebblebee), body cameras, smart glasses, Flipper Zero devices, drones, beacons, wearables, smart lights and Fast Pair accessories, each with a type tag
+- **Gunshot sensors and police cameras**: ShotSpotter (SoundThinking) and Flock Raven sensors (shown as GUNSHOT), and body or in-car cameras from makers other than Axon, such as Motorola Solutions and WatchGuard, Digital Ally, COBAN and Utility (shown as BODYCAM). Most are matched by address block or set-up network name, so confidence is lower than for Axon.
 - **Zigbee and Thread** smart-home radios (802.15.4)
 - **Drone Remote ID**: the serial number and position many drones broadcast
 - **Possible card skimmers**: Bluetooth modules still wearing a factory name (the kind sometimes hidden in gas pumps and ATM readers). This is a clue, not a verdict.
@@ -45,6 +46,7 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 
 - Five **scenes** (STREET, AIRSPACE, PERSONAL, ZB/TH, ALL OFF) that arm useful sets of detection groups in one step, or pick groups one by one
 - Detection groups: ALPR, AXON, CAMS, GLASS, DRONE, BT, TAGS, WIFI, ZIGBEE/THREAD
+- Wide maker lists, including many camera, doorbell and tracker makers, gunshot sensors (Flock Raven, ShotSpotter) and police body cameras beyond Axon
 - **Finds** list, strongest first, and a **Track** screen with a live signal-strength (dBm) ring; the LED blinks faster as you get closer
 - A banner and a group-coloured LED pulse for each new find; tracker "following" alert and possible-skimmer alert
 - RGB LED status light; optional buzzer and up to two optional extra buttons

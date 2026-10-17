@@ -26,7 +26,8 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 
 - **Wi-Fi** devices such as security cameras, doorbells, smart glasses, drones and license-plate readers, from their network names and hardware addresses
 - **Rogue Wi-Fi signs**: de-authentication floods, open "evil twin" copies of a protected network name, and one transmitter answering to many names - flagged as warnings, not proof
-- **Bluetooth LE** devices such as trackers (AirTag and other Find My trackers, Tile, SmartTag, Google Find Hub, Chipolo, Pebblebee), body cameras, smart glasses, drones, beacons, wearables, smart lights and Fast Pair accessories, each with a type tag
+- **Bluetooth LE** devices such as trackers (AirTag and other Find My trackers, Tile, SmartTag, Google Find Hub, Chipolo, Pebblebee), body cameras, smart glasses, Flipper Zero devices, drones, beacons, wearables, smart lights and Fast Pair accessories, each with a type tag
+- **Gunshot sensors and police cameras**: ShotSpotter (SoundThinking) and Flock Raven sensors (shown as GUNSHOT), and body or in-car cameras from makers other than Axon, such as Motorola Solutions and WatchGuard, Digital Ally, COBAN and Utility (shown as BODYCAM). Most are matched by address block or set-up network name, so confidence is lower than for Axon.
 - **Drone Remote ID**: the serial number and position many drones broadcast
 - **Possible card skimmers**: Bluetooth modules still wearing a factory name (the kind sometimes hidden in gas pumps and ATM readers). This is a clue, not a verdict.
 
@@ -37,7 +38,7 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 - **Track** screen: a live signal-strength (dBm) display with audible feedback so you can walk toward a source
 - **AIM (beta)**: a gyro check, a 5-point calibration, then a direction arrow with an uncertainty arc
 - **SWEEP** page: walkthrough marks (which room was each device strongest in), a baseline of what is normally in a place, and a list of what is new
-- Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), device-fingerprint codes and Bluetooth spam detection
+- Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), home-camera and doorbell makers (Ring, Wyze, Arlo, Blink, Eufy, Canary, Swann, Abode), gunshot sensors, device-fingerprint codes and Bluetooth spam detection
 - Custom signatures (oui, ssid, ble, cid, uuid and ie rules, up to 128) and a signature update file (`sigs_update.txt`)
 - Tracker "following" alert, ignore list, scenes, session report and logs (with a GPS module also as KML and GeoJSON map files)
 - Discreet mode, power saver, landscape and portrait screens, touch calibration

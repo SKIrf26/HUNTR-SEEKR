@@ -11,7 +11,7 @@ First public release for the **Waveshare ESP32-C6-Touch-AMOLED-2.06** watch.
 - Track screen with a live dBm ring and audible feedback
 - **AIM** direction finder: gyro check, 5-point calibration, direction arrow with an uncertainty arc
 - Rogue Wi-Fi alerts (de-authentication floods, open twins, name-hungry transmitters) and Bluetooth spam detection
-- Wide maker lists including many camera and tracker makers, and your own rules (up to 128), plus a signature update file you can upload from your phone
+- Wide maker lists including many camera, doorbell and tracker makers, gunshot sensors (Flock Raven, ShotSpotter), police body cameras beyond Axon and Flipper Zero detection, and your own rules (up to 128), plus a signature update file you can upload from your phone
 - Tracker "following" alert, possible card-skimmer tags, session report, logs (with KML and GeoJSON map files when a GPS module is fitted), ignore list
 - Phone page over the watch's own Wi-Fi (live view, clock sync, firmware update)
 - Illustrated user guide included (PDF, normal and booklet), plain-text help and the full source code

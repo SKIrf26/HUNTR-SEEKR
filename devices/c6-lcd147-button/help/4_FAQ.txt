@@ -18,6 +18,17 @@ Why one button?
   BOOT is the only button on the board that software can read. TAP moves to the next item, HOLD selects, LONG goes back,
   and the strip along the bottom of every screen shows what each one does.
 
+What do the GUNSHOT and BODYCAM tags mean?
+  GUNSHOT is a gunshot-detection sensor: ShotSpotter (SoundThinking), SDS, or Flock's Raven (found from its Bluetooth
+  services). It is listed under the ALPR group. BODYCAM is a police body or in-car camera from a maker other than Axon
+  (Motorola Solutions and WatchGuard, Digital Ally, COBAN, Utility, VIEVU, Pro-Vision, ICOP, L3 Mobile-Vision, Zepcam).
+  It is listed under the AXON group. Most of these are recognised only by hardware-address block or set-up network
+  name, so treat them as hints. Lower-confidence finds are shown as such.
+
+Can it find a Flipper Zero?
+  Yes, when the Flipper's Bluetooth is on. Its case-colour service is the strong sign, a "Flipper" name is a medium
+  one, and the chip address alone is only a weak hint. It appears with a FLIPPER type tag.
+
 Can it tell me which direction a signal comes from?
   Not in this edition. The board has one antenna and no motion sensor, so there is no direction finder (AIM). Track
   shows signal strength (dBm): the number closer to zero means closer, and the LED blinks faster as you get closer.
