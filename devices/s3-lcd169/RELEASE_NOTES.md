@@ -12,7 +12,7 @@ First public release for the **Waveshare ESP32-S3-Touch-LCD-1.69**.
 - **AIM** direction finder: gyro check, 5-point calibration, direction arrow with an uncertainty arc
 - Rogue Wi-Fi alerts (de-authentication floods, open twins, name-hungry transmitters) and Bluetooth spam detection
 - Wide maker lists including many camera, doorbell and tracker makers, gunshot sensors (Flock Raven, ShotSpotter), police body cameras beyond Axon and Flipper Zero detection, and your own rules (up to 128), plus a signature update file
-- Tracker "following" alert, possible card-skimmer tags, session report, logs (with KML and GeoJSON map files when a GPS module is fitted), ignore list
+- Tracker "following" alert, possible card-skimmer tags, session report, logs (a GPS module adds your position to the log), ignore list
 - Phone page over the board's own Wi-Fi (live view, clock sync, firmware update)
 - Illustrated user guide included (PDF, normal and booklet), plain-text help and the full source code
 

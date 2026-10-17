@@ -38,7 +38,7 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 - **Track** screen: a live signal-strength (dBm) display with audible feedback so you can walk toward a source
 - Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), home-camera and doorbell makers (Ring, Wyze, Arlo, Blink, Eufy, Canary, Swann, Abode), gunshot sensors, device-fingerprint codes and Bluetooth spam detection
 - Custom signatures (oui, ssid, ble, cid, uuid and ie rules, up to 128) and a signature update file (`sigs_update.txt`)
-- Tracker "following" alert, ignore list, scenes, session report and logs (saved to a microSD card or the board's flash; with a GPS module also as KML and GeoJSON map files)
+- Tracker "following" alert, ignore list, scenes, session report and logs (saved to a microSD card or the board's flash; a GPS module adds your position to the log)
 - Discreet mode, power saver, landscape and portrait screens, touch calibration, and a Screen colors setting that corrects boards whose display shows swapped or inverted colours
 - Phone page over the board's own Wi-Fi hotspot: live view and clock sync
 - Self-test screen that checks every part of the hardware

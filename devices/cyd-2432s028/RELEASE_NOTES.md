@@ -11,7 +11,7 @@ First public release for the **ESP32-2432S028 (CYD 2.8)**.
 - Track screen with a live dBm display and audible feedback
 - Rogue Wi-Fi alerts (de-authentication floods, open twins, name-hungry transmitters) and Bluetooth spam detection
 - Wide maker lists including many camera, doorbell and tracker makers, gunshot sensors (Flock Raven, ShotSpotter), police body cameras beyond Axon and Flipper Zero detection, and your own rules (up to 128), plus a signature update file
-- Tracker "following" alert, possible card-skimmer tags, session report, logs (with KML and GeoJSON map files when a GPS module is fitted), ignore list
+- Tracker "following" alert, possible card-skimmer tags, session report, logs (a GPS module adds your position to the log), ignore list
 - Phone page over the board's own Wi-Fi (live view, clock sync)
 - **SETUP > Screen colors** corrects a board whose display shows swapped or inverted colours (Normal, Swap R/B, Invert, Swap + invert)
 - Illustrated user guide included (PDF, normal and booklet), plain-text help and the full source code

@@ -38,7 +38,7 @@ Does it need a battery?
 
 Does it save what it finds?
   When you choose SAVE LOG on the LOG page, the findings record is written to the board's flash. With a GPS module
-  fitted it is also written as KML and GeoJSON map files.
+  fitted, your position is added to the log.
 
 Can I add my own devices to detect?
   Yes: your own rules ("signatures") can be added from your phone, up to 128; see the user guide, section 9.3. A signature

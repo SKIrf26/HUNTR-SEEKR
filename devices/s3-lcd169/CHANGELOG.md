@@ -29,7 +29,7 @@ First public release, for the **Waveshare ESP32-S3-Touch-LCD-1.69**.
 - **AIM**: a gyro check, a 5-point calibration, then a direction arrow with an uncertainty arc. REDO, FLIP and NUM buttons.
 - SWEEP page: walkthrough marks, a baseline of a place and a list of what is new.
 - Possible card-skimmer tags (Bluetooth modules still wearing a factory name), Bluetooth type tags, tracker "following" alert.
-- Session report, logs (KML and GeoJSON map files when a GPS module is fitted), ignore list, scenes, discreet mode, power saver, landscape and portrait screens, touch calibration.
+- Session report, logs (a GPS module adds your position to the log), ignore list, scenes, discreet mode, power saver, landscape and portrait screens, touch calibration.
 - Phone page over the board's own Wi-Fi hotspot (live view, clock sync, firmware update).
 - Setup and self-test screens.
 - Complete, illustrated user guide (PDF, normal and two booklet versions) and plain-text help files.

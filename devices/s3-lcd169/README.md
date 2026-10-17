@@ -40,7 +40,7 @@ It is passive: it only receives. It does not jam, attack, or connect to anyone's
 - **SWEEP** page: walkthrough marks (which room was each device strongest in), a baseline of what is normally in a place, and a list of what is new
 - Wide maker lists, including many camera makers (Amcrest, Lorex, Hikvision, Dahua, Axis, Uniview, Vivotek, Hanwha), home-camera and doorbell makers (Ring, Wyze, Arlo, Blink, Eufy, Canary, Swann, Abode), gunshot sensors, device-fingerprint codes and Bluetooth spam detection
 - Custom signatures (oui, ssid, ble, cid, uuid and ie rules, up to 128) and a signature update file (`sigs_update.txt`)
-- Tracker "following" alert, ignore list, scenes, session report and logs (with a GPS module also as KML and GeoJSON map files)
+- Tracker "following" alert, ignore list, scenes, session report and logs (a GPS module adds your position to the log)
 - Discreet mode, power saver, landscape and portrait screens, touch calibration
 - Phone page over the board's own Wi-Fi hotspot: live view, clock sync, firmware update
 - Self-test screen that checks every part of the hardware

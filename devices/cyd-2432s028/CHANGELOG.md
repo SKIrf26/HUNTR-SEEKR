@@ -31,7 +31,7 @@ First public release, for the **ESP32-2432S028 (CYD 2.8)**.
 - Custom signatures (oui, ssid, ble, cid, uuid, ie; up to 128 rules) and a signature update file (sigs_update.txt).
 - Finds list with signal strength, Track screen with a live dBm display and audible feedback.
 - Possible card-skimmer tags (Bluetooth modules still wearing a factory name), Bluetooth type tags, tracker "following" alert.
-- Session report, logs (KML and GeoJSON map files when a GPS module is fitted), ignore list, scenes, discreet mode, power saver, landscape and portrait screens, touch calibration.
+- Session report, logs (a GPS module adds your position to the log), ignore list, scenes, discreet mode, power saver, landscape and portrait screens, touch calibration.
 - Phone page over the board's own Wi-Fi hotspot (live view, clock sync).
 - Setup and self-test screens.
 - Complete, illustrated user guide (PDF, normal and two booklet versions) and plain-text help files.
