@@ -16,6 +16,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Hardware-address rows that are shared with ordinary products now report low confidence, so they read as hints and not firm matches: the Liteon and Silicon Labs modules used by Flock, an Intel module used by Reolink, a WNC module used by Axon, and some Meta-glasses addresses.
 - The Groups page cards now name the makers each group covers (ALPR: Flock, Raven, ShotSpotter, Penguin; CAMS: Ring, Wyze, Arlo, Blink, Hikvision, Dahua and more; AXON: the body-camera makers above).
 
+### Fixed
+- Spontaneous restarts and slowdowns in busy areas: Bluetooth now reports each device once per scan cycle instead of every advertisement, which flooded the Bluetooth task (small stack). The scan restarts briefly (every 2 s, every 0.5 s while tracking a Bluetooth device) so signal strength and "still here" keep updating. Found and fixed by Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000), [#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)). The same change is in this board's firmware; it has not been run on this board yet.
+
 ## [Public Beta 1] - 2026-10-14
 
 First public release, for the **NM-CYD-C5** (ESP32-C5, 2.8 inch touch screen) board.

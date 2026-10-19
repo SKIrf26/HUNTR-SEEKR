@@ -39,3 +39,6 @@ This edition has no direction finder (AIM), landscape screen, settings pages, se
 Use it responsibly and within your local laws. See the README.
 
 Please report problems with the **Bug report** form on the Issues tab, with the Serial Monitor output if you can.
+
+## Thanks
+Thanks to Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000)), who reported the Watch's slowdowns and spontaneous reboots ([#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)), traced them in the serial monitor to Bluetooth duplicate reports and found the fix that is now in every board's firmware. See [CONTRIBUTORS.md](CONTRIBUTORS.md).

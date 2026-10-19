@@ -8239,7 +8239,21 @@ static void bleHold(bool on) {
   else
     bleKick(0);
 }
-// the BLE lib keeps every advert it has seen -> free it
+// With duplicate reports off, each device is heard once per scan cycle. A short restart of the scan makes the controller forget
+// who it has heard, so every device is reported again: this is what keeps signal strength and "still here" fresh.
+#define BLE_REFRESH_MS 2000       // normal scanning
+#define BLE_HUNT_REFRESH_MS 500   // while tracking a Bluetooth device (live signal strength)
+static uint32_t bleCycleAt = 0;
+static void bleCycleScan() {
+  RdStep rs("ble refresh");
+  bleScan->stop();
+  if (!bleScan->start(0, nullptr, false)) {
+    // refused: the normal start path above tries again
+    bleRunning = false;
+    rdBFails++;
+    bleDueAt = millis() + 250;
+  }
+}
 static void bleHousekeeping() {
   static uint32_t last = 0;
   if (!radioOn || !bleScan)
@@ -8291,6 +8305,12 @@ static void bleHousekeeping() {
       bleKeepCnt = true;
       bleDueAt = now;
       bleStartScan();
+      return;
+    }
+    uint32_t per = (hunting && huntBle) ? BLE_HUNT_REFRESH_MS : BLE_REFRESH_MS;
+    if ((uint32_t)(now - bleCycleAt) >= per) {
+      bleCycleAt = now;
+      bleCycleScan();
       return;
     }
   }
@@ -8530,7 +8550,9 @@ static void radioApply() {
 #if ENABLE_BLE
     BLEDevice::init("");
     bleScan = BLEDevice::getScan();
-    bleScan->setAdvertisedDeviceCallbacks(&bleCb, true);
+    // one report per device per scan cycle (the controller drops repeats). Reporting every packet floods the Bluetooth host task
+    // (small stack) and caused resets; bleHousekeeping restarts the scan on a short cycle so signal strength still refreshes
+    bleScan->setAdvertisedDeviceCallbacks(&bleCb, false);
     bleScan->setActiveScan(true);
     bleScan->setInterval(320);
     bleWinCur = bleWinWant();
@@ -10371,7 +10393,9 @@ static void portalPlusBle() {
   if (!bleScan) {
     BLEDevice::init("");
     bleScan = BLEDevice::getScan();
-    bleScan->setAdvertisedDeviceCallbacks(&bleCb, true);
+    // one report per device per scan cycle (the controller drops repeats). Reporting every packet floods the Bluetooth host task
+    // (small stack) and caused resets; bleHousekeeping restarts the scan on a short cycle so signal strength still refreshes
+    bleScan->setAdvertisedDeviceCallbacks(&bleCb, false);
     bleScan->setActiveScan(true);
     bleScan->setInterval(320);
     bleWinCur = bleWinWant();

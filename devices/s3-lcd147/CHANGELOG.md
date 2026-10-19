@@ -3,6 +3,11 @@
 All notable changes to this project are listed here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Fixed
+- Spontaneous restarts and slowdowns in busy areas: Bluetooth now reports each device once per scan cycle instead of every advertisement, which flooded the Bluetooth task (small stack). The scan restarts briefly (every 2 s, every 0.5 s while tracking a Bluetooth device) so signal strength and "still here" keep updating. Found and fixed by Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000), [#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)). The same change is in this board's firmware; it has not been run on this board yet.
+
 ## [Public Beta 1] - 2026-10-17
 
 First public release, for the **Waveshare ESP32-S3-Touch-LCD-1.47**.

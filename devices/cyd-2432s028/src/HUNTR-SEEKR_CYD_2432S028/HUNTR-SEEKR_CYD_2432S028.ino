@@ -7885,7 +7885,8 @@ static bool bleBringUp() {
     return false;
   }
   bleScan = NimBLEDevice::getScan();
-  bleScan->setScanCallbacks(&bleCb, true);
+  // one report per device per scan cycle; bleHousekeeping restarts the scan on a short cycle so signal strength still refreshes
+  bleScan->setScanCallbacks(&bleCb, false);
   bleScan->setMaxResults(0);
   bleScan->setActiveScan(true);
   bleScan->setInterval(200);
@@ -7926,15 +7927,26 @@ static void bleHold(bool on) {
   else
     bleStartScan();
 }
-// the BLE lib keeps every advert it has seen -> free it
+// With duplicate reports off, each device is heard once per scan cycle. A short restart of the scan makes the controller forget
+// who it has heard, so every device is reported again: this is what keeps signal strength and "still here" fresh.
+#define BLE_REFRESH_MS 2000       // normal scanning
+#define BLE_HUNT_REFRESH_MS 500   // while tracking a Bluetooth device (live signal strength)
+static uint32_t bleCycleAt = 0;
+// the BLE lib keeps every advert it has seen -> free it (every 15 s); the scan itself is restarted on the short cycle
 static void bleHousekeeping() {
-  static uint32_t last = 0;
+  static uint32_t clearedAt = 0;
   bleDrain();
-  if (!radioOn || !bleScan || !bleRunning || bleHeld || millis() - last < 15000)
+  if (!radioOn || !bleScan || !bleRunning || bleHeld)
     return;
-  last = millis();
+  uint32_t now = millis();
+  if ((uint32_t)(now - bleCycleAt) < (hunting ? BLE_HUNT_REFRESH_MS : BLE_REFRESH_MS))
+    return;
+  bleCycleAt = now;
   bleScan->stop();
-  bleScan->clearResults();
+  if ((uint32_t)(now - clearedAt) >= 15000) {
+    clearedAt = now;
+    bleScan->clearResults();
+  }
   bleScan->start(0, false, true);
 }
 // Wi-Fi sniffing and 802.15.4 share ONE radio. When both are armed they take turns: a Wi-Fi slice sweeps channels 1-13,

@@ -40,6 +40,7 @@ Each board has its own folder with the source code, the user guide, plain-text h
 | [Waveshare ESP32-C6-LCD-1.47, no touch (one button)](devices/c6-lcd147-button/) | ESP32-C6 | 4 MB | Wi-Fi 2.4 GHz, Bluetooth LE, Zigbee/Thread | - | Run on the board (starts and finds Wi-Fi networks) |
 | [NM-CYD-C5](devices/c5-cyd/) | ESP32-C5 | 8 MB | Wi-Fi 2.4 GHz + 5 GHz, Bluetooth LE, Zigbee/Thread | - | Run on the board |
 | [ESP32-2432S028 (CYD 2.8)](devices/cyd-2432s028/) | ESP32 | 4 MB | Wi-Fi 2.4 GHz, Bluetooth LE | - | Run on the board (Wi-Fi and Bluetooth work) |
+| [Waveshare ESP32-Touch-LCD-3.5](devices/esp32-lcd35/) | ESP32 | 16 MB | Wi-Fi 2.4 GHz, Bluetooth LE | SWEEP | In field testing (port of the same firmware, still being tuned) |
 
 "Status" is stated plainly in each board's README. Every board's firmware builds from the source in its folder; only the boards marked "Run on the board" have been run on real hardware by the project. Please report what you see on the others, good or bad.
 
@@ -71,6 +72,10 @@ docs/                shared project documents
 ## Contributing
 
 Testing and bug reports are the most useful help right now. See [CONTRIBUTING.md](CONTRIBUTING.md). To report a security problem, see [SECURITY.md](SECURITY.md).
+
+### Thanks
+
+Thanks to Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000)), who reported the Watch's slowdowns and spontaneous reboots ([#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)), traced them in the serial monitor to Bluetooth duplicate reports and found the fix that is now in every board's firmware. The full list is in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 ## Licence
 

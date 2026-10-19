@@ -8547,6 +8547,21 @@ static void bleHold(bool on) {
   else
     bleKick(0);
 }
+// With duplicate reports off, each device is heard once per scan cycle. A short restart of the scan makes the controller forget
+// who it has heard, so every device is reported again: this is what keeps signal strength and "still here" fresh.
+#define BLE_REFRESH_MS 2000       // normal scanning
+#define BLE_HUNT_REFRESH_MS 500   // while tracking a Bluetooth device (live signal strength)
+static uint32_t bleCycleAt = 0;
+static void bleCycleScan() {
+  RdStep rs("ble refresh");
+  bleScan->stop();
+  if (!bleScan->start(0, nullptr, false)) {
+    // refused: the normal start path above tries again
+    bleRunning = false;
+    rdBFails++;
+    bleDueAt = millis() + 250;
+  }
+}
 static void bleHousekeeping() {
   static uint32_t last = 0;
   if (!radioOn || !bleScan)
@@ -8598,6 +8613,12 @@ static void bleHousekeeping() {
       bleKeepCnt = true;
       bleDueAt = now;
       bleStartScan();
+      return;
+    }
+    uint32_t per = (hunting && huntBle) ? BLE_HUNT_REFRESH_MS : BLE_REFRESH_MS;
+    if ((uint32_t)(now - bleCycleAt) >= per) {
+      bleCycleAt = now;
+      bleCycleScan();
       return;
     }
   }
@@ -8839,7 +8860,9 @@ static void radioApply() {
 #if ENABLE_BLE
     BLEDevice::init("");
     bleScan = BLEDevice::getScan();
-    bleScan->setAdvertisedDeviceCallbacks(&bleCb, true);
+    // one report per device per scan cycle (the controller drops repeats). Reporting every packet floods the Bluetooth host task
+    // (small stack) and caused resets; bleHousekeeping restarts the scan on a short cycle so signal strength still refreshes
+    bleScan->setAdvertisedDeviceCallbacks(&bleCb, false);
     bleScan->setActiveScan(true);
     bleScan->setInterval(320);
     bleWinCur = bleWinWant();
@@ -11617,7 +11640,9 @@ static void portalPlusBle() {
   if (!bleScan) {
     BLEDevice::init("");
     bleScan = BLEDevice::getScan();
-    bleScan->setAdvertisedDeviceCallbacks(&bleCb, true);
+    // one report per device per scan cycle (the controller drops repeats). Reporting every packet floods the Bluetooth host task
+    // (small stack) and caused resets; bleHousekeeping restarts the scan on a short cycle so signal strength still refreshes
+    bleScan->setAdvertisedDeviceCallbacks(&bleCb, false);
     bleScan->setActiveScan(true);
     bleScan->setInterval(320);
     bleWinCur = bleWinWant();
@@ -14596,6 +14621,10 @@ static void drawIgn() {
     }
     y += ROWH + 6;
   }
+  if (sc.max > 0) {  // scroll bar
+    int bh = imax(18, (int)(viewH * (float)viewH / (float)total));
+    rrFill(W - 5, top + (int)((viewH - bh) * clamp01(sc.y / sc.max)), 3, bh, 1, C_LINE);
+  }
   clipReset();
   drawHeader("Ignored", false);
   const char* n[2] = {"BACK", nar ? "ALL" : "RESTORE ALL"};
@@ -17311,6 +17340,10 @@ static void drawReport() {
     drawText(&SKI_SM, "60 min ago", cx0, y + CH - 15, C_DIM);
     textR(&SKI_SM, "now", cx0 + cw2, y + CH - 15, C_DIM);
   }
+  if (sc.max > 0) {  // scroll bar
+    int bh = imax(18, (int)(viewH * (float)viewH / (float)total));
+    rrFill(W - 5, top + (int)((viewH - bh) * clamp01(sc.y / sc.max)), 3, bh, 1, C_LINE);
+  }
   clipReset();
   drawHeader("Report", false);
   const char* n[1] = {"BACK"};
@@ -19576,7 +19609,8 @@ static void onListTap(int x, int y) {
 
 // ---- Touch state machine ---------------------------------------------------
 static bool screenScrollable() {
-  if (screen == SCR_SCAN || screen == SCR_INFO || screen == SCR_FILES || screen == SCR_TEST)
+  if (screen == SCR_SCAN || screen == SCR_INFO || screen == SCR_FILES || screen == SCR_TEST || screen == SCR_REPORT ||
+      screen == SCR_IGN)
     return true;
   if (screen == SCR_MAIN)
     return curPage() != 0;

@@ -38,3 +38,6 @@ Already running a beta? Use `HUNTR-SEEKR_S3_LCD147_Public_Beta_1_app-only.bin` o
 This is a **beta**. This release has been flashed and run on a real Waveshare ESP32-S3-Touch-LCD-1.47 by the project. Not every feature has been tried one by one on the board yet, so some may have had less testing on hardware. There is no illustrated user guide for this board yet.
 
 Use it responsibly and within your local laws. See the README.
+
+## Thanks
+Thanks to Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000)), who reported the Watch's slowdowns and spontaneous reboots ([#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)), traced them in the serial monitor to Bluetooth duplicate reports and found the fix that is now in every board's firmware. See [CONTRIBUTORS.md](CONTRIBUTORS.md).

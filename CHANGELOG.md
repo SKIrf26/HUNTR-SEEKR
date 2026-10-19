@@ -12,10 +12,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Police body and in-car cameras from makers other than Axon are shown as BODYCAM and listed under the AXON group: Motorola Solutions and WatchGuard (V300, 4RE, VB and SI500 series), Digital Ally (FirstVu), COBAN, Utility, VIEVU, Pro-Vision, ICOP, L3 Mobile-Vision and Zepcam. Most are found by hardware-address block or set-up network name only, so their confidence is lower than Axon's.
 - Many more home-camera and doorbell makers, added from the public IEEE address registry (Wyze, Amcrest, Canary, Eagle Eye, Jooan, Swann, Abode, Eufy and others), plus Bluetooth company IDs for Arlo, Hikvision, SimpliSafe, Vivint, Wyze and Anker.
 - Flipper Zero detection over Bluetooth: its case-colour service (strong), a "Flipper" name (medium) or only its chip address (low), shown with a FLIPPER type tag.
+- New board (in field testing): **Waveshare ESP32-Touch-LCD-3.5**, in `devices/esp32-lcd35/`. The same detection on a 320 x 480 touch screen, with the Track screens and phone page fitted to the larger panel.
 
 ### Changed
 - Hardware-address rows that are shared with ordinary products now report low confidence, so they read as hints and not firm matches: the Liteon and Silicon Labs modules used by Flock, an Intel module used by Reolink, a WNC module used by Axon, and some Meta-glasses addresses.
 - The Groups page cards now name the makers each group covers (ALPR: Flock, Raven, ShotSpotter, Penguin; CAMS: Ring, Wyze, Arlo, Blink, Hikvision, Dahua and more; AXON: the body-camera makers above).
+
+### Fixed
+- Spontaneous restarts and slowdowns in busy areas, on every board: Bluetooth now reports each device once per scan cycle instead of every advertisement, which flooded the Bluetooth task (small stack) and starved the rest of the firmware. The scan restarts briefly (every 2 s, every 0.5 s while tracking a Bluetooth device) so signal strength and "still here" keep updating. Found and fixed by Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000), [#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)); run on the Watch for more than 5 hours with every group armed and no restart. The other boards have the same change and have not been run with it yet.
+- Watch: the Report and Ignored pages scroll, with a scroll bar.
 
 These apply to all boards. Each board's own changelog has the details.
 

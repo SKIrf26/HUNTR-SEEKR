@@ -14,5 +14,8 @@ Use **Feature request**. Please describe how the device announces itself (its Wi
 ## Code changes
 Pull requests are welcome. Please keep each one small and focused, build it for the board it touches (see `devices/<board>/docs/BUILDING.md`) and describe how you tested it. `devices/<board>/docs/CODE_MAP.md` shows where each part of the firmware lives. By contributing you agree that your contribution is released under the same licence as the project (GPL v3).
 
+## Credit
+People whose reports, tests or fixes ended up in the project are named in [CONTRIBUTORS.md](CONTRIBUTORS.md), in the changelog entry for the change and, when a commit contains their work, as a `Co-authored-by` line on that commit. Tell us if you would like a different name, or none.
+
 ## Responsible use
 This project is for defensive, privacy-protecting use. Suggestions that aim to identify or track individual people will not be accepted.
