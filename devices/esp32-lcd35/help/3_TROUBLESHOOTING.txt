@@ -1,0 +1,63 @@
+3. TROUBLESHOOTING
+==================
+
+The board prints start-up messages over USB that help a lot: open any serial terminal at 115200 baud on the board's port.
+The board's own check: SETUP > Self-test (green dot = healthy, red dot = not). On this board Motion says "no sensor on this board" (normal) and Clock is amber until it is set (also normal).
+
+A. The computer does not see the board / flashing fails
+   - Use a USB DATA cable. Try another USB port on the computer.
+   - If no port appears, install the free driver for the board's USB chip (the page of the board names it).
+   - Hold the BOOT button while plugging the cable in, release it, then try again.
+   - If the connection is unreliable, add --baud 115200 to the command.
+
+B. Nothing shows on the screen, or the colours are wrong
+   - Unplug the board, wait 10 seconds, plug it in again. Try another cable or USB port.
+   - Flash the .bin again (help/2_FLASHING.txt).
+   - The backlight comes on only after the first picture is ready. If the Serial Monitor shows "TCA9554 ... NOT FOUND" the
+     display and touch resets could not be released: check that you flashed the right image for this board.
+   - Colours like a photo negative: this needs a one-word change in the sketch (config/README.md) and a rebuild. Please
+     report it with the Serial Monitor output.
+
+C. Touch does nothing, or lands in the wrong place
+   - The Serial Monitor line "FT6336 ... found" confirms the touch chip answers. SETUP > Self-test > Touch shows the same.
+   - Taps land mirrored or swapped: set TP_SWAP_XY / TP_FLIP_X / TP_FLIP_Y near the top of the sketch (config/README.md) and
+     rebuild. Please tell us which combination was right, so the next release can have it as the default.
+   - The first touch after a pause does nothing: normal, that touch wakes the screen.
+
+D. No sound
+   1. the Volume slider is up and Discreet mode is off (a long-press on the status pill toggles it);
+   2. SETUP > Self-test > BEEP plays a tone;
+   3. the Self-test Sound row says whether the audio codec was found.
+   In Track, QUIET silences the beeps and SOUND brings them back.
+
+E. Wi-Fi or Bluetooth finds are missing or slow
+   - Make sure the group you expect is armed on the ARM page.
+   - Wi-Fi pauses while the Share hotspot is on.
+   - Bluetooth finds slow while a Wi-Fi group is armed: the board has one radio for Wi-Fi and Bluetooth. Turn on
+     SETUP > Bluetooth share so Wi-Fi pauses regularly and Bluetooth gets the whole radio. Arming only Bluetooth
+     groups also gives Bluetooth the whole radio.
+   - The board listens on 2.4 GHz only. A device on 5 GHz Wi-Fi is not heard.
+   - "Bluetooth off: low memory" on the screen: the extra memory (PSRAM) is not switched on in this build. Use the ready-made
+     .bin, or choose Tools > PSRAM > Enabled when building.
+
+F. Logs are not saved to the TF card
+   - Fit the card BEFORE switching the board on. Use FAT32 (cards over 32 GB are often exFAT, which the board cannot read).
+   - The Serial Monitor says "SD card ok" at start-up when the card is found; otherwise it says it is using internal flash.
+
+G. The phone will not join the board's Wi-Fi / will not stay connected
+   - Join the exact name shown on the board, with the password shown.
+   - If the phone refuses, forget any older saved network called HUNTR-SEEKR (iPhone: Settings > Wi-Fi > the i next to
+     the name > Forget This Network; Android: touch and hold the name > Forget) and join again.
+   - Some phones drop networks without internet: turn off "auto-switch to mobile data" while connected.
+   - The address is http://192.168.4.1 (not https).
+
+H. The phone update page does not work
+   It needs the 16 MB image (two app slots). The 4 MB image is updated over USB (help/2_FLASHING.txt).
+
+I. A phone or watch shows only "Apple", or does not appear
+   Normal. Apple devices rotate their address and send very little, so they cannot be told apart.
+
+J. Reset everything
+   Flash the .bin again (help/2_FLASHING.txt): this resets the saved settings. Logs on the TF card are not touched.
+
+Still stuck? Open an issue (Bug report form) with the release name from the boot screen and the Serial Monitor output.

@@ -1,0 +1,32 @@
+1. GETTING STARTED
+==================
+
+What the board is
+-----------------
+The Waveshare ESP32-Touch-LCD-3.5 is a small board with a classic ESP32 chip (dual core, 16 MB flash, 2 MB extra memory), a 3.5 inch
+capacitive touch screen (320 x 480, rounded corners), a built-in speaker and microphone, a TF (microSD) card slot, a battery
+connector with a power chip, a real-time clock and a USB-C port. HUNTR/SEEKR is the software that runs on it.
+
+Parts you may want to add (all optional)
+----------------------------------------
+  TF card      FAT32, 32 GB or smaller is safest. Fit it BEFORE you switch the board on (it is not noticed later).
+               Logs, the ignore list and your own rules are kept on the card; with no card they go to the board's flash.
+  Battery      A single-cell lithium battery on the board's battery connector. The board works from USB without one.
+  GPS          A module wired to two free header pins (9600 baud). Set the two pin numbers (PIN_GPS_RX, PIN_GPS_TX) near the top of the
+               sketch and build it yourself: the ready-made .bin has GPS switched off.
+  Phone        Used for the Live view and to set the clock over the board's own Wi-Fi.
+
+Step by step
+------------
+ 1. Put the software on the board: help/2_FLASHING.txt.
+ 2. After the boot screen (it ends with "ready  Port Test 6") you land on the ARM page: eight group tiles
+    (ALPR, AXON, CAMS, GLASS, DRONE, BT, TAGS, WIFI).
+    Tap a tile to arm that group. Swipe left and right, or tap the tabs along the bottom, to move between ARM, FINDS, GROUPS, LOG and SETUP.
+ 3. Open FINDS to see what has been heard. Tap a device, then TRACK to follow its signal: the number closer to
+    zero means closer.
+ 4. Open SETUP > Self-test. Every dot should be green. Motion is green and says "no sensor on this board", and Clock is amber until it is set (from your phone, over the board's Wi-Fi).
+ 5. Buttons: PWR (short press) turns the screen off and on, and a long press opens the Power screen (sleep, restart).
+    BOOT (short press) shows the clock face; holding it puts the board to sleep. Touch or a button press wakes it.
+
+Signal strength (dBm) is a rough guide to distance: closer to zero is closer. The board has one antenna and cannot tell
+which direction a signal comes from, so walk toward the stronger reading.

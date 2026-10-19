@@ -1,0 +1,39 @@
+2. FLASHING (PUTTING THE SOFTWARE ON THE BOARD)
+===============================================
+
+You need: the board, a USB-C DATA cable, a computer, and the .bin file from this release.
+Two files may be offered:
+   ..._Port_Test_6.bin         4 MB layout. Works with every flasher, including the web flasher.
+   ..._Port_Test_6_16MB.bin    16 MB layout (the board's full flash): two app slots, phone updates, about 9.9 MB storage.
+                               Use esptool or the Arduino IDE, NOT the web flasher.
+
+Method 1: esptool (command line)
+--------------------------------
+  1. Install Python 3 from python.org, then in a terminal:   pip install esptool
+  2. Plug in the board. Find its port: Windows "COM3" (Device Manager > Ports), macOS /dev/cu.usbserial-..., Linux /dev/ttyUSB0.
+  3. Run (replace YOUR_PORT and the file name):
+
+       esptool --chip esp32 --port YOUR_PORT --baud 460800 write-flash 0x0 HUNTR-SEEKR_ESP32_LCD35_Port_Test_6.bin
+
+     (older esptool: write_flash). If the connection is unreliable, use --baud 115200.
+  4. If it cannot connect: unplug the cable, HOLD the BOOT button, plug the cable in, release BOOT, run it again.
+  5. The board restarts and the boot screen shows "Port Test 6" at the bottom.
+
+Method 2: web flasher (4 MB file only)
+--------------------------------------
+  Open https://skirf-labs.tech/ in Google Chrome or Microsoft Edge, connect the board, choose the board and the file, and follow the steps.
+
+Check the download
+------------------
+  Linux/macOS:  shasum -a 256 -c SHA256SUMS.txt
+  Windows PowerShell:  Get-FileHash .\HUNTR-SEEKR_ESP32_LCD35_Port_Test_6.bin -Algorithm SHA256   (compare with SHA256SUMS.txt)
+
+What flashing changes
+---------------------
+  Saved settings are reset. Logs on the TF card stay. Moving between the 4 MB and 16 MB files also resets the internal
+  storage (the partition table changes). For a fully clean start first run:   esptool --chip esp32 --port YOUR_PORT erase-flash
+
+Updating later
+--------------
+  Flash the newer .bin the same way. (The 16 MB image can also be updated from a phone: SHARE, join the board's Wi-Fi, open
+  http://192.168.4.1/update.)

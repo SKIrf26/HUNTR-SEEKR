@@ -1,0 +1,36 @@
+4. FAQ
+======
+
+Is this tested on the real board?
+  This first release for the board ("Port Test 6") is a port of the current firmware that has not yet been run on the
+  hardware. It compiles and follows Waveshare's own pin map and examples. Please report what you find.
+
+Does it transmit anything?
+  No. It only listens. The board's own Wi-Fi hotspot is used only when you press SHARE, to show the live view on your phone.
+
+Why eight groups and not nine?
+  The chip on this board has no 802.15.4 radio, so Zigbee and Thread cannot be heard. That group is left out.
+
+Why is there no AIM (direction arrow)?
+  AIM needs a motion sensor (gyro). This board has none. Walk toward the stronger signal using the Track screen.
+
+Can it see 5 GHz Wi-Fi?
+  No. The chip is 2.4 GHz only.
+
+Where are the logs?
+  On the TF card when one is fitted at start-up, otherwise in the board's flash. Open the LOG page, or use SHARE and the phone page.
+
+Why does it need the extra memory (PSRAM)?
+  The classic ESP32 has limited fast memory, and Wi-Fi and Bluetooth use most of it. The firmware keeps its large lists in the
+  board's 2 MB of PSRAM. The ready-made .bin is built for that.
+
+Is the battery needed?
+  No. USB power is enough. With a battery fitted the status bar shows its charge.
+
+How do I turn it off?
+  Hold the PWR button for the Power screen (sleep or restart), or hold BOOT for the sleep countdown. Touch or a button wakes it.
+
+Can I change the screen look or the groups?
+  Yes: see SETUP. Custom rules (SSID, name, address prefix, company id, service id) can be added from the phone page.
+
+More questions: open an issue on the project page.
