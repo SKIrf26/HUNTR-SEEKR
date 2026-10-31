@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Port Test 6]
 
+### Added
+- Signature update (2026-10-30), checked against colonelpanichacks/flock-you and Unified Blue (MIT) and valleytechsolutions/Dragon-Detector (MIT): Flock "FS Ext Battery" pack Bluetooth address prefixes and 10-digit pack names (low confidence), the Flock accessory Bluetooth service (high), Axon service FE6B, DJI and DJI Baiwang drone prefixes, more Luxottica glasses prefixes, Meta/Snap glasses services (low), Tile service FD84, DULT unwanted-tracker-alert tags, and the Flipper Devices address prefix 0C:FA:22. Shared chip-maker prefixes (Amazon, Espressif, Realtek, Atheros and similar) were left out on purpose because they would flag ordinary gadgets. Not yet run on a real board.
+
 ### Fixed
 - Bluetooth reports each device once per scan cycle and the scan restarts every 2 s (0.5 s while tracking), which follows the fix found by Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000), [#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)) for spontaneous restarts.
 - Radios (Wi-Fi / Bluetooth) not coming back after using the phone page (Share): the page handlers were added again on every Share, Bluetooth could be switched off for good if it was started while the hotspot held memory, and a failed restart of the radios was never retried. Handlers are now added once, Bluetooth is retried after a low-memory skip, a failed Wi-Fi start is retried automatically, and the serial log prints free memory when Share starts, stops and when the radios are back.

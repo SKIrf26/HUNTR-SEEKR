@@ -1189,6 +1189,13 @@ static const SigOUI WIFI_OUI[] = {
   {0x38,0x1D,0x14, FAM_DRONE, CONF_MED,"SKYDIO"},
   {0x00,0x26,0x7E, FAM_DRONE, CONF_LOW,"PARROT"},
   {0x90,0x3A,0xE6, FAM_DRONE, CONF_LOW,"PARROT"},
+  // Dragon Detector update (2026-10-30): IEEE-registered DJI group (valleytechsolutions/Dragon-Detector, MIT)
+  {0x4C,0x43,0xF6, FAM_DRONE, CONF_MED,"DJI"},
+  {0x88,0x29,0x85, FAM_DRONE, CONF_MED,"DJI"},
+  {0x34,0x91,0xF0, FAM_DRONE, CONF_LOW,"DJI-BW"},
+  {0x9C,0x5A,0x8A, FAM_DRONE, CONF_LOW,"DJI-BW"},
+  {0xC8,0xA1,0x62, FAM_DRONE, CONF_LOW,"DJI-BW"},
+  {0xEC,0x72,0xF7, FAM_DRONE, CONF_LOW,"DJI-BW"},
 
   // ---- vendor blocks from the IEEE registry (camera, doorbell and gunshot-sensor makers) ----
   {0x3C,0xA0,0x70, FAM_CAM, CONF_MED,"BLINK"},
@@ -1437,6 +1444,20 @@ static const SigOUI BLE_OUI[] = {
   {0x7C,0x2A,0x9E,FAM_GLASS,CONF_MED,"META"},
   {0xCC,0x66,0x0A,FAM_GLASS,CONF_LOW,"META"},
   {0x98,0x59,0x49,FAM_GLASS,CONF_MED,"LUXOTTICA"},
+  {0x38,0x47,0x12,FAM_GLASS,CONF_LOW,"LUXOTTICA"},
+  {0x80,0xAA,0x1C,FAM_GLASS,CONF_LOW,"LUXOTTICA"},
+  // Flock "FS Ext Battery" packs: Bluetooth address prefixes seen on packs advertising that name (colonelpanichacks/flock-you datasets, MIT).
+  // Silicon Labs parts are used by other makers too, so these stay LOW.
+  {0xEC,0x1B,0xBD, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0x58,0x8E,0x81, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0x90,0x35,0xEA, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0xB4,0xE3,0xF9, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0x04,0x0D,0x84, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0xF0,0x82,0xC0, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0x1C,0x34,0xF1, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0x94,0x34,0x69, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0x38,0x5B,0x44, FAM_FLOCK, CONF_LOW,"FS-BATT"},
+  {0xCC,0xCC,0xCC, FAM_FLOCK, CONF_LOW,"FS-BATT"},
   {0x98,0xDA,0x92,FAM_GLASS,CONF_MED,"VUZIX"},
   {0x60,0x60,0x1F,FAM_DRONE,CONF_HIGH,"DJI"},
   {0x34,0xD2,0x62,FAM_DRONE,CONF_HIGH,"DJI"},
@@ -1644,6 +1665,7 @@ static const SigPat SSID_PAT[] = {
 static const int SSID_PAT_N = sizeof(SSID_PAT) / sizeof(SSID_PAT[0]) - 1;
 // clang-format off
 static const SigPat BLE_PAT[] = {
+  {"^[0-9]{10}$",FAM_FLOCK,CONF_LOW,"FS-BATT"},
   {"^XL200-[0-9A-Z]+$",FAM_BT,CONF_LOW,"L3HARRIS"},
   {"^APX[- ]?[0-9]{3,4}",FAM_BT,CONF_LOW,"MOTOROLA"},
   {"^TAIT-[0-9A-Z]+$",FAM_BT,CONF_LOW,"TAIT"},
@@ -7463,7 +7485,8 @@ static uint16_t flipperUuid(const uint8_t* pl, int n) {
 }
 // the Bluetooth address of a Flipper's STM32WB55 (80:E1:26 or 80:E1:27; mac[0] is the first byte as written)
 static bool flipperMac(const uint8_t* mac) {
-  return mac[0] == 0x80 && mac[1] == 0xE1 && (mac[2] == 0x26 || mac[2] == 0x27);
+  return mac[0] == 0x80 && mac[1] == 0xE1 && (mac[2] == 0x26 || mac[2] == 0x27)
+         || (mac[0] == 0x0C && mac[1] == 0xFA && mac[2] == 0x22);
 }
 // "Flipper" anywhere in the name, any case
 static bool flipperName(const char* n) {
@@ -7553,19 +7576,39 @@ class BleCb : public BLEAdvertisedDeviceCallbacks {
       hit = true;
       tag = "FE6C";
     }
+    if (adv.isAdvertisingService(BLEUUID((uint16_t)0xFE6B))) {
+      fam = FAM_AXON;
+      conf = CONF_MED;
+      hit = true;
+      tag = "FE6B";
+    }
+    if (!hit && (adv.isAdvertisingService(BLEUUID((uint16_t)0xFEB7)) || adv.isAdvertisingService(BLEUUID((uint16_t)0xFEB8)) || adv.isAdvertisingService(BLEUUID((uint16_t)0xFE45)))) {
+      fam = FAM_GLASS;  // Meta / Snap service ids: weak on their own
+      conf = CONF_LOW;
+      hit = true;
+      tag = "GLASS-SVC";
+    }
     if (adv.isAdvertisingService(BLEUUID((uint16_t)0xFD5F))) {
       fam = FAM_GLASS;
       conf = CONF_HIGH;
       hit = true;
       tag = "FD5F";
     }
-    if (adv.isAdvertisingService(BLEUUID((uint16_t)0xFEED)) || adv.isAdvertisingService(BLEUUID((uint16_t)0xFEEC))) {
+    if (adv.isAdvertisingService(BLEUUID((uint16_t)0xFEED)) || adv.isAdvertisingService(BLEUUID((uint16_t)0xFEEC)) || adv.isAdvertisingService(BLEUUID((uint16_t)0xFD84))) {
       fam = FAM_TAG;
       conf = CONF_HIGH;
       hit = true;
       tag = "TILE";
       if (!name.length())
         strncpy(shown, "Tile", 19);
+    }
+    if (!hit && adv.isAdvertisingService(BLEUUID((uint16_t)0xFCB2))) {
+      fam = FAM_TAG;  // DULT: accessory built to the unwanted-tracker-alert standard (Find My / Find Hub tags)
+      conf = CONF_MED;
+      hit = true;
+      tag = "DULT";
+      if (!name.length())
+        strncpy(shown, "Tracker (DULT)", 19);
     }
     if (adv.isAdvertisingService(BLEUUID((uint16_t)0xFD5A))) {
       fam = FAM_TAG;
@@ -7671,6 +7714,17 @@ class BleCb : public BLEAdvertisedDeviceCallbacks {
           }
           break;
         }
+      }
+    }
+    // Flock accessory service e8ccbb38-9532-46a8-9fe5-1814df172e6f (from the open firmware analysis in colonelpanichacks/flock-you, MIT)
+    {
+      if (adv.isAdvertisingService(BLEUUID("e8ccbb38-9532-46a8-9fe5-1814df172e6f"))) {
+        fam = FAM_FLOCK;
+        conf = CONF_HIGH;
+        hit = true;
+        tag = "FLOCK-GATT";
+        if (!name.length())
+          strncpy(shown, "Flock accessory", 19);
       }
     }
     // beats every other reading of the same advert (a BLE serial module also looks like a drone: service 0xFFE0)

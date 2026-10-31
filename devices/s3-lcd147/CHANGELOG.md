@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- Signature update (2026-10-30), checked against colonelpanichacks/flock-you and Unified Blue (MIT) and valleytechsolutions/Dragon-Detector (MIT): Flock "FS Ext Battery" pack Bluetooth address prefixes and 10-digit pack names (low confidence), the Flock accessory Bluetooth service (high), Axon service FE6B, DJI and DJI Baiwang drone prefixes, more Luxottica glasses prefixes, Meta/Snap glasses services (low), Tile service FD84, DULT unwanted-tracker-alert tags, and the Flipper Devices address prefix 0C:FA:22. Shared chip-maker prefixes (Amazon, Espressif, Realtek, Atheros and similar) were left out on purpose because they would flag ordinary gadgets. Not yet run on a real board.
+
 ### Fixed
 - Spontaneous restarts and slowdowns in busy areas: Bluetooth now reports each device once per scan cycle instead of every advertisement, which flooded the Bluetooth task (small stack). The scan restarts briefly (every 2 s, every 0.5 s while tracking a Bluetooth device) so signal strength and "still here" keep updating. Found and fixed by Alfa ([@AlfaBeta2000](https://github.com/AlfaBeta2000), [#4](https://github.com/SKIrf26/HUNTR-SEEKR/issues/4)). The same change is in this board's firmware; it has not been run on this board yet.
 

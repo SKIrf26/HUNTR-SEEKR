@@ -29,3 +29,6 @@ Names such as RockBase, NMTech, Espressif, Arduino, AirTag, Tile, SmartTag, Wyze
 
 ## Binary releases
 A pre-built `.bin` attached to a GitHub Release contains compiled code from the components above. The library sources are available from the projects named in the table.
+
+## About the Flock, Axon and drone signature additions (30 Oct 2026)
+Some Bluetooth address prefixes, names and service identifiers for Flock accessories (the "FS Ext Battery" pack prefixes, the 10-digit pack name and the accessory Bluetooth service) come from the public research in [colonelpanichacks/flock-you](https://github.com/colonelpanichacks/flock-you) and [oui-spy-unified-blue](https://github.com/colonelpanichacks/oui-spy-unified-blue) (MIT, Copyright (c) 2026 colonelpanichacks), which in turn credit NitekryDPaul, DeFlockJoplin and Will Greenberg (wgreenberg). The Axon service, DJI, DJI Baiwang and Luxottica prefixes, glasses and tracker service identifiers and the Flipper address prefix were cross-checked against [valleytechsolutions/Dragon-Detector](https://github.com/valleytechsolutions/Dragon-Detector) (MIT, Copyright (c) 2026 Valleytech Custom Solutions). Only facts (identifiers) were used; no source code was copied. A match on a hardware address, name or service identifier does not prove what a device is.
