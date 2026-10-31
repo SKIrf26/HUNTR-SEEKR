@@ -7459,7 +7459,7 @@ static void bleProcess(const BleAdv& adv) {
     hit = true;
     tag = "FE6C";
   }
-  if (adv.isAdvertisingService(BleU16((uint16_t)0xFE6B))) {
+  if (adv.isAdvertisingService(BleU16((uint16_t)0xFE6B)) && !(hit && fam == FAM_AXON && conf >= CONF_HIGH)) {
     fam = FAM_AXON;
     conf = CONF_MED;
     hit = true;

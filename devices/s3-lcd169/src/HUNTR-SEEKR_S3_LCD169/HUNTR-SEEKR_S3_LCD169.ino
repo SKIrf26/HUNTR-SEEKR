@@ -7546,7 +7546,7 @@ class BleCb : public BLEAdvertisedDeviceCallbacks {
       hit = true;
       tag = "FE6C";
     }
-    if (adv.isAdvertisingService(BLEUUID((uint16_t)0xFE6B))) {
+    if (adv.isAdvertisingService(BLEUUID((uint16_t)0xFE6B)) && !(hit && fam == FAM_AXON && conf >= CONF_HIGH)) {
       fam = FAM_AXON;
       conf = CONF_MED;
       hit = true;
